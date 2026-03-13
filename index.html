@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treatment Finder — Your Salon Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rose: #B5596E; --rose-mid: #C4768A; --rose-light: #F5E8EC;
+      --rose-pale: #FDF6F8; --gold: #8A6A3E; --dark: #2A2A2A;
+      --mid: #555555; --gray: #999999; --border: #EDD5DC;
+    }
+    html, body {
+      min-height: 100%;
+      background: linear-gradient(160deg, #FDF6F8 0%, #F5EAF0 40%, #EEE0E8 100%);
+      background-attachment: fixed;
+      font-family: 'Jost', sans-serif;
+      color: var(--dark);
+    }
+    /* LOCK */
+    #lock-screen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .lock-card {
+      background:white; border-radius:20px;
+      box-shadow:0 4px 40px rgba(181,89,110,0.10);
+      padding:52px 44px; width:100%; max-width:400px;
+      text-align:center; animation:fadeUp 0.4s ease both;
+    }
+    .lock-icon { font-size:32px; margin-bottom:20px; }
+    .lock-card h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--dark); margin-bottom:6px; }
+    .lock-card h2 em { font-style:italic; color:var(--rose); }
+    .lock-card p { font-size:12px; color:var(--gray); font-weight:300; margin-bottom:32px; line-height:1.5; }
+    .lock-input {
+      width:100%; padding:14px 18px; border:1.5px solid var(--border); border-radius:12px;
+      font-family:'Jost',sans-serif; font-size:14px; color:var(--dark);
+      outline:none; transition:border-color 0.2s; margin-bottom:12px;
+      letter-spacing:2px; text-align:center;
+    }
+    .lock-input:focus { border-color:var(--rose); }
+    .lock-input.error { border-color:#E05555; animation:shake 0.3s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .lock-btn {
+      width:100%; padding:14px; background:var(--rose); color:white; border:none;
+      border-radius:12px; font-family:'Jost',sans-serif; font-size:12px;
+      font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.18s;
+    }
+    .lock-btn:hover { background:#9E4A5E; }
+    .lock-error { font-size:12px; color:#E05555; margin-top:10px; height:16px; }
+    /* APP */
+    #app { display:none; }
+    .wrap { min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:52px 20px 90px; }
+    .header { text-align:center; margin-bottom:44px; }
+    .salon-name { font-size:11px; font-weight:400; letter-spacing:5px; color:var(--rose); text-transform:uppercase; margin-bottom:14px; }
+    .header h1 { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:var(--dark); line-height:1.1; margin-bottom:10px; }
+    .header h1 em { font-style:italic; color:var(--rose); }
+    .header p { font-size:13px; font-weight:300; color:var(--gray); }
+    .progress-bar { width:100%; max-width:580px; height:2px; background:#E8D5DB; border-radius:2px; margin-bottom:40px; overflow:hidden; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--rose),#D4849B); border-radius:2px; transition:width 0.5s ease; }
+    .card {
+      background:white; border-radius:20px;
+      box-shadow:0 4px 40px rgba(181,89,110,0.08),0 1px 8px rgba(0,0,0,0.04);
+      padding:44px; width:100%; max-width:560px; animation:fadeUp 0.35s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+    .back-btn { background:none; border:none; color:var(--gray); font-family:'Jost',sans-serif; font-size:12px; cursor:pointer; margin-bottom:22px; padding:0; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .back-btn:hover { color:var(--rose); }
+    .step-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--rose); font-weight:500; margin-bottom:12px; }
+    .question { font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:400; color:var(--dark); line-height:1.3; margin-bottom:8px; }
+    .question-note { font-size:12px; color:var(--gray); font-weight:300; margin-bottom:28px; line-height:1.55; }
+    .client-name-wrap { margin-bottom:28px; }
+    .client-name-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--rose); font-weight:500; margin-bottom:8px; }
+    .client-name-input { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:10px; font-family:'Jost',sans-serif; font-size:14px; color:var(--dark); outline:none; transition:border-color 0.2s; }
+    .client-name-input:focus { border-color:var(--rose); }
+    .options { display:flex; flex-direction:column; gap:10px; }
+    .option-btn { display:flex; align-items:center; gap:14px; padding:15px 18px; border:1.5px solid var(--border); border-radius:12px; background:white; cursor:pointer; text-align:left; transition:all 0.18s; width:100%; font-family:'Jost',sans-serif; }
+    .option-btn:hover { border-color:var(--rose); background:var(--rose-pale); transform:translateX(3px); }
+    .opt-icon { font-size:18px; width:38px; height:38px; background:var(--rose-light); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .opt-text { flex:1; }
+    .opt-title { font-size:14px; font-weight:500; color:var(--dark); line-height:1.2; }
+    .opt-sub { font-size:12px; color:var(--gray); font-weight:300; margin-top:2px; line-height:1.4; }
+    .opt-arrow { color:var(--border); font-size:16px; }
+    .multi-hint { font-size:11px; color:var(--rose); font-weight:300; margin-bottom:16px; }
+    .multi-opt { display:flex; align-items:center; gap:14px; padding:13px 18px; border:1.5px solid var(--border); border-radius:12px; background:white; cursor:pointer; transition:all 0.18s; user-select:none; }
+    .multi-opt:hover { border-color:var(--rose); background:var(--rose-pale); }
+    .multi-opt.checked { border-color:var(--rose); background:var(--rose-light); }
+    .checkbox { width:20px; height:20px; border:1.5px solid #D4A0AF; border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:12px; color:white; transition:all 0.15s; }
+    .multi-opt.checked .checkbox { background:var(--rose); border-color:var(--rose); }
+    .continue-btn { margin-top:20px; width:100%; padding:15px; background:var(--rose); color:white; border:none; border-radius:12px; font-family:'Jost',sans-serif; font-size:12px; font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.18s; }
+    .continue-btn:hover { background:#9E4A5E; transform:translateY(-1px); }
+    .continue-btn:disabled { background:#ccc; cursor:default; transform:none; }
+    /* RESULT */
+    .result-card { background:white; border-radius:20px; box-shadow:0 4px 40px rgba(181,89,110,0.1); width:100%; max-width:600px; overflow:hidden; animation:fadeUp 0.4s ease both; }
+    .result-header { background:linear-gradient(135deg,var(--rose) 0%,var(--rose-mid) 100%); padding:36px 44px; color:white; }
+    .result-header.gold { background:linear-gradient(135deg,var(--gold) 0%,#A68555 100%); }
+    .result-tag { font-size:10px; letter-spacing:3px; text-transform:uppercase; opacity:0.8; margin-bottom:10px; font-weight:400; }
+    .result-title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; line-height:1.2; margin-bottom:6px; }
+    .result-meta { font-size:13px; opacity:0.85; font-weight:300; }
+    .result-body { padding:36px 44px; }
+    .section-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--rose); font-weight:500; margin-bottom:14px; }
+    .treatment-desc { font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--mid); line-height:1.7; font-style:italic; margin-bottom:28px; }
+    .steps-list { list-style:none; margin-bottom:28px; }
+    .steps-list li { display:flex; gap:12px; padding:9px 0; border-bottom:1px solid #F5EEF0; font-size:13px; color:var(--mid); line-height:1.5; }
+    .dot { width:6px; height:6px; background:var(--rose); border-radius:50%; margin-top:6px; flex-shrink:0; }
+    .addons-box { background:var(--rose-pale); border-radius:12px; padding:20px 22px; margin-bottom:24px; }
+    .addon-item { display:flex; gap:10px; padding:7px 0; font-size:13px; color:var(--mid); }
+    .addon-star { color:var(--rose); font-size:11px; margin-top:2px; flex-shrink:0; }
+    .addon-name { font-weight:500; color:var(--dark); font-size:13px; }
+    .addon-desc { font-size:12px; color:var(--gray); margin-top:2px; line-height:1.4; }
+    .protocols { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+    .badge { background:var(--rose-light); color:var(--rose); font-size:11px; font-weight:500; padding:5px 14px; border-radius:20px; }
+    .notes-box { background:#FFF9F0; border:1px solid #EDDFCC; border-radius:12px; padding:18px 20px; margin-bottom:24px; }
+    .notes-label { font-size:10px; letter-spacing:2px; color:var(--gold); font-weight:500; margin-bottom:10px; text-transform:uppercase; }
+    .note-item { font-size:12px; color:var(--gold); line-height:1.6; padding:3px 0; display:flex; gap:8px; }
+    .save-status { display:flex; align-items:center; justify-content:center; gap:8px; font-size:12px; padding:12px; border-radius:10px; margin-bottom:16px; }
+    .save-status.saving { background:#FFF9F0; color:var(--gold); }
+    .save-status.saved  { background:#F0FFF4; color:#2D7A4F; }
+    .save-status.error  { background:#FFF0F0; color:#C0392B; }
+    .divider { height:1px; background:var(--rose-light); margin:28px 0; }
+    .restart-btn { width:100%; padding:14px; background:transparent; color:var(--rose); border:1.5px solid var(--rose); border-radius:12px; font-family:'Jost',sans-serif; font-size:12px; font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.18s; }
+    .restart-btn:hover { background:var(--rose-light); }
+    .ornament { text-align:center; color:var(--rose); font-size:13px; letter-spacing:8px; margin:24px 0 44px; opacity:0.4; }
+    @media(max-width:520px) {
+      .card,.result-body{padding:32px 24px} .result-header{padding:28px 24px}
+      .header h1{font-size:36px} .result-title{font-size:26px} .lock-card{padding:40px 28px}
+    }
+  </style>
+</head>
+<body>
+
+<div id="lock-screen">
+  <div class="lock-card">
+    <div class="lock-icon">🔒</div>
+    <h2>Staff <em>Access</em></h2>
+    <p>This tool is for salon staff only.<br/>Enter the access password to continue.</p>
+    <input class="lock-input" id="pw-input" type="password" placeholder="Enter password" autocomplete="off" />
+    <button class="lock-btn" id="pw-btn">Enter →</button>
+    <div class="lock-error" id="pw-error"></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="wrap">
+    <div class="header">
+      <div class="salon-name">✦ Your Salon Name ✦</div>
+      <h1>Treatment <em>Finder</em></h1>
+      <p>Answer a few quick questions — we'll build the client's personalised recommendation.</p>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div id="main"></div>
+    <div class="ornament">· · ·</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  ⚙️  CONFIGURATION — only edit these two lines
+// ═══════════════════════════════════════════════════
+const STAFF_PASSWORD = "salon2024";  // ← change this
+const SHEETS_URL     = "";           // ← paste your Apps Script URL here
+// ═══════════════════════════════════════════════════
+
+const SESSION_KEY = "salon_auth";
+function isAuth() { return sessionStorage.getItem(SESSION_KEY) === "true"; }
+
+function unlock() {
+  const input = document.getElementById("pw-input");
+  const error = document.getElementById("pw-error");
+  if (input.value === STAFF_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, "true");
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    render();
+  } else {
+    error.textContent = "Incorrect password. Please try again.";
+    input.classList.add("error");
+    input.value = "";
+    setTimeout(() => input.classList.remove("error"), 400);
+  }
+}
+
+document.getElementById("pw-btn").addEventListener("click", unlock);
+document.getElementById("pw-input").addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+if (isAuth()) { document.getElementById("lock-screen").style.display = "none"; document.getElementById("app").style.display = "block"; }
+
+// ── QUESTIONS ───────────────────────────────────────────────────
+const QUESTIONS = [
+  { id:"service", question:"What brings the client in today?", note:"Build the recommendation around their primary focus.", type:"single",
+    options:[
+      {value:"mani",  icon:"✋", title:"Hands & nails",         sub:"Manicure, nail care, hand treatment"},
+      {value:"pedi",  icon:"🦶", title:"Feet & soles",          sub:"Pedicure, callus care, foot massage"},
+      {value:"both",  icon:"✨", title:"Both — full treatment", sub:"Complete hands and feet session"},
+    ]},
+  { id:"nail_condition", question:"How would you describe the client's nails?", note:"Select what best matches what you see.", type:"single", showFor:["mani","both"],
+    options:[
+      {value:"brittle", icon:"🌿", title:"Brittle, peeling or ridged",  sub:"More fragile than before, vertical lines, splitting"},
+      {value:"healthy", icon:"💅", title:"Generally healthy",            sub:"Maintenance and polish is the main goal"},
+      {value:"soft",    icon:"🌸", title:"Soft and bendy",               sub:"They bend easily and don't hold length well"},
+      {value:"bitten",  icon:"🌱", title:"Short, bitten or very worn",   sub:"Looking to strengthen and grow them out"},
+    ]},
+  { id:"foot_condition", question:"How are the client's feet and soles?", note:"This guides callus treatment and massage choices.", type:"single", showFor:["pedi","both"],
+    options:[
+      {value:"callus",         icon:"🪨", title:"Significant calluses or dry soles",   sub:"Rough heels, thick build-up, cracking"},
+      {value:"thick_nails",    icon:"🍂", title:"Thickened or discoloured toenails",    sub:"Nails are harder, yellowed or raised"},
+      {value:"maintenance",    icon:"🌿", title:"General maintenance",                  sub:"Everything's mostly fine, just keeping on top of it"},
+      {value:"sensitive_feet", icon:"🫧", title:"Sensitive or diabetic care needed",    sub:"Requires very gentle protocol, no blade use"},
+    ]},
+  { id:"hormonal", question:"What is the client's hormonal stage?", note:"This changes product choices and massage technique throughout.", type:"single",
+    options:[
+      {value:"peri",          icon:"🌙", title:"Perimenopause or menopause",    sub:"Irregular cycles, or post-menopausal"},
+      {value:"pre",           icon:"🌤", title:"Pre-menopause / regular cycle",  sub:"No significant hormonal changes noted"},
+      {value:"hrt",           icon:"💊", title:"On HRT or hormonal medication",  sub:"Including contraceptive pill or coil"},
+      {value:"skip_hormonal", icon:"○",  title:"Not known / not shared",         sub:"We'll use other profile signals instead"},
+    ]},
+  { id:"health_flags", question:"Any health considerations?", note:"Tick all that apply — adjusts technique, heat levels, and product choice.", type:"multi",
+    options:[
+      {value:"diabetes",     icon:"🩺", title:"Diabetes or circulation issues"},
+      {value:"isotretinoin", icon:"💊", title:"On isotretinoin / Roaccutane"},
+      {value:"lymph",        icon:"💧", title:"Fluid retention or lymphoedema"},
+      {value:"arthritis",    icon:"🤲", title:"Arthritis or joint sensitivity"},
+      {value:"allergies",    icon:"🌿", title:"Nut oil or fragrance allergies"},
+      {value:"none",         icon:"✓",  title:"None of the above"},
+    ]},
+  { id:"preferences", question:"Any product or service preferences?", note:"Tick all that apply.", type:"multi",
+    options:[
+      {value:"vegan",          icon:"🌱", title:"Vegan & cruelty-free products"},
+      {value:"halal",          icon:"🌙", title:"Halal / breathable polish (wudu-compatible)"},
+      {value:"fragrance_free", icon:"🫧", title:"Fragrance-free formulations"},
+      {value:"no_paraffin",    icon:"🚫", title:"No paraffin wax treatments"},
+      {value:"reflexology",    icon:"✨", title:"Interested in reflexology add-on"},
+      {value:"age_spots",      icon:"🌸", title:"Concerned about age spots / uneven tone"},
+    ]},
+];
+
+// ── STATE ────────────────────────────────────────────────────────
+let S = { clientName:"", answers:{}, history:[], currentQ:0, multiSelected:[], done:false, saveStatus:"idle" };
+function getVisible() { const svc=S.answers.service; return QUESTIONS.filter(q=>!q.showFor||q.showFor.includes(svc)); }
+
+// ── RECOMMENDATION ENGINE ────────────────────────────────────────
+function buildRec() {
+  const a=S.answers, hf=a.health_flags||[], pr=a.preferences||[];
+  const isPeri=a.hormonal==="peri"||a.hormonal==="hrt",
+        isDiab=hf.includes("diabetes"), isIsot=hf.includes("isotretinoin"),
+        isLymph=hf.includes("lymph"), isAlrg=hf.includes("allergies"),
+        isVegan=pr.includes("vegan"), isHalal=pr.includes("halal"),
+        isFF=pr.includes("fragrance_free")||isAlrg, noParaf=pr.includes("no_paraffin")||isIsot,
+        wReflex=pr.includes("reflexology"), wSpots=pr.includes("age_spots"),
+        nc=a.nail_condition, fc=a.foot_condition;
+  let treatments=[], addons=[], notes=[], protocols=[];
+
+  if (a.service==="mani"||a.service==="both") {
+    if (isPeri||isLymph) {
+      treatments.push({ name:"The Hormonal Harmony Manicure", tier:"Tier 2 — Hero Treatment", duration:"75 min",
+        desc:"Our flagship manicure, designed around the specific changes perimenopause and menopause bring to skin and nails.",
+        steps:["Thermal mitt soak — deep moisture penetration for thinning, dry skin",
+               "Exfoliation adapted to Fitzpatrick skin tone",
+               "Keratin or calcium nail strengthening treatment",
+               isLymph?"Extended lymphatic drainage hand massage — targets fluid retention":"Extended relaxing hand massage with lymphatic technique",
+               "Vitamin E + rosehip cuticle oil (collagen-supporting)",
+               "SPF hand cream finish — essential protection against pigmentation",
+               (nc==="brittle"||nc==="soft")?"BIAB strengthening overlay recommended over standard gel":"Choice of regular polish or BIAB overlay"] });
+    } else {
+      treatments.push({ name:"The Signature Manicure", tier:"Tier 1", duration:"45 min",
+        desc:"A results-focused manicure built around nail and skin health, not just polish. Perfect for regular maintenance.",
+        steps:["Nail assessment & personalised shape consultation",
+               "Ridge-filling base to visually smooth any vertical ridges",
+               "Cuticle softening with urea-based treatment — no harsh clipping",
+               "Peptide & collagen-boosting hand massage",
+               (nc==="brittle"||nc==="soft"||nc==="bitten")
+                 ?"BIAB builder gel overlay — stronger than regular gel, protects while growing"
+                 :"Choice of regular polish, gel, or clear strengthening finish"] });
+    }
+    if (wSpots)   addons.push({title:"Hand Age-Spot Serum",      desc:"Targeted niacinamide application on the backs of hands. Brightens and evens tone over time."});
+    if (!noParaf&&(isPeri||nc==="brittle")) addons.push({title:"Paraffin Wax Dip", desc:"Extra-deep moisture therapy. Effective for dry, arthritic or perimenopausal skin."});
+    if (nc==="brittle"||nc==="soft") addons.push({title:"BIAB Strengthening Overlay", desc:"Prevents breakage and supports natural nail growth. Gentler than gel extensions."});
+  }
+
+  if (a.service==="pedi"||a.service==="both") {
+    if (fc==="maintenance"&&!isDiab) {
+      treatments.push({ name:"The Wellness Pedicure Express", tier:"Tier 4", duration:"60 min",
+        desc:"Premium maintenance for clients who keep on top of their foot care. Efficient, consistent, deeply relaxing.",
+        steps:[isFF?"Fragrance-free personalised foot soak":"Personalised foot soak (oat, milk, or tea tree — to preference)",
+               "Callus maintenance & toenail shaping","Standard foot & lower leg massage","Cuticle care",
+               isHalal?"Halal breathable polish finish":"Choice of polish, gel, or strengthening finish"] });
+    } else {
+      treatments.push({ name:"The Restorative Pedicure", tier:"Tier 3", duration:"90 min",
+        desc:"A deep-treatment pedicure for feet that need more than maintenance. Addresses calluses, thickened nails, and circulation.",
+        steps:[isFF?"Fragrance-free foot soak":fc==="sensitive_feet"?"Gentle milk and oat soak — no essential oils":fc==="thick_nails"?"Antifungal tea tree foot soak":"Personalised foot soak matched to skin type",
+               (isDiab||fc==="sensitive_feet")?"Gentle callus softening — no blade, electric file only":"Medical-grade callus removal (blade or electric file)",
+               fc==="thick_nails"?"Toenail thinning & antifungal treatment":"Toenail shaping and care",
+               "Hydrating mask with thermal booties",
+               wReflex?"20-minute reflexology-based massage":"15-minute reflexology-based foot massage",
+               isHalal?"Halal breathable polish finish":"Choice of polish, gel, or clear finish"] });
+    }
+    if (wReflex) addons.push({title:"Extended Reflexology Add-on (+15 min)", desc:"Targets reflex zones for deeper relaxation and circulation support."});
+  }
+
+  if (isDiab)  { protocols.push("Diabetic-Safe Protocol");          notes.push("Diabetic-safe protocol — no blade, careful heat monitoring, no cutting near skin folds."); }
+  if (isIsot)  { protocols.push("Isotretinoin-Safe (No Paraffin)"); notes.push("Client is on isotretinoin — paraffin and aggressive exfoliation removed. Maximum-gentleness products only."); }
+  if (isVegan)   protocols.push("Vegan Product Line");
+  if (isHalal)   protocols.push("Halal / Breathable Polish");
+  if (isFF)      protocols.push("Fragrance-Free Formulations");
+  if (isPeri&&wSpots) notes.push("SPF hand cream essential at this hormonal stage. Strongly recommend the Age-Spot Serum add-on.");
+  if (nc==="brittle"||nc==="soft") notes.push("BIAB overlay recommended — protects the nail plate and reduces damage from removal.");
+  if (fc==="thick_nails") notes.push("Thickened or discoloured toenails may indicate fungal issue — assess at appointment, may need podiatrist referral before polish.");
+  return {treatments,addons,notes,protocols};
+}
+
+// ── GOOGLE SHEETS ────────────────────────────────────────────────
+async function saveToSheets(rec) {
+  if (!SHEETS_URL) return;
+  S.saveStatus = "saving"; render();
+  const a=S.answers;
+  const labels = {
+    service:        {mani:"Hands & nails",pedi:"Feet & soles",both:"Both"},
+    nail_condition: {brittle:"Brittle/peeling/ridged",healthy:"Generally healthy",soft:"Soft/bendy",bitten:"Short/bitten/worn"},
+    foot_condition: {callus:"Calluses/dry soles",thick_nails:"Thickened/discoloured nails",maintenance:"General maintenance",sensitive_feet:"Sensitive/diabetic"},
+    hormonal:       {peri:"Perimenopause/menopause",pre:"Pre-menopause",hrt:"HRT/hormonal medication",skip_hormonal:"Not shared"},
+  };
+  const payload = {
+    timestamp:      new Date().toLocaleString("nl-NL",{timeZone:"Europe/Amsterdam"}),
+    client_name:    S.clientName||"—",
+    service:        labels.service[a.service]||a.service||"—",
+    nail_condition: labels.nail_condition[a.nail_condition]||"—",
+    foot_condition: labels.foot_condition[a.foot_condition]||"—",
+    hormonal:       labels.hormonal[a.hormonal]||"—",
+    health_flags:   (a.health_flags||[]).join(", ")||"None",
+    preferences:    (a.preferences||[]).join(", ")||"None",
+    recommended:    rec.treatments.map(t=>t.name).join(" + "),
+    addons:         rec.addons.map(x=>x.title).join(", ")||"None",
+    protocols:      rec.protocols.join(", ")||"None",
+    therapist_notes:rec.notes.join(" | ")||"None",
+  };
+  try {
+    await fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    S.saveStatus="saved";
+  } catch(e) { S.saveStatus="error"; }
+  render();
+}
+
+// ── HANDLERS ─────────────────────────────────────────────────────
+function handleSingle(value) {
+  const qs=getVisible(); S.answers[qs[S.currentQ].id]=value;
+  S.history.push(S.currentQ); S.currentQ++; S.multiSelected=[];
+  if (S.currentQ>=getVisible().length) { S.done=true; saveToSheets(buildRec()); }
+  render();
+}
+function handleMultiToggle(value) {
+  if (value==="none") { S.multiSelected=["none"]; }
+  else {
+    const w=S.multiSelected.filter(v=>v!=="none");
+    S.multiSelected=S.multiSelected.includes(value)?w.filter(v=>v!==value):[...w,value];
+  }
+  render();
+}
+function handleMultiContinue() {
+  if (!S.multiSelected.length) return;
+  const qs=getVisible(); S.answers[qs[S.currentQ].id]=[...S.multiSelected];
+  S.history.push(S.currentQ); S.currentQ++; S.multiSelected=[];
+  if (S.currentQ>=getVisible().length) { S.done=true; saveToSheets(buildRec()); }
+  render();
+}
+function handleBack() {
+  if (!S.history.length) return;
+  if (S.done) { S.done=false; S.saveStatus="idle"; }
+  const prev=S.history.pop(); const qs=getVisible(); const pq=qs[prev];
+  S.multiSelected=(pq&&pq.type==="multi")?(S.answers[pq.id]||[]):[];
+  S.currentQ=prev; render();
+}
+function handleRestart() { S={clientName:"",answers:{},history:[],currentQ:0,multiSelected:[],done:false,saveStatus:"idle"}; render(); }
+
+// ── DOM HELPER ───────────────────────────────────────────────────
+function el(tag,attrs,...children) {
+  const e=document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs||{})) {
+    if (k==="class") e.className=v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2).toLowerCase(),v);
+    else e.setAttribute(k,v);
+  }
+  for (const c of children) { if(c==null)continue; e.appendChild(typeof c==="string"?document.createTextNode(c):c); }
+  return e;
+}
+
+// ── RENDER ───────────────────────────────────────────────────────
+function render() {
+  if (!isAuth()) return;
+  const main=document.getElementById("main"); main.innerHTML="";
+  const qs=getVisible();
+  document.getElementById("progress").style.width=(S.done?100:(S.currentQ/qs.length)*100)+"%";
+  if (S.done) { main.appendChild(renderResult()); return; }
+
+  const q=qs[S.currentQ]; const card=el("div",{class:"card"});
+  if (S.history.length) card.appendChild(el("button",{class:"back-btn",onClick:handleBack},"← Back"));
+
+  if (S.currentQ===0) {
+    const nw=el("div",{class:"client-name-wrap"});
+    nw.appendChild(el("div",{class:"client-name-label"},"Client Name (optional)"));
+    const ni=el("input",{class:"client-name-input",type:"text",placeholder:"e.g. Maria",value:S.clientName});
+    ni.addEventListener("input",e=>{S.clientName=e.target.value;});
+    nw.appendChild(ni); card.appendChild(nw);
+  }
+
+  card.appendChild(el("div",{class:"step-label"},`Question ${S.currentQ+1} of ${qs.length}`));
+  card.appendChild(el("div",{class:"question"},q.question));
+  if (q.note) card.appendChild(el("div",{class:"question-note"},q.note));
+  const opts=el("div",{class:"options"});
+
+  if (q.type==="single") {
+    for (const o of q.options) {
+      opts.appendChild(el("button",{class:"option-btn",onClick:()=>handleSingle(o.value)},
+        el("div",{class:"opt-icon"},o.icon),
+        el("div",{class:"opt-text"},el("div",{class:"opt-title"},o.title),o.sub?el("div",{class:"opt-sub"},o.sub):null),
+        el("span",{class:"opt-arrow"},"›")));
+    }
+    card.appendChild(opts);
+  }
+
+  if (q.type==="multi") {
+    card.appendChild(el("div",{class:"multi-hint"},"Select all that apply, then press Continue"));
+    for (const o of q.options) {
+      const chk=S.multiSelected.includes(o.value);
+      opts.appendChild(el("div",{class:"multi-opt"+(chk?" checked":""),onClick:()=>handleMultiToggle(o.value)},
+        el("div",{class:"checkbox"},chk?"✓":""),
+        el("div",{class:"opt-icon"},o.icon),
+        el("div",{class:"opt-text"},el("div",{class:"opt-title"},o.title))));
+    }
+    card.appendChild(opts);
+    const btn=el("button",{class:"continue-btn",onClick:handleMultiContinue},"Continue →");
+    if (!S.multiSelected.length) btn.setAttribute("disabled","true");
+    card.appendChild(btn);
+  }
+
+  main.appendChild(card);
+}
+
+function renderResult() {
+  const rec=buildRec(); const wrap=el("div",{class:"result-card"});
+  rec.treatments.forEach((t,i)=>{
+    wrap.appendChild(el("div",{class:"result-header"+(i>0?" gold":"")},
+      el("div",{class:"result-tag"},t.tier+(rec.treatments.length>1?` · Treatment ${i+1} of ${rec.treatments.length}`:"")),
+      el("div",{class:"result-title"},t.name),
+      el("div",{class:"result-meta"},t.duration+" · personalised to client profile")));
+    const body=el("div",{class:"result-body"});
+    body.appendChild(el("div",{class:"treatment-desc"},t.desc));
+    body.appendChild(el("div",{class:"section-label"},"What's included"));
+    const ul=el("ul",{class:"steps-list"});
+    t.steps.forEach(s=>ul.appendChild(el("li",{},el("div",{class:"dot"}),s)));
+    body.appendChild(ul);
+    if (i===0&&rec.addons.length) {
+      body.appendChild(el("div",{class:"section-label"},"Recommended Add-ons"));
+      const box=el("div",{class:"addons-box"});
+      rec.addons.forEach(a=>box.appendChild(el("div",{class:"addon-item"},
+        el("span",{class:"addon-star"},"✦"),
+        el("div",{},el("div",{class:"addon-name"},a.title),el("div",{class:"addon-desc"},a.desc)))));
+      body.appendChild(box);
+    }
+    if (i===rec.treatments.length-1) {
+      if (rec.protocols.length) {
+        body.appendChild(el("div",{class:"section-label"},"Applied Protocols"));
+        const pb=el("div",{class:"protocols"}); rec.protocols.forEach(p=>pb.appendChild(el("div",{class:"badge"},p)));
+        body.appendChild(pb);
+      }
+      if (rec.notes.length) {
+        const nb=el("div",{class:"notes-box"});
+        nb.appendChild(el("div",{class:"notes-label"},"Therapist Notes"));
+        rec.notes.forEach(n=>nb.appendChild(el("div",{class:"note-item"},el("span",{},"→"),n)));
+        body.appendChild(nb);
+      }
+      if (SHEETS_URL) {
+        const sm={saving:{cls:"saving",icon:"⏳",text:"Saving to client records…"},saved:{cls:"saved",icon:"✓",text:"Saved to client records"},error:{cls:"error",icon:"⚠️",text:"Could not save — check your Sheets URL"}};
+        const s=sm[S.saveStatus]; if(s) body.appendChild(el("div",{class:`save-status ${s.cls}`},`${s.icon}  ${s.text}`));
+      }
+      body.appendChild(el("button",{class:"restart-btn",onClick:handleRestart},"New client ↺"));
+    }
+    wrap.appendChild(body);
+    if (i<rec.treatments.length-1) wrap.appendChild(el("div",{class:"divider"}));
+  });
+  return wrap;
+}
+
+if (isAuth()) render();
+</script>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SETUP GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. CHANGE THE PASSWORD
+  ───────────────────────
+  Find: const STAFF_PASSWORD = "salon2024";
+  Replace "salon2024" with your own password.
+
+
+  2. SET UP GOOGLE SHEETS (~5 minutes)
+  ──────────────────────────────────────
+  A. Create a new Google Sheet.
+     Name the first tab: Consultations
+     Add these 12 headers in row 1:
+
+     Timestamp | Client Name | Service | Nail Condition |
+     Foot Condition | Hormonal Stage | Health Flags |
+     Preferences | Recommended Treatment | Add-ons |
+     Protocols | Therapist Notes
+
+  B. In your Sheet:
+     Extensions → Apps Script → delete existing code → paste:
+
+       function doPost(e) {
+         var sheet = SpreadsheetApp.getActiveSpreadsheet()
+           .getSheetByName("Consultations");
+         var data = JSON.parse(e.postData.contents);
+         sheet.appendRow([
+           data.timestamp, data.client_name, data.service,
+           data.nail_condition, data.foot_condition, data.hormonal,
+           data.health_flags, data.preferences, data.recommended,
+           data.addons, data.protocols, data.therapist_notes
+         ]);
+         return ContentService.createTextOutput("OK");
+       }
+
+  C. Deploy → New deployment
+     Type: Web app
+     Execute as: Me
+     Who has access: Anyone
+     → Copy the Web App URL
+
+  D. Paste the URL into: const SHEETS_URL = "...";
+
+
+  3. UPLOAD TO GITHUB
+  ─────────────────────
+  - Rename this file to: index.html
+  - Upload to your GitHub repository
+  - Settings → Pages → Deploy from main branch
+  - Live at: https://yourusername.github.io/your-repo/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+</body>
+</html>
