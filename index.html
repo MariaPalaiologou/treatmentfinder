@@ -160,27 +160,7 @@
 // ═══════════════════════════════════════════════════
 const STAFF_PASSWORD = "confidence";  // ← change this
 const SHEETS_URL     = "https://script.google.com/macros/s/AKfycbzVC8N43mxM49s92EFN7DXJNPM4JBwrqt3P34evKDLcxavS52A0EQCLIBORhhjYjzu0KQ/exec";
-  var sheet = SpreadsheetApp.getActiveSpreadsheet()
-    .getSheetByName("Consultations");
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
-    data.timestamp,
-    data.client_name,
-    data.service,
-    data.nail_condition,
-    data.foot_condition,
-    data.hormonal,
-    data.health_flags,
-    data.preferences,
-    data.recommended,
-    data.addons,
-    data.protocols,
-    data.therapist_notes
-  ]);
-  return ContentService.createTextOutput("OK");
-}";           // ← paste your Apps Script URL here
 // ═══════════════════════════════════════════════════
-
 const SESSION_KEY = "salon_auth";
 function isAuth() { return sessionStorage.getItem(SESSION_KEY) === "true"; }
 
