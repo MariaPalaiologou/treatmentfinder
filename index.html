@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Treatment Finder — Your Salon Name</title>
+  <title>Treatment Finder — Nail & Muse </title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -144,7 +144,7 @@
 <div id="app">
   <div class="wrap">
     <div class="header">
-      <div class="salon-name">✦ Your Salon Name ✦</div>
+      <div class="salon-name">✦ Nail & Muse ✦</div>
       <h1>Treatment <em>Finder</em></h1>
       <p>Answer a few quick questions — we'll build the client's personalised recommendation.</p>
     </div>
@@ -158,8 +158,27 @@
 // ═══════════════════════════════════════════════════
 //  ⚙️  CONFIGURATION — only edit these two lines
 // ═══════════════════════════════════════════════════
-const STAFF_PASSWORD = "salon2024";  // ← change this
-const SHEETS_URL     = "";           // ← paste your Apps Script URL here
+const STAFF_PASSWORD = "nail&muse";  // ← change this
+const SHEETS_URL     = "function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName("Consultations");
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    data.timestamp,
+    data.client_name,
+    data.service,
+    data.nail_condition,
+    data.foot_condition,
+    data.hormonal,
+    data.health_flags,
+    data.preferences,
+    data.recommended,
+    data.addons,
+    data.protocols,
+    data.therapist_notes
+  ]);
+  return ContentService.createTextOutput("OK");
+}";           // ← paste your Apps Script URL here
 // ═══════════════════════════════════════════════════
 
 const SESSION_KEY = "salon_auth";
