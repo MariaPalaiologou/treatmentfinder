@@ -440,9 +440,9 @@ function buildRec(){
   var finishDetail;
   if(nc==="fungal"){ finishDetail="No polish or overlay — active fungal infection. Antifungal base only if condition is mild and client insists, otherwise leave bare and advise treatment."; }
   else if(isHalal){ finishDetail="Halal breathable / water-permeable polish — wudu compatible. Confirm colour choice with client."; }
-  else if(nc==="thickened"||nc==="onycholysis"){ finishDetail="Regular polish only — no gel or BIAB overlay. Keep nails short."; }
-  else if(nc==="brittle"||nc==="soft"||nc==="bitten"){ finishDetail="BIAB recommended. If client prefers gel or plain polish, note increased fragility and advise accordingly."; }
-  else{ finishDetail="Client choice — gel polish, BIAB, or plain polish. All suitable for current nail condition."; }
+  else if(nc==="thickened"||nc==="onycholysis"){ finishDetail="Simple polish only — no Gel Polish, Hard Gel or BIAB overlay. Keep nails short."; }
+  else if(nc==="brittle"||nc==="soft"||nc==="bitten"){ finishDetail="BIAB recommended to protect and strengthen. Hard Gel is also suitable for added structure. If client prefers Gel Polish or Simple Polish, note increased fragility and advise accordingly."; }
+  else{ finishDetail="Client choice — Gel Polish, BIAB, Hard Gel, or Simple Polish. All suitable for current nail condition."; }
 
   // BUILD STEPS
   steps.push({name:nailName,detail:nailNote,tag:nc==="fungal"?"Referral required":nc==="ingrown"?"Handle with care":null});
