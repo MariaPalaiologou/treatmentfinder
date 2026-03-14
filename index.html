@@ -759,9 +759,7 @@ function renderPlans(){
   if(S.plansLoading){ wrap.appendChild(el("div",{"class":"plans-loading"},"Loading plans…")); return wrap; }
 
   if(!visible.length){
-    wrap.appendChild(el("div",{"class":"plans-empty"},"No plans saved yet.
-Complete a consultation and save a plan
-to see it appear here."));
+    wrap.appendChild(el("div",{"class":"plans-empty"},"No plans saved yet. Complete a consultation and save a plan to see it appear here."));
     return wrap;
   }
 
