@@ -115,6 +115,7 @@
     .step-detail{font-size:12px;color:var(--gray);font-weight:300;margin-top:3px;line-height:1.55}
     .step-tag{display:inline-block;font-size:10px;background:var(--burg-light);color:var(--burg);padding:2px 10px;border-radius:20px;margin-top:5px;font-weight:500}
     .step-tag.s{background:var(--suede-light);color:var(--suede)}
+    .step-why{background:#FDFAF7;border-left:3px solid var(--suede);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;font-size:11px;color:#4A3728;font-weight:400;line-height:1.6;font-style:italic}
 
     /* PROTOCOLS / NOTES */
     .protocols{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
@@ -445,14 +446,68 @@ function buildRec(){
   else{ finishDetail="Client choice — Gel Polish, BIAB, Hard Gel, or Simple Polish. All suitable for current nail condition."; }
 
   // BUILD STEPS
-  steps.push({name:nailName,detail:nailNote,tag:nc==="fungal"?"Referral required":nc==="ingrown"?"Handle with care":null});
-  if(pedi) steps.push({name:"Heel Cleanse",detail:heelNote,tag:isDiab?"Diabetic-safe":null});
-  steps.push({name:scrubName,detail:scrubDetail,tag:null,ts:"s"});
-  if(tier2) steps.push({name:thermalName,detail:thermalDetail,tag:noHeat?"Paraffin replaced":isPreg?"Pregnancy-safe":null});
-  steps.push({name:creamName,detail:creamDetail,tag:isPreg?"Pregnancy-safe":null});
-  if(tier2) steps.push({name:mani?"Hand Massage":"Foot Massage",detail:massageDetail,tag:isPreg?"Modified for pregnancy":null});
-  if(wantsAroma) steps.push({name:"Aromatherapy",detail:aromaDetail||"",tag:isPreg?"Use with caution":null,ts:"s"});
-  steps.push({name:"Finish",detail:finishDetail,tag:isHalal?"Halal polish":nc==="fungal"?"No polish":null});
+  // Each step has: name, detail, tag, ts (style), why (rationale frame)
+
+  var nailWhy = nc==="fungal" ? "Active infection detected — referral and infection control take priority over any cosmetic treatment."
+    : nc==="onycholysis" ? "Nail plate separation requires minimal intervention to avoid worsening the condition."
+    : nc==="ingrown"     ? "Incorrect technique on ingrown nails risks pain and infection — safe filing only."
+    : nc==="thickened"   ? "Thickened nails require extra care to avoid pressure damage to the nail bed."
+    : nc==="yellow"      ? "Discolouration may signal an underlying issue — documenting and advising takes priority."
+    : nc==="brittle"||nc==="soft" ? "Hormonal changes and aging reduce nail keratin — gentler technique and strengthening overlay protect the nail plate."
+    : nc==="bitten"      ? "Short or bitten nails benefit from careful cuticle work and a strengthening overlay to support regrowth."
+    : "Nails are in good condition — standard technique is appropriate.";
+
+  var heelWhy = isDiab ? "Diabetes reduces circulation and sensation — blade use risks undetected injury. Electric file is always safer."
+    : sf==="cracked_heels" ? "Deep fissures need gradual softening before any mechanical removal to avoid splitting further."
+    : sf==="calluses"      ? "Callus build-up requires targeted removal at pressure points — heel borders and ball of foot are the priority areas."
+    : "Standard heel maintenance appropriate for current foot condition.";
+
+  var scrubWhy = sf==="calluses"||sf==="cracked_heels" ? "Urea-based or pumice formula loosens hard skin before removal, making the heel cleanse more effective and less aggressive."
+    : isIsot||isPreg ? "Isotretinoin and pregnancy make skin highly reactive — enzyme formulas exfoliate without any abrasive risk."
+    : (sf==="antiaging"||sf==="pigmentation")&&!isPreg ? "AHA acids accelerate cell turnover and interrupt melanin production — directly addressing the client's anti-ageing or pigmentation concern."
+    : sf==="hydration"||isPeri ? "Perimenopausal and dehydrated skin loses moisture rapidly after exfoliation — a humectant scrub resurfaces and seals hydration in the same step."
+    : sf==="sensitivity"||fragSens ? "Reactive skin needs exfoliation without friction or active acids — enzyme formulas dissolve dead cells gently."
+    : "Standard maintenance exfoliation appropriate for current skin condition.";
+
+  var thermalWhy = noHeat ? "Paraffin bath produces high localised heat which is contraindicated — a mask achieves similar moisture penetration without thermal risk."
+    : isDiab ? "Diabetic clients have reduced heat sensitivity — a controlled warm mask is safer than immersion in hot paraffin."
+    : isPreg  ? "High heat is avoided during pregnancy — a comfortably warm mask delivers hydration safely."
+    : sf==="hydration"||isPeri||sf==="cracked_heels" ? "Paraffin creates an occlusive seal that drives cream actives deep into the skin — the most effective moisture delivery for dry or perimenopausal skin."
+    : "Both options are appropriate — paraffin gives deeper penetration, mask gives a lighter finish.";
+
+  var creamWhy = isIsot ? "Isotretinoin strips the skin barrier — ceramide formula rebuilds it without adding any irritant."
+    : isPreg  ? "Many active ingredients are contraindicated in pregnancy — this formula is safe across all trimesters."
+    : sf==="antiaging"&&!isPeri ? "Retinol stimulates fibroblast activity and collagen production — the most evidence-based anti-ageing active for hands."
+    : isPeri||sf==="hydration" ? "Estrogen decline reduces collagen and hyaluronic acid production — peptide formula directly compensates for this hormonal shift."
+    : sf==="pigmentation" ? "Niacinamide interrupts melanin transfer and vitamin C brightens existing spots — targeted at the client's primary concern."
+    : sf==="calluses"||sf==="cracked_heels" ? "High-concentration urea continues the softening work at home — essential for managing hard skin between appointments."
+    : sf==="sensitivity"||fragSens ? "Reactive skin needs barrier support without any potential irritants — fragrance-free oat formula soothes while hydrating."
+    : "Standard nourishing formula appropriate for current skin condition.";
+
+  var massageWhy = isPreg ? "Certain acupressure points stimulate uterine contractions — avoiding them and using gentle effleurage keeps the treatment safe throughout pregnancy."
+    : isPeri||a.hormonal==="hrt" ? "Perimenopausal hormonal shifts cause fluid retention in extremities — lymphatic drainage technique helps reduce this directly."
+    : isArth ? "Inflamed joints are aggravated by deep pressure — gentle mobilisation improves circulation without causing discomfort."
+    : "Massage improves circulation, aids product absorption, and delivers the relaxation element of the Tier 2 treatment.";
+
+  var aromaWhy = isPreg ? "Essential oils can cross the placental barrier — only the safest oils at low dilution are used, with client confirmation."
+    : sf==="sensitivity"||fragSens ? "Client has reactive skin — patch test and fragrance-free base are essential before any aromatic product is applied."
+    : isPeri ? "Clary sage and geranium have phytoestrogenic properties that may help balance hormonal fluctuations."
+    : "Aromatherapy enhances the sensory experience and supports the relaxation outcomes of the treatment.";
+
+  var finishWhy = nc==="fungal" ? "No product should be applied over an active infection — it traps moisture and worsens the condition."
+    : isHalal ? "Water-permeable polish allows ritual washing (wudu) without requiring removal — essential for observant Muslim clients."
+    : nc==="thickened"||nc==="onycholysis" ? "Overlays add thickness and tension to already compromised nails — simple polish is the only safe finish option."
+    : nc==="brittle"||nc==="soft"||nc==="bitten" ? "Weak nails benefit from a builder overlay that reinforces the nail plate — BIAB or Hard Gel reduce breakage between appointments."
+    : "Nails are in good condition and can support any finish the client prefers.";
+
+  steps.push({name:nailName, detail:nailNote, why:nailWhy, tag:nc==="fungal"?"Referral required":nc==="ingrown"?"Handle with care":null});
+  if(pedi) steps.push({name:"Heel Cleanse", detail:heelNote, why:heelWhy, tag:isDiab?"Diabetic-safe":null});
+  steps.push({name:scrubName, detail:scrubDetail, why:scrubWhy, tag:null, ts:"s"});
+  if(tier2) steps.push({name:thermalName, detail:thermalDetail, why:thermalWhy, tag:noHeat?"Paraffin replaced":isPreg?"Pregnancy-safe":null});
+  steps.push({name:creamName, detail:creamDetail, why:creamWhy, tag:isPreg?"Pregnancy-safe":null});
+  if(tier2) steps.push({name:mani?"Hand Massage":"Foot Massage", detail:massageDetail, why:massageWhy, tag:isPreg?"Modified for pregnancy":null});
+  if(wantsAroma) steps.push({name:"Aromatherapy", detail:aromaDetail||"", why:aromaWhy, tag:isPreg?"Use with caution":null, ts:"s"});
+  steps.push({name:"Finish", detail:finishDetail, why:finishWhy, tag:isHalal?"Halal polish":nc==="fungal"?"No polish":null});
 
   if(isDiab)        protocols.push("Diabetic-Safe Protocol");
   if(isIsot)        protocols.push("Isotretinoin-Safe");
@@ -693,6 +748,7 @@ function renderResult(){
     var item=el("div",{"class":"step-item"},el("div",{"class":"step-num"},String(i+1)));
     var content=el("div",{"class":"step-body"},el("div",{"class":"step-name"},s.name),el("div",{"class":"step-detail"},s.detail));
     if(s.tag) content.appendChild(el("div",{"class":"step-tag"+(s.ts==="s"?" s":"")},s.tag));
+    if(s.why) content.appendChild(el("div",{"class":"step-why"},"Why: "+s.why));
     item.appendChild(content); stepsEl.appendChild(item);
   });
   body.appendChild(stepsEl);
@@ -853,6 +909,7 @@ function renderModal(p){
       var item=el("div",{"class":"step-item"},el("div",{"class":"step-num"},String(i+1)));
       var content=el("div",{"class":"step-body"},el("div",{"class":"step-name"},s.name||""),el("div",{"class":"step-detail"},s.detail||""));
       if(s.tag) content.appendChild(el("div",{"class":"step-tag"+(s.ts==="s"?" s":"")},s.tag));
+      if(s.why) content.appendChild(el("div",{"class":"step-why"},"Why: "+s.why));
       item.appendChild(content); stepsEl.appendChild(item);
     });
     body.appendChild(stepsEl);
