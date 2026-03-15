@@ -176,6 +176,11 @@
 
     .plans-empty{text-align:center;padding:60px 20px;color:var(--gray);font-size:13px;font-weight:300;line-height:1.8}
     .plans-loading{text-align:center;padding:60px 20px;color:var(--suede);font-size:13px}
+    .plans-search-wrap{position:relative;margin-bottom:16px}
+    .plans-search{width:100%;padding:11px 16px 11px 38px;border:1.5px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--charcoal);outline:none;transition:border-color .2s;background:white}
+    .plans-search:focus{border-color:var(--burg)}
+    .plans-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:14px;pointer-events:none}
+    .plans-count{font-size:11px;color:var(--gray);font-weight:300;margin-bottom:14px}
 
     /* MODAL */
     .modal-overlay{position:fixed;inset:0;background:rgba(55,54,54,.72);display:flex;align-items:center;justify-content:center;padding:16px;z-index:200;animation:fadeIn .2s ease}
@@ -342,7 +347,7 @@ var S = {
   tab:"new", clientName:"", treatment:null,
   answers:{}, history:[], currentQ:0, multiSelected:[],
   done:false, agreed:null, altPath:"", saveStatus:"idle",
-  plans:[], plansLoading:false, pendingDelete:null
+  plans:[], plansLoading:false, pendingDelete:null, plansSearch:""
 };
 
 function isManiPath(){ return S.treatment==="sig_mani"||S.treatment==="spa_mani"; }
@@ -590,7 +595,7 @@ document.getElementById("tab-new-btn").addEventListener("click",function(){
   render();
 });
 document.getElementById("tab-plans-btn").addEventListener("click",function(){
-  S.tab="plans";
+  S.tab="plans"; S.plansSearch="";
   document.getElementById("tab-plans-btn").classList.add("active");
   document.getElementById("tab-new-btn").classList.remove("active");
   document.getElementById("prog-wrap").style.display="none";
@@ -801,9 +806,14 @@ function renderAgreement(rec){
 // ── PLANS TAB ─────────────────────────────────────
 function renderPlans(){
   var hidden=getHidden();
+  var query=S.plansSearch.toLowerCase().trim();
   var visible=S.plans.filter(function(p){
     var ts=String(p.timestamp||p["Timestamp"]||"");
-    return hidden.indexOf(ts)<0;
+    if(hidden.indexOf(ts)>=0) return false;
+    if(!query) return true;
+    var name=String(p.client_name||p["Client Name"]||"").toLowerCase();
+    var treatment=String(p.treatment||p["Treatment"]||"").toLowerCase();
+    return name.indexOf(query)>=0||treatment.indexOf(query)>=0;
   });
 
   var wrap=el("div",{"class":"plans-wrap"});
@@ -814,8 +824,25 @@ function renderPlans(){
 
   if(S.plansLoading){ wrap.appendChild(el("div",{"class":"plans-loading"},"Loading plans…")); return wrap; }
 
+  // Search bar
+  var sw=el("div",{"class":"plans-search-wrap"});
+  sw.appendChild(el("span",{"class":"plans-search-icon"},"🔍"));
+  var si=el("input",{"class":"plans-search","type":"text","placeholder":"Search by client name or treatment…","value":S.plansSearch});
+  si.addEventListener("input",function(e){ S.plansSearch=e.target.value; render(); });
+  sw.appendChild(si);
+  wrap.appendChild(sw);
+
+  // Result count
+  var total=S.plans.filter(function(p){ return hidden.indexOf(String(p.timestamp||p["Timestamp"]||""))<0; }).length;
+  if(query){
+    wrap.appendChild(el("div",{"class":"plans-count"},visible.length+" of "+total+" plans match"));
+  } else {
+    wrap.appendChild(el("div",{"class":"plans-count"},total+" plan"+(total===1?"":"s")+" saved"));
+  }
+
   if(!visible.length){
-    wrap.appendChild(el("div",{"class":"plans-empty"},"No plans saved yet. Complete a consultation and save a plan to see it appear here."));
+    var emptyMsg = query ? "No plans match \""+S.plansSearch+"\" — try a different name or clear the search." : "No plans saved yet. Complete a consultation and save a plan to see it appear here.";
+    wrap.appendChild(el("div",{"class":"plans-empty"},emptyMsg));
     return wrap;
   }
 
