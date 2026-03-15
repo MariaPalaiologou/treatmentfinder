@@ -746,7 +746,7 @@ function renderAgreement(rec){
 function renderPlans(){
   var hidden=getHidden();
   var visible=S.plans.filter(function(p){
-    var ts=p.timestamp||p["Timestamp"]||"";
+    var ts=String(p.timestamp||p["Timestamp"]||"");
     return hidden.indexOf(ts)<0;
   });
 
@@ -767,9 +767,9 @@ function renderPlans(){
   visible.forEach(function(p){
     var name=p.client_name||p["Client Name"]||"Unknown client";
     var treatment=p.treatment||p["Treatment"]||"—";
-    var time=p.timestamp||p["Timestamp"]||"—";
+    var time=String(p.timestamp||p["Timestamp"]||"—");
     var agreed=p.agreed||p["Agreed"]||"";
-    var ts=p.timestamp||p["Timestamp"]||"";
+    var ts=String(p.timestamp||p["Timestamp"]||"");
     var isPending=S.pendingDelete===ts;
 
     var row=el("div",{"class":"plan-row"});
