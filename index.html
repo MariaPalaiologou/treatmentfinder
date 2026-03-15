@@ -806,15 +806,6 @@ function renderAgreement(rec){
 // ── PLANS TAB ─────────────────────────────────────
 function renderPlans(){
   var hidden=getHidden();
-  var query=S.plansSearch.toLowerCase().trim();
-  var visible=S.plans.filter(function(p){
-    var ts=String(p.timestamp||p["Timestamp"]||"");
-    if(hidden.indexOf(ts)>=0) return false;
-    if(!query) return true;
-    var name=String(p.client_name||p["Client Name"]||"").toLowerCase();
-    var treatment=String(p.treatment||p["Treatment"]||"").toLowerCase();
-    return name.indexOf(query)>=0||treatment.indexOf(query)>=0;
-  });
 
   var wrap=el("div",{"class":"plans-wrap"});
   var toolbar=el("div",{"class":"plans-toolbar"});
@@ -828,51 +819,79 @@ function renderPlans(){
   var sw=el("div",{"class":"plans-search-wrap"});
   sw.appendChild(el("span",{"class":"plans-search-icon"},"🔍"));
   var si=el("input",{"class":"plans-search","type":"text","placeholder":"Search by client name or treatment…","value":S.plansSearch});
-  si.addEventListener("input",function(e){ S.plansSearch=e.target.value; render(); });
+  si.addEventListener("input",function(e){ 
+    S.plansSearch=e.target.value;
+    // Only re-render the list and count, not the whole page
+    updatePlansList(wrap, hidden);
+  });
   sw.appendChild(si);
   wrap.appendChild(sw);
 
-  // Result count
-  var total=S.plans.filter(function(p){ return hidden.indexOf(String(p.timestamp||p["Timestamp"]||""))<0; }).length;
-  if(query){
-    wrap.appendChild(el("div",{"class":"plans-count"},visible.length+" of "+total+" plans match"));
-  } else {
-    wrap.appendChild(el("div",{"class":"plans-count"},total+" plan"+(total===1?"":"s")+" saved"));
-  }
+  // Initial list render
+  updatePlansList(wrap, hidden);
+  return wrap;
+}
+
+function updatePlansList(wrap, hidden){
+  // Remove old count + list if they exist
+  var oldCount = wrap.querySelector(".plans-count");
+  var oldList  = wrap.querySelector(".plans-list");
+  var oldEmpty = wrap.querySelector(".plans-empty");
+  if(oldCount) oldCount.parentNode.removeChild(oldCount);
+  if(oldList)  oldList.parentNode.removeChild(oldList);
+  if(oldEmpty) oldEmpty.parentNode.removeChild(oldEmpty);
+
+  var query = S.plansSearch.toLowerCase().trim();
+  var visible = S.plans.filter(function(p){
+    var ts = String(p.timestamp||p["Timestamp"]||"");
+    if(hidden.indexOf(ts)>=0) return false;
+    if(!query) return true;
+    var name      = String(p.client_name||p["Client Name"]||"").toLowerCase();
+    var treatment = String(p.treatment||p["Treatment"]||"").toLowerCase();
+    return name.indexOf(query)>=0 || treatment.indexOf(query)>=0;
+  });
+
+  var total = S.plans.filter(function(p){
+    return hidden.indexOf(String(p.timestamp||p["Timestamp"]||""))<0;
+  }).length;
+
+  var countEl = el("div",{"class":"plans-count"},
+    query ? visible.length+" of "+total+" plans match"
+          : total+" plan"+(total===1?"":"s")+" saved");
+  wrap.appendChild(countEl);
 
   if(!visible.length){
-    var emptyMsg = query ? "No plans match \""+S.plansSearch+"\" — try a different name or clear the search." : "No plans saved yet. Complete a consultation and save a plan to see it appear here.";
+    var emptyMsg = query
+      ? "No plans match \""+S.plansSearch+"\" — try a different name or clear the search."
+      : "No plans saved yet. Complete a consultation and save a plan to see it appear here.";
     wrap.appendChild(el("div",{"class":"plans-empty"},emptyMsg));
-    return wrap;
+    return;
   }
 
-  var list=el("div",{"class":"plans-list"});
+  var list = el("div",{"class":"plans-list"});
   visible.forEach(function(p){
-    var name=p.client_name||p["Client Name"]||"Unknown client";
-    var treatment=p.treatment||p["Treatment"]||"—";
-    var time=String(p.timestamp||p["Timestamp"]||"—");
-    var agreed=p.agreed||p["Agreed"]||"";
-    var ts=String(p.timestamp||p["Timestamp"]||"");
-    var isPending=S.pendingDelete===ts;
+    var name      = p.client_name||p["Client Name"]||"Unknown client";
+    var treatment = p.treatment||p["Treatment"]||"—";
+    var time      = String(p.timestamp||p["Timestamp"]||"—");
+    var agreed    = p.agreed||p["Agreed"]||"";
+    var ts        = String(p.timestamp||p["Timestamp"]||"");
+    var isPending = S.pendingDelete===ts;
 
-    var row=el("div",{"class":"plan-row"});
+    var row = el("div",{"class":"plan-row"});
     row.appendChild(el("div",{"class":"plan-dot"}));
 
-    // Clickable info area
     (function(plan){ row.appendChild(el("div",{"class":"plan-info","onClick":function(){ openModal(plan); }},
       el("div",{"class":"plan-name"},name),
       el("div",{"class":"plan-meta"},treatment+" · "+time+(agreed?" · "+agreed:"")))); })(p);
 
-    // Open arrow
     (function(plan){ row.appendChild(el("button",{"class":"plan-open-btn","onClick":function(){ openModal(plan); }},"›")); })(p);
 
-    // Delete / confirm
     if(!isPending){
       (function(t){ row.appendChild(el("button",{"class":"plan-del-btn","onClick":function(e){
         e.stopPropagation(); S.pendingDelete=t; render();
       }},"Delete")); })(ts);
     } else {
-      var conf=el("div",{"class":"del-confirm"});
+      var conf = el("div",{"class":"del-confirm"});
       conf.appendChild(el("span",{"class":"del-confirm-txt"},"Remove?"));
       (function(t){ conf.appendChild(el("button",{"class":"del-yes-btn","onClick":function(e){
         e.stopPropagation(); hideplan(t); S.pendingDelete=null; render();
@@ -882,11 +901,9 @@ function renderPlans(){
       }},"Cancel"));
       row.appendChild(conf);
     }
-
     list.appendChild(row);
   });
   wrap.appendChild(list);
-  return wrap;
 }
 
 function openModal(plan){ renderModal(plan); }
