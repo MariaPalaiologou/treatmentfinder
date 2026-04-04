@@ -58,7 +58,6 @@
     .t-tier{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:5px}
     .t-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:7px}
     .t-inc{font-size:10px;color:var(--gray);font-weight:300;line-height:1.5}
-    .t-icon{font-size:20px;margin-bottom:9px}
     .options{display:flex;flex-direction:column;gap:9px}
     .opt-btn{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;background:white;cursor:pointer;text-align:left;transition:all .18s;width:100%;font-family:'Poppins',sans-serif}
     .opt-btn:hover{border-color:var(--burg);background:var(--burg-pale);transform:translateX(3px)}
@@ -247,10 +246,10 @@ if(isAuth()){
 
 // TREATMENTS
 var TREATMENTS = {
-  sig_mani:{ tier:"Signature", name:"The Signature Manicure", icon:"\u270B", inc:"Russian manicure · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
-  edit_mani:{ tier:"Edit", name:"The Edit Manicure", icon:"\u2728", inc:"Russian manicure · Scrub · Serum · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
-  found_pedi:{ tier:"Foundation", name:"The Foundation Pedicure", icon:"\U0001F9B6", inc:"Russian pedicure · Heel cleanse · Soak · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
-  cerem_pedi:{ tier:"Ceremony", name:"The Ceremony Pedicure", icon:"\u2728", inc:"Russian pedicure · Heel cleanse · Soak · Scrub · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" }
+  sig_mani:{ tier:"Signature", name:"The Signature Manicure", inc:"Russian manicure · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  edit_mani:{ tier:"Edit", name:"The Edit Manicure", inc:"Russian manicure · Scrub · Serum · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  found_pedi:{ tier:"Foundation", name:"The Foundation Pedicure", inc:"Russian pedicure · Heel cleanse · Soak · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  cerem_pedi:{ tier:"Ceremony", name:"The Ceremony Pedicure", inc:"Russian pedicure · Heel cleanse · Soak · Scrub · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" }
 };
 
 // QUESTIONS
@@ -756,7 +755,6 @@ function renderSelect(){
   Object.keys(TREATMENTS).forEach(function(key){
     var t=TREATMENTS[key];
     (function(k){ grid.appendChild(el("div",{"class":"t-tile","onClick":function(){ selectTreatment(k); }},
-      el("div",{"class":"t-icon"},t.icon),
       el("div",{"class":"t-tier"},t.tier),
       el("div",{"class":"t-name"},t.name),
       el("div",{"class":"t-inc"},t.inc))); })(key);
