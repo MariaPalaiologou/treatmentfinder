@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Treatment Guide — Nail &amp; Muse</title>
+  <title>Treatment Guide - Nail &amp; Muse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -15,8 +15,6 @@
       --charcoal:#373636;--mid:#5A5555;--gray:#9A9494;--border:#DDD5CE;
     }
     html,body{min-height:100%;background:#F7F4F1;font-family:'Poppins',sans-serif;color:var(--charcoal)}
-
-    /* LOCK */
     #lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 50%,#EDE0D8 100%)}
     .lock-card{background:white;border-radius:20px;box-shadow:0 8px 48px rgba(71,11,20,.10);padding:48px 44px;width:100%;max-width:420px;text-align:center;animation:fadeUp .4s ease both}
     .logo-img{width:200px;max-width:100%;height:auto;margin:0 auto 24px;display:block}
@@ -31,28 +29,18 @@
     .lock-btn{width:100%;padding:13px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s}
     .lock-btn:hover{background:var(--burg-mid)}
     .lock-err{font-size:12px;color:#C0392B;margin-top:10px;height:16px}
-
-    /* APP */
     #app{display:none}
     .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:44px 20px 100px;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 40%,#EDE0D8 100%);background-attachment:fixed}
-
-    /* HEADER */
     .header{text-align:center;margin-bottom:32px}
     .header-logo{width:180px;max-width:100%;height:auto;margin:0 auto 16px;display:block}
     .header-div{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--suede),transparent);margin:0 auto 14px}
     .header-sub{font-size:12px;font-weight:300;color:var(--gray);line-height:1.6}
-
-    /* TAB BAR */
     .tab-bar{display:flex;gap:0;margin-bottom:32px;background:white;border-radius:12px;padding:4px;box-shadow:0 2px 16px rgba(71,11,20,.06);width:100%;max-width:580px}
     .tab-btn{flex:1;padding:11px;border:none;background:transparent;font-family:'Poppins',sans-serif;font-size:11px;font-weight:400;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border-radius:9px;transition:all .2s}
     .tab-btn.active{background:var(--burg);color:white;font-weight:500}
-
-    /* PROGRESS */
     .prog-wrap{width:100%;max-width:580px;margin-bottom:32px}
     .prog-bar{height:2px;background:var(--warm-grey);border-radius:2px;overflow:hidden}
     .prog-fill{height:100%;background:linear-gradient(90deg,var(--burg),var(--suede));border-radius:2px;transition:width .5s ease}
-
-    /* CARD */
     .card{background:white;border-radius:20px;box-shadow:0 4px 40px rgba(71,11,20,.07),0 1px 8px rgba(0,0,0,.03);padding:40px 44px;width:100%;max-width:580px;animation:fadeUp .35s ease both}
     @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .back-btn{background:none;border:none;color:var(--gray);font-family:'Poppins',sans-serif;font-size:11px;cursor:pointer;margin-bottom:20px;padding:0;display:flex;align-items:center;gap:5px;letter-spacing:.5px;transition:color .15s}
@@ -60,14 +48,10 @@
     .step-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:10px}
     .question{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:8px}
     .q-note{font-size:12px;color:var(--gray);font-weight:300;margin-bottom:24px;line-height:1.6}
-
-    /* CLIENT NAME */
     .cname-wrap{margin-bottom:24px}
     .cname-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:7px}
     .cname-input{width:100%;padding:11px 15px;border:1.5px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color .2s;background:var(--burg-pale)}
     .cname-input:focus{border-color:var(--burg);background:white}
-
-    /* TREATMENT TILES */
     .t-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .t-tile{border:1.5px solid var(--border);border-radius:14px;padding:20px 14px;cursor:pointer;transition:all .2s;text-align:center;background:white}
     .t-tile:hover{border-color:var(--burg);background:var(--burg-pale);transform:translateY(-2px);box-shadow:0 4px 16px rgba(71,11,20,.08)}
@@ -75,8 +59,6 @@
     .t-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:7px}
     .t-inc{font-size:10px;color:var(--gray);font-weight:300;line-height:1.5}
     .t-icon{font-size:20px;margin-bottom:9px}
-
-    /* OPTIONS */
     .options{display:flex;flex-direction:column;gap:9px}
     .opt-btn{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;background:white;cursor:pointer;text-align:left;transition:all .18s;width:100%;font-family:'Poppins',sans-serif}
     .opt-btn:hover{border-color:var(--burg);background:var(--burg-pale);transform:translateX(3px)}
@@ -94,8 +76,6 @@
     .cont-btn{margin-top:18px;width:100%;padding:13px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .18s}
     .cont-btn:hover{background:var(--burg-mid);transform:translateY(-1px)}
     .cont-btn:disabled{background:#ccc;cursor:default;transform:none}
-
-    /* RESULT */
     .res-card{background:white;border-radius:20px;box-shadow:0 4px 40px rgba(71,11,20,.09);width:100%;max-width:620px;overflow:hidden;animation:fadeUp .4s ease both}
     .res-hdr{background:var(--burg);padding:36px 44px;color:white;position:relative;overflow:hidden}
     .res-hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04)}
@@ -104,8 +84,6 @@
     .res-client{font-size:13px;opacity:.8;font-weight:300}
     .res-body{padding:36px 44px}
     .sec-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:14px}
-
-    /* STEPS */
     .steps{margin-bottom:24px}
     .step-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #F5F0EE}
     .step-item:last-child{border-bottom:none}
@@ -116,15 +94,11 @@
     .step-tag{display:inline-block;font-size:10px;background:var(--burg-light);color:var(--burg);padding:2px 10px;border-radius:20px;margin-top:5px;font-weight:500}
     .step-tag.s{background:var(--suede-light);color:var(--suede)}
     .step-why{background:#FDFAF7;border-left:3px solid var(--suede);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:8px;font-size:11px;color:#4A3728;font-weight:400;line-height:1.6;font-style:italic}
-
-    /* PROTOCOLS / NOTES */
     .protocols{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
     .badge{background:var(--burg-light);color:var(--burg);font-size:10px;font-weight:500;padding:4px 13px;border-radius:20px}
     .notes-box{background:#FBF8F3;border:1px solid #E8DFCC;border-radius:12px;padding:16px 18px;margin-bottom:20px}
     .notes-lbl{font-size:9px;letter-spacing:3px;color:var(--suede);font-weight:500;margin-bottom:9px;text-transform:uppercase}
     .note-item{font-size:12px;color:#7A6340;line-height:1.6;padding:3px 0;display:flex;gap:8px}
-
-    /* AGREEMENT */
     .agree-sec{border-top:1px solid #F0EAE8;padding-top:24px;margin-top:4px}
     .agree-q{font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal);margin-bottom:16px;line-height:1.3}
     .agree-btns{display:flex;gap:10px;margin-bottom:16px}
@@ -144,36 +118,30 @@
     .restart-btn{margin-top:12px;width:100%;padding:13px;background:transparent;color:var(--burg);border:1.5px solid var(--burg);border-radius:10px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .18s}
     .restart-btn:hover{background:var(--burg-light)}
     .ornament{text-align:center;color:var(--suede);font-size:16px;letter-spacing:10px;margin:24px 0 44px;opacity:.35;font-family:'Playfair Display',serif}
-
-    /* PLANS TAB */
     .plans-wrap{width:100%;max-width:580px}
     .plans-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
     .plans-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--charcoal)}
     .refresh-btn{background:transparent;border:1.5px solid var(--border);color:var(--mid);font-family:'Poppins',sans-serif;font-size:10px;font-weight:400;letter-spacing:1px;padding:7px 16px;border-radius:8px;cursor:pointer;transition:all .18s}
     .refresh-btn:hover{border-color:var(--burg);color:var(--burg)}
     .plans-list{display:flex;flex-direction:column;gap:9px}
-
-    /* PLAN ROW — with delete */
     .plan-row{background:white;border-radius:14px;padding:14px 16px;box-shadow:0 2px 12px rgba(71,11,20,.05);border:1.5px solid transparent;display:flex;align-items:center;gap:12px;transition:border-color .18s}
     .plan-row:hover{border-color:var(--border)}
     .plan-dot{width:8px;height:8px;background:var(--burg);border-radius:50%;flex-shrink:0}
     .plan-info{flex:1;cursor:pointer;min-width:0}
     .plan-info:hover .plan-name{color:var(--burg)}
     .plan-name{font-size:14px;font-weight:500;color:var(--charcoal);transition:color .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .plan-meta{font-size:11px;color:var(--gray);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .plan-meta{font-size:11px;color:var(--mid);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .plan-date{font-size:10px;color:var(--gray);margin-top:2px;font-weight:300}
     .plan-open-btn{background:transparent;border:none;color:var(--gray);font-size:16px;cursor:pointer;padding:4px 6px;transition:color .15s;flex-shrink:0}
     .plan-open-btn:hover{color:var(--burg)}
     .plan-del-btn{background:transparent;border:1.5px solid #EECECE;color:#C0392B;font-family:'Poppins',sans-serif;font-size:10px;font-weight:500;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .18s;flex-shrink:0;letter-spacing:.5px}
     .plan-del-btn:hover{background:#FFF0F0;border-color:#C0392B}
-
-    /* DELETE CONFIRM inline */
     .del-confirm{display:flex;align-items:center;gap:8px;flex-shrink:0}
     .del-confirm-txt{font-size:11px;color:#C0392B;font-weight:400}
     .del-yes-btn{background:#C0392B;border:none;color:white;font-family:'Poppins',sans-serif;font-size:10px;font-weight:500;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .18s}
     .del-yes-btn:hover{background:#A93226}
     .del-no-btn{background:transparent;border:1.5px solid var(--border);color:var(--mid);font-family:'Poppins',sans-serif;font-size:10px;font-weight:400;padding:5px 10px;border-radius:8px;cursor:pointer;transition:all .18s}
     .del-no-btn:hover{border-color:var(--charcoal);color:var(--charcoal)}
-
     .plans-empty{text-align:center;padding:60px 20px;color:var(--gray);font-size:13px;font-weight:300;line-height:1.8}
     .plans-loading{text-align:center;padding:60px 20px;color:var(--suede);font-size:13px}
     .plans-search-wrap{position:relative;margin-bottom:16px}
@@ -181,8 +149,11 @@
     .plans-search:focus{border-color:var(--burg)}
     .plans-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:14px;pointer-events:none}
     .plans-count{font-size:11px;color:var(--gray);font-weight:300;margin-bottom:14px}
-
-    /* MODAL */
+    .pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid var(--warm-grey)}
+    .page-btn{background:white;border:1.5px solid var(--border);color:var(--mid);font-family:'Poppins',sans-serif;font-size:11px;font-weight:400;padding:7px 14px;border-radius:8px;cursor:pointer;transition:all .18s}
+    .page-btn:hover{border-color:var(--burg);color:var(--burg)}
+    .page-btn:disabled{opacity:.35;cursor:default;border-color:var(--border);color:var(--gray)}
+    .page-info{font-size:11px;color:var(--gray);font-weight:300;min-width:80px;text-align:center}
     .modal-overlay{position:fixed;inset:0;background:rgba(55,54,54,.72);display:flex;align-items:center;justify-content:center;padding:16px;z-index:200;animation:fadeIn .2s ease}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     .modal-card{background:white;border-radius:20px;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;animation:slideUp .3s ease}
@@ -198,20 +169,17 @@
     .modal-agree{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:20px}
     .modal-agree.yes{background:#EDF7F1;color:#2D7A4F}
     .modal-agree.no{background:#FFF0F0;color:#C0392B}
-
     @media(max-width:560px){
       .card,.res-body,.modal-body{padding:28px 20px}
       .res-hdr,.modal-hdr{padding:28px 20px}
       .res-name,.modal-tname{font-size:22px}
       .t-grid{grid-template-columns:1fr}
       .lock-card{padding:36px 24px}
-      .plan-del-btn{display:none}
     }
   </style>
 </head>
 <body>
 
-<!-- LOCK -->
 <div id="lock-screen">
   <div class="lock-card">
     <img class="logo-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QC8RXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABgAAAAAQAAAGAAAAABAAAABgAAkAcABAAAADAyMTABkQcABAAAAAECAwAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAMAAQAAACADAAADoAMAAQAAAPoAAAAAAAAA/+EONWh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI2LTAxLTA4PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjYzNTUwZDcwLWNhYzAtNDJiNi04MWE1LTM3ZmY5OGE3Nzk2NDwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5VbnRpdGxlZCBkZXNpZ24gLSAxPC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpwZGY9J2h0dHA6Ly9ucy5hZG9iZS5jb20vcGRmLzEuMy8nPgogIDxwZGY6QXV0aG9yPk1hcm5pPC9wZGY6QXV0aG9yPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nPgogIDx4bXA6Q3JlYXRvclRvb2w+Q2FudmEgKFJlbmRlcmVyKSBkb2M9REFHOXZwRUJQVDAgdXNlcj1VQUcwZEJFVUd4NCBicmFuZD1CQUcwZE4xWHVuNCB0ZW1wbGF0ZT08L3htcDpDcmVhdG9yVG9vbD4KIDwvcmRmOkRlc2NyaXB0aW9uPgo8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSd3Jz8+/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/9sAQwEHBwcKCAoTCgoTKBoWGigoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgo/8AAEQgA+gMgAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+qaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACis3Wte0fQo0k1vVdP05H+613cpCG+hYjNWNM1Kx1W0W60u9tr21bgTW0qyIfoykigC1RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABWR4w1pfDnhTWNadPMGn2ktzszjeUQsF/EjFa9Z3iXSINf8PanpF2Stvf20ls7L1AdSpI9xmgD80vFPiHVPFOuXWr65dyXV9cNuZ2PCjsqjso6ADpXV/BDx1qPgfx5ps9pO/8AZ91PHBe2+fkljZsE4/vLnIP9CaxfH3gjXPAutzabr1nJEVYiK4Cnyp17MjdCCO3UdDg12HwA+GWq+NvGOnXj2ssWgWU6T3N26kI4U58tD/ExIxx0Bye2QD79ooooA+Xf2nfin4y8E/EGz03wxrH2Kyk06Odo/ssMmXMkoJy6E9FXjOOK8x0D49/Eq713Tre48Sb4ZrmON1+w2wypYAjIj9K2P20f+Sraf/2CIf8A0bNXi/hb/kZ9I/6/If8A0MUAfqBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFeMfFH4+aZ8P/ABbN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ooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA474qeNV8CeGBqS2n227lnS2t7UPtMrtzjIBPQE9PQd6vfDzxTD4z8IafrkEYhNwpEkIbd5bqSrLnjuPyIrgvEJ/4S/wCPmjaQPn07wxbnULkdvtDY2D6j92R/wKj4T/8AFK/Ejxj4Kf5LV5f7W09e3lvjco+mUH/AWoA2vH/xOh8G+N9A0S9slaz1IAyXZl2+Rl9oO3HIzgnkcZr0avBfjP4eh8V/GPwzolwQFu9Ju1Rj/A4SUo34MAfwrufhR4t/tD4eG412TyNQ0QSWmp+YeUeEcs31UAn3zQBF45+JsPhrx74b8LwWS3dzqk0STOZdn2dZJAinGDk/eOOOg9avfEHx3J4c1LTdE0bS5NY8RakGa3s1kEaqg6u7HoOD+R5GK8KmtZ9U8SeDPG+pIyXfiHxRC0CN1itY3RYl/n9QAa9g+JXhLxBN4v0fxl4Na0l1fToWtpLO6O1J4ju4B7H526kdueOQCn/wsrxD4c1nTrT4heGotMsdQlEEOoWlyJY0c9FcdvrnoCcHBx1Hi7VvGdjqixeGfDVnqliYgxnmvlhYPk5XafbHPvXN2vxPiXU7PSPiH4Xu9AubiQJDLcBZ7V5OnEmMA8+4GeTXqtAHjXg/4keOvFumf2jovg3T5bMStCXbUghDLjPBGe9bvjzx3rejeONL8M+HdEttTvL61a5XzrnycbS2RkjHRc1lfsvf8k0k/wCwjP8A+y1lfE3UL/S/j74Vu9J0qTV7xNLlC2kc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eMIEZsnOBj1YVx2struofHK5k8NR6ZLJpGjRwSDUJJFRWmkL5GwE7tqgfTNdX4n8P3HivwJJo3ie6tLDUbphiWyYsiSK+6MrvwW+6Mjjvj1oAqW3xJtxqGnW+saBrujQajKsFpdX0CLG8jfdRtrEox7AirHjfx/H4PFzNf6BrdxYW4Qve20cRiyxAA+aQHOSB061kaf4h13SfEGk+HfiDp9hdi+kK2OrWgzHJKgyBJGwyj47jjJ47kS/Gr/TLDwzoo5/tTXLWGRfWJSZHP4bRQB1PhrXrjWmuBPoOr6SIgpBv0jUSZz93Y7dMc5x1FL4u8TWfhfTori7jnuJriVbe2tbdN8txK3REHrweTwK3KyPEUmi6fBHrWv/AGSKPTt0kd1cAZhLDB2nrkjjjk9KAMDQ/HNzceJ7bQfEPh680O/vInms/NmjmSdU5YbkJwwHOP8A62W6x48lj1m90zw34f1DX7mxIF49u6RxQsRnZvcjc+OqjpVDQIrzxJ4mPjfVbSWy02wtZIdItJl2ysrcvO4/hLAABfTk1L8DgsPwvsdSunUT37z6hdzE43O8jEsT7AAfhQBr6T480a/8Ey+KJnlsrC3Di5S4XEkDodrIwH8WeAB1yPWsZfiRdW1zpsmteFNV0vR9SnS2t76eSJiHf7nmRKxZAffpVT4SafZaj8Orq+1q2gex1XUbnVTHcqNioZSUYg8dFDfkadNM3xL8Qad9gRh4Q0i7W7e8YYGoXEediResankt0YjA6ZoA2PEnjS+0/wAVf2Donhy41u8WzW8lMV1HCI0Z2UA7yMnK/rWp4W1jWtUkuF1rw1PoixhTG0t3FN5pOcgBCcY9/WuVfwZqWsePfEWsR+J3sdOuVgtVTSnX7QpiXlHdlIT5mJ2jk5GSMc3Phbfap/aPirRNT1GXVYdHvUht72YDzHVowxRiAASpOCfegDv6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgrjwJqcfijWtb0bxZeaZLqrRNPGlnBKMRptQAupPAz+dafiDweviHw3Y6fq2qXcl/ZzJdQ6nEqRTJOmdsgCjaOpGMYx7811VFAHF6V4HnGvWWseJdfvddvLAN9jWWGOCKEsMF9iAbmxxk9K1tb8NQ6v4l8P6vPcSKdHeaSOAAbZGkTZlj/ALPJH1reooAK4Lxp8O28U+IbTVZfEOo2v2TBtrZEieGJwPvhXUgt7nkdq72igDnvDWgahpU07al4j1DWUkQKsd1HEqp6kbFGc+9crD8JoYLSXSoPEuuReGZHZjpKSIECscmMPt3hDk8Z6E8969LooA4rx14Bh8VaRp+lR6peaVpdoAPstoqeXKBjYrhgcquOF6c89qm8OeE9T0e+tpZvFmqXtnApUWUkMCREbSAPkQEAcEYPYV19FAHCXnw/lj1rUdQ8O+JNU0RdSk868t7dY5I3kxguu9TsY9yK6Twt4esfDOkiw00SFC7SyyzPvlnkY5aR2/iY9zWvRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9k=" alt="Nail &amp; Muse"/>
@@ -224,7 +192,6 @@
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div class="wrap">
     <div class="header">
@@ -240,7 +207,7 @@
       <div class="prog-bar"><div class="prog-fill" id="progress" style="width:0%"></div></div>
     </div>
     <div id="main"></div>
-    <div class="ornament">✦ ✦ ✦</div>
+    <div class="ornament">&#10022; &#10022; &#10022;</div>
   </div>
 </div>
 
@@ -249,97 +216,90 @@
 <script>
 var STAFF_PASSWORD = "confidence";
 var SHEETS_URL = "https://script.google.com/macros/s/AKfycbxcd6jtwSy27E1zVGnmKBT4u4P60UjQ5GtlKCK--GLfI-5O2ku2_uZOjUoZSM0JVcr6Xw/exec";
-
 var SESSION_KEY = "nm_auth";
-var HIDDEN_KEY  = "nm_hidden_plans"; // localStorage key for hidden plan timestamps
+var HIDDEN_KEY = "nm_hidden_plans";
 
 function isAuth(){ return sessionStorage.getItem(SESSION_KEY) === "true"; }
-
-function getHidden(){
-  try{ return JSON.parse(localStorage.getItem(HIDDEN_KEY)||"[]"); }
-  catch(e){ return []; }
-}
-function hideplan(ts){
-  var h = getHidden();
-  if(h.indexOf(ts)<0){ h.push(ts); localStorage.setItem(HIDDEN_KEY, JSON.stringify(h)); }
-}
+function getHidden(){ try{ return JSON.parse(localStorage.getItem(HIDDEN_KEY)||"[]"); } catch(e){ return []; } }
+function hideplan(ts){ var h=getHidden(); if(h.indexOf(ts)<0){ h.push(ts); localStorage.setItem(HIDDEN_KEY,JSON.stringify(h)); } }
 
 function unlock(){
-  var input = document.getElementById("pw-input");
-  var err   = document.getElementById("pw-err");
-  if(input.value === STAFF_PASSWORD){
+  var input=document.getElementById("pw-input");
+  var err=document.getElementById("pw-err");
+  if(input.value===STAFF_PASSWORD){
     sessionStorage.setItem(SESSION_KEY,"true");
-    document.getElementById("lock-screen").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    document.getElementById("lock-screen").style.display="none";
+    document.getElementById("app").style.display="block";
     render();
   } else {
-    err.textContent = "Incorrect password. Please try again.";
+    err.textContent="Incorrect password. Please try again.";
     input.classList.add("err");
-    input.value = "";
-    setTimeout(function(){ input.classList.remove("err"); }, 400);
+    input.value="";
+    setTimeout(function(){ input.classList.remove("err"); },400);
   }
 }
-document.getElementById("pw-btn").addEventListener("click", unlock);
-document.getElementById("pw-input").addEventListener("keydown", function(e){ if(e.key==="Enter") unlock(); });
+document.getElementById("pw-btn").addEventListener("click",unlock);
+document.getElementById("pw-input").addEventListener("keydown",function(e){ if(e.key==="Enter") unlock(); });
 if(isAuth()){
-  document.getElementById("lock-screen").style.display = "none";
-  document.getElementById("app").style.display = "block";
+  document.getElementById("lock-screen").style.display="none";
+  document.getElementById("app").style.display="block";
 }
 
+// TREATMENTS
 var TREATMENTS = {
-  sig_mani:{ tier:"Tier 1", name:"Signature Manicure", icon:"✋", inc:"Russian manicure · Scrub · Cream · Polish choice" },
-  sig_pedi:{ tier:"Tier 1", name:"Signature Pedicure", icon:"🦶", inc:"Russian pedicure · Heel cleanse · Scrub · Cream · Polish choice" },
-  spa_mani:{ tier:"Tier 2", name:"Spa Manicure",       icon:"🌿", inc:"Russian manicure · Mask or Paraffin · Hand massage · Polish choice" },
-  spa_pedi:{ tier:"Tier 2", name:"Spa Pedicure",       icon:"✨", inc:"Russian pedicure · Heel cleanse · Mask or Paraffin · Massage · Polish choice" }
+  sig_mani:{ tier:"Signature", name:"The Signature Manicure", icon:"\u270B", inc:"Russian manicure · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  edit_mani:{ tier:"Edit", name:"The Edit Manicure", icon:"\u2728", inc:"Russian manicure · Scrub · Serum · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  found_pedi:{ tier:"Foundation", name:"The Foundation Pedicure", icon:"\U0001F9B6", inc:"Russian pedicure · Heel cleanse · Soak · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" },
+  cerem_pedi:{ tier:"Ceremony", name:"The Ceremony Pedicure", icon:"\u2728", inc:"Russian pedicure · Heel cleanse · Soak · Scrub · Mask · Paraffin · Massage · Cream · Aromatherapy · Cuticle Oil · Polish" }
 };
 
+// QUESTIONS
 var QUESTIONS = [
   { id:"hormonal", q:"What is the client's hormonal stage?", note:"Influences product formulation choices throughout.", type:"single",
     options:[
-      {v:"peri",    i:"🌙", t:"Perimenopause or menopause",   s:"Irregular cycles or post-menopausal"},
-      {v:"pre",     i:"🌤", t:"Pre-menopause / regular cycle", s:"No significant hormonal changes noted"},
-      {v:"hrt",     i:"💊", t:"On HRT or hormonal medication", s:"Including contraceptive pill or coil"},
-      {v:"unknown", i:"○",  t:"Not known / not shared",        s:"Use skin and nail profile to guide choices"},
+      {v:"peri",    i:"\u{1F319}", t:"Perimenopause or menopause",   s:"Irregular cycles or post-menopausal"},
+      {v:"pre",     i:"\u26C5",   t:"Pre-menopause / regular cycle", s:"No significant hormonal changes noted"},
+      {v:"hrt",     i:"\u{1F48A}",t:"On HRT or hormonal medication", s:"Including contraceptive pill or coil"},
+      {v:"unknown", i:"o",         t:"Not known / not shared",        s:"Use skin and nail profile to guide choices"},
     ]},
-  { id:"skin_focus", q:"What is the client's primary skin concern?", note:"Determines active ingredients in the scrub and cream.", type:"single",
+  { id:"skin_focus", q:"What is the client's primary skin concern?", note:"Determines active ingredients in the scrub, serum and cream.", type:"single",
     options:[
-      {v:"antiaging",    i:"🌸", t:"Anti-ageing / fine lines",      s:"Wants to address signs of ageing on hands or feet"},
-      {v:"hydration",    i:"💧", t:"Dryness / dehydration",         s:"Very dry skin, tight feeling, flaking"},
-      {v:"pigmentation", i:"✦",  t:"Pigmentation / age spots",      s:"Uneven tone, sun damage, dark patches"},
-      {v:"sensitivity",  i:"🫧", t:"Sensitive / reactive skin",     s:"Redness, reactivity, easily irritated"},
-      {v:"calluses",     i:"🪨", t:"Calluses and corns",            s:"Build-up of hard skin, pressure spots", showFor:["pedi"]},
-      {v:"cracked_heels",i:"🦶", t:"Cracked heels and rough skin",  s:"Deep heel fissures, rough borders, peeling", showFor:["pedi"]},
-      {v:"none",         i:"○",  t:"No specific concern",           s:"General maintenance"},
+      {v:"antiaging",    i:"\u{1F338}", t:"Anti-ageing / fine lines",      s:"Wants to address signs of ageing on hands or feet"},
+      {v:"hydration",    i:"\u{1F4A7}", t:"Dryness / dehydration",         s:"Very dry skin, tight feeling, flaking"},
+      {v:"pigmentation", i:"*",          t:"Pigmentation / age spots",      s:"Uneven tone, sun damage, dark patches"},
+      {v:"sensitivity",  i:"\u{1FAE7}", t:"Sensitive / reactive skin",     s:"Redness, reactivity, easily irritated"},
+      {v:"calluses",     i:"\u{1FAA8}", t:"Calluses and corns",            s:"Build-up of hard skin, pressure spots", showFor:["pedi"]},
+      {v:"cracked_heels",i:"\u{1F9B6}", t:"Cracked heels and rough skin",  s:"Deep heel fissures, rough borders, peeling", showFor:["pedi"]},
+      {v:"none",         i:"o",          t:"No specific concern",           s:"General maintenance"},
     ]},
-  { id:"nail_condition", q:"How would you describe the client's nails?", note:"Guides technique, finish recommendations, and any referral flags.", type:"single",
+  { id:"nail_condition", q:"How would you describe the client's nails?", note:"Guides technique, finish and any referral flags.", type:"single",
     options:[
-      {v:"brittle",    i:"🌿", t:"Brittle, peeling or ridged",     s:"More fragile than before, vertical lines, splitting"},
-      {v:"healthy",    i:"💅", t:"Generally healthy",               s:"Good baseline, maintenance focus"},
-      {v:"soft",       i:"🌱", t:"Soft and bendy",                  s:"Bend easily, do not hold length well"},
-      {v:"bitten",     i:"✂️", t:"Short, bitten or very worn",      s:"Looking to strengthen and grow out"},
-      {v:"yellow",     i:"🟡", t:"Yellow or discoloured nails",     s:"Yellowing, staining, or loss of natural colour"},
-      {v:"thickened",  i:"🔶", t:"Thickened nails",                 s:"Nails noticeably thicker and harder than normal"},
-      {v:"fungal",     i:"⚠️", t:"Exhibiting fungal infection",     s:"White/yellow patches, crumbling edges, odour"},
-      {v:"ingrown",    i:"📌", t:"Ingrown nails",                   s:"Nail edge growing into surrounding skin"},
-      {v:"onycholysis",i:"🔍", t:"Onycholysis or other nail condition", s:"Nail plate separating from bed, or other concern", showFor:["mani"]},
+      {v:"brittle",    i:"\u{1F33F}", t:"Brittle, peeling or ridged",         s:"More fragile than before, vertical lines, splitting"},
+      {v:"healthy",    i:"\u{1F485}", t:"Generally healthy",                   s:"Good baseline, maintenance focus"},
+      {v:"soft",       i:"\u{1F331}", t:"Soft and bendy",                      s:"Bend easily, do not hold length well"},
+      {v:"bitten",     i:"\u2702",    t:"Short, bitten or very worn",          s:"Looking to strengthen and grow out"},
+      {v:"yellow",     i:"\u{1F7E1}", t:"Yellow or discoloured nails",         s:"Yellowing, staining, or loss of natural colour"},
+      {v:"thickened",  i:"\u{1F536}", t:"Thickened nails",                     s:"Nails noticeably thicker and harder than normal"},
+      {v:"fungal",     i:"\u26A0",    t:"Exhibiting fungal infection",          s:"White/yellow patches, crumbling edges, odour"},
+      {v:"ingrown",    i:"\u{1F4CC}", t:"Ingrown nails",                       s:"Nail edge growing into surrounding skin"},
+      {v:"onycholysis",i:"\u{1F50D}", t:"Onycholysis or other nail condition", s:"Nail plate separating from bed, or other concern", showFor:["mani"]},
     ]},
-  { id:"health_flags", q:"Any health considerations?", note:"Tick all that apply — adjusts technique, heat and product choices.", type:"multi",
+  { id:"health_flags", q:"Any health considerations?", note:"Tick all that apply.", type:"multi",
     options:[
-      {v:"diabetes",     i:"🩺", t:"Diabetes or circulation issues"},
-      {v:"isotretinoin", i:"💊", t:"On isotretinoin / Roaccutane"},
-      {v:"arthritis",    i:"🤲", t:"Arthritis or joint sensitivity"},
-      {v:"pregnancy",    i:"🤰", t:"Pregnancy"},
-      {v:"nut_allergy",  i:"🥜", t:"Nut oil allergy"},
-      {v:"fragrance",    i:"🫧", t:"Fragrance sensitivity"},
-      {v:"none",         i:"✓",  t:"None of the above"},
+      {v:"diabetes",     i:"\u{1FA7A}", t:"Diabetes or circulation issues"},
+      {v:"isotretinoin", i:"\u{1F48A}", t:"On isotretinoin / Roaccutane"},
+      {v:"arthritis",    i:"\u{1F932}", t:"Arthritis or joint sensitivity"},
+      {v:"pregnancy",    i:"\u{1F930}", t:"Pregnancy"},
+      {v:"nut_allergy",  i:"\u{1F95C}", t:"Nut oil allergy"},
+      {v:"fragrance",    i:"\u{1FAE7}", t:"Fragrance sensitivity"},
+      {v:"none",         i:"\u2713",    t:"None of the above"},
     ]},
   { id:"product_prefs", q:"Any product or service preferences?", note:"Tick all that apply.", type:"multi",
     options:[
-      {v:"vegan",       i:"🌱", t:"Vegan products only"},
-      {v:"halal",       i:"🌙", t:"Halal / breathable polish"},
-      {v:"no_heat",     i:"🚫", t:"No heat treatments (no paraffin)"},
-      {v:"aromatherapy",i:"🌸", t:"Aromatherapy welcome"},
-      {v:"none",        i:"○",  t:"None of the above"},
+      {v:"vegan",   i:"\u{1F331}", t:"Vegan products only"},
+      {v:"halal",   i:"\u{1F319}", t:"Halal / breathable polish"},
+      {v:"no_heat", i:"\u{1F6AB}", t:"No heat treatments (no paraffin)"},
+      {v:"none",    i:"o",          t:"None of the above"},
     ]},
 ];
 
@@ -347,12 +307,15 @@ var S = {
   tab:"new", clientName:"", treatment:null,
   answers:{}, history:[], currentQ:0, multiSelected:[],
   done:false, agreed:null, altPath:"", saveStatus:"idle",
-  plans:[], plansLoading:false, pendingDelete:null, plansSearch:""
+  plans:[], plansLoading:false, pendingDelete:null,
+  plansSearch:"", plansPage:0
 };
 
-function isManiPath(){ return S.treatment==="sig_mani"||S.treatment==="spa_mani"; }
-function isPediPath(){ return S.treatment==="sig_pedi"||S.treatment==="spa_pedi"; }
-function isTier2(){    return S.treatment==="spa_mani"||S.treatment==="spa_pedi"; }
+function isManiPath(){ return S.treatment==="sig_mani"||S.treatment==="edit_mani"; }
+function isPediPath(){ return S.treatment==="found_pedi"||S.treatment==="cerem_pedi"; }
+function isEditMani(){ return S.treatment==="edit_mani"; }
+function isCeremPedi(){ return S.treatment==="cerem_pedi"; }
+function isTier2(){ return S.treatment==="edit_mani"||S.treatment==="cerem_pedi"; }
 
 function getOptions(q){
   var pathKey = isManiPath() ? "mani" : "pedi";
@@ -362,158 +325,254 @@ function getOptions(q){
 function buildRec(){
   var a=S.answers, hf=a.health_flags||[], pp=a.product_prefs||[];
   function has(arr,v){ return arr.indexOf(v)>=0; }
-  var isPeri=a.hormonal==="peri"||a.hormonal==="hrt",
-      isDiab=has(hf,"diabetes"), isIsot=has(hf,"isotretinoin"),
-      isArth=has(hf,"arthritis"), isPreg=has(hf,"pregnancy"),
-      nutAllerg=has(hf,"nut_allergy"), fragSens=has(hf,"fragrance"),
-      isVegan=has(pp,"vegan"), isHalal=has(pp,"halal"),
-      noHeat=has(pp,"no_heat")||isIsot, wantsAroma=has(pp,"aromatherapy"),
+  var isPeri   = a.hormonal==="peri"||a.hormonal==="hrt",
+      isDiab   = has(hf,"diabetes"),
+      isIsot   = has(hf,"isotretinoin"),
+      isArth   = has(hf,"arthritis"),
+      isPreg   = has(hf,"pregnancy"),
+      nutAllerg= has(hf,"nut_allergy"),
+      fragSens = has(hf,"fragrance"),
+      isVegan  = has(pp,"vegan"),
+      isHalal  = has(pp,"halal"),
+      noHeat   = has(pp,"no_heat")||isIsot,
       nc=a.nail_condition, sf=a.skin_focus,
-      mani=isManiPath(), pedi=isPediPath(), tier2=isTier2();
+      mani=isManiPath(), pedi=isPediPath(),
+      editMani=isEditMani(), ceremPedi=isCeremPedi(),
+      tier2=isTier2();
 
   var steps=[],notes=[],protocols=[];
 
-  // SCRUB
-  var scrubName,scrubDetail;
-  if(sf==="calluses"){ scrubName="Urea Callus Scrub"; scrubDetail="High-urea mechanical scrub — softens and lifts hard skin before removal. Focus on heel borders, ball of foot, and corn sites."; }
-  else if(sf==="cracked_heels"){ scrubName="Exfoliating Heel Scrub"; scrubDetail="Pumice-based scrub with moisturising base. Concentrate on heel fissure borders. Do not scrub open cracks — focus on surrounding hard skin only."; }
-  else if(sf==="sensitivity"||isIsot||isPreg){ scrubName="Enzyme Scrub"; scrubDetail="Gentle papaya or pineapple enzyme formula — no abrasive particles. Safe for reactive, isotretinoin-sensitive and pregnancy skin."; }
-  else if((sf==="antiaging"||sf==="pigmentation")&&!isPreg){ scrubName="AHA Exfoliating Scrub"; scrubDetail="Lactic or glycolic acid-based — promotes cell turnover and helps fade pigmentation. Avoid on broken skin."; }
-  else if(sf==="hydration"||isPeri){ scrubName="Hydrating Sugar Scrub"; scrubDetail="Humectant-rich sugar scrub with hyaluronic acid — gently resurfaces while locking in moisture. Ideal for perimenopausal dry skin."; }
-  else{ scrubName="Classic Sugar Scrub"; scrubDetail="Standard exfoliating sugar scrub suited to normal skin in good condition."; }
-
-  // CREAM
-  var creamName,creamDetail;
-  if(isIsot){ creamName="Barrier Repair Cream"; creamDetail="Fragrance-free ceramide formula. Isotretinoin thins the skin barrier — restores it without aggravating sensitivity."; }
-  else if(isPreg){ creamName="Pregnancy-Safe Hydrating Cream"; creamDetail="No retinol, no salicylic acid, no essential oils. Shea butter and hyaluronic acid base — safe for all trimesters."; }
-  else if(sf==="antiaging"&&!isPeri){ creamName="Retinol Hand Cream"; creamDetail="Low-concentration retinol to stimulate collagen and reduce fine lines. Apply sparingly, avoid broken skin."; }
-  else if(isPeri||sf==="hydration"){ creamName="Peptide-Rich Cream"; creamDetail="Tripeptide and collagen-boosting formula — suited to perimenopausal skin where estrogen loss reduces elasticity and moisture retention."; }
-  else if(sf==="pigmentation"){ creamName="Brightening Niacinamide Cream"; creamDetail="Niacinamide and vitamin C blend — targets age spots and uneven pigmentation. Follow with SPF if daytime appointment."; }
-  else if(sf==="calluses"||sf==="cracked_heels"){ creamName="Intensive Urea Foot Cream"; creamDetail="High-concentration urea (20-40%) foot cream — continues softening hard skin and healing heel fissures post-treatment. Advise client to use nightly at home."; }
-  else if(sf==="sensitivity"||fragSens){ creamName="Fragrance-Free Calming Cream"; creamDetail="Oat extract and allantoin formula — no fragrance, no essential oils. Ideal for reactive or sensitive skin."; }
-  else{ creamName="Hydrating Hand and Foot Cream"; creamDetail="Standard nourishing cream with shea and vitamin E. Suitable for normal to dry skin."; }
-  if(nutAllerg){ creamDetail+=" Confirm no nut-derived oils in this product before applying."; }
-
   // NAIL TECHNIQUE
-  var nailName=mani?"Russian Manicure":"Russian Pedicure", nailNote;
-  if(nc==="fungal"){ nailNote="STOP — active fungal infection present. Do not apply polish or overlay. Antifungal soak treatment only. Advise client to see GP/podiatrist. Sanitise all tools after treatment. Document in client notes."; }
-  else if(nc==="onycholysis"){ nailNote="Onycholysis detected — nail plate separating from bed. No soaking, no cleaning under nail plate. BIAB not recommended. Keep nails short. Use gentle technique only. Refer to dermatologist if spreading."; }
-  else if(nc==="ingrown"){ nailNote="Ingrown nail present. File straight across only — do not cut corners. Gently clean the groove. Do not attempt to lift embedded nail edge. Refer to podiatrist if inflamed or severely embedded."; }
-  else if(nc==="thickened"){ nailNote="Thickened nails — gentle filing only, do not force or apply excessive pressure. If severely thickened or painful, refer to podiatrist. No gel overlay recommended."; }
+  var nailName = mani ? "Russian Manicure" : "Russian Pedicure";
+  var nailNote;
+  if(nc==="fungal"){ nailNote="STOP - active fungal infection present. Do not apply polish or overlay. Antifungal soak treatment only. Advise client to see GP/podiatrist. Sanitise all tools. Document in client notes."; }
+  else if(nc==="onycholysis"){ nailNote="Onycholysis detected - nail plate separating from bed. No soaking, no cleaning under nail plate. BIAB not recommended. Keep nails short. Use gentle technique only. Refer to dermatologist if spreading."; }
+  else if(nc==="ingrown"){ nailNote="Ingrown nail present. File straight across only - do not cut corners. Gently clean the groove. Do not attempt to lift embedded nail edge. Refer to podiatrist if inflamed or severely embedded."; }
+  else if(nc==="thickened"){ nailNote="Thickened nails - gentle filing only. If severely thickened or painful, refer to podiatrist. No gel overlay recommended."; }
   else if(nc==="yellow"){ nailNote="Yellow or discoloured nails may indicate fungal infection, product staining, or underlying health issue. Apply antifungal base coat. Do not apply coloured polish until cause identified. Document and advise client."; }
-  else if(nc==="brittle"||nc==="soft"){ nailNote="BIAB overlay strongly recommended — protects the nail plate during and after the Russian technique. Avoid prolonged soaking before cuticle work."; }
+  else if(nc==="brittle"||nc==="soft"){ nailNote="BIAB overlay strongly recommended - protects the nail plate during and after the Russian technique. Avoid prolonged soaking before cuticle work."; }
   else if(nc==="bitten"){ nailNote="Keep nails short and uniform. BIAB overlay will help strengthen and encourage growth. Be gentle around the hyponychium."; }
-  else{ nailNote="Standard Russian technique. Nails in good condition — client has full choice of finish."; }
+  else{ nailNote="Standard Russian technique. Nails in good condition - client has full choice of finish."; }
+  var nailWhy = nc==="fungal" ? "Active infection detected - referral and infection control take priority over any cosmetic treatment."
+    : nc==="onycholysis" ? "Nail plate separation requires minimal intervention to avoid worsening the condition."
+    : nc==="ingrown"     ? "Incorrect technique on ingrown nails risks pain and infection - safe filing only."
+    : nc==="thickened"   ? "Thickened nails require extra care to avoid pressure damage to the nail bed."
+    : nc==="yellow"      ? "Discolouration may signal an underlying issue - documenting and advising takes priority."
+    : nc==="brittle"||nc==="soft" ? "Hormonal changes and aging reduce nail keratin - gentler technique and strengthening overlay protect the nail plate."
+    : nc==="bitten"      ? "Short or bitten nails benefit from careful cuticle work and a strengthening overlay to support regrowth."
+    : "Nails are in good condition - standard technique is appropriate.";
+  steps.push({name:nailName, detail:nailNote, why:nailWhy, tag:nc==="fungal"?"Referral required":nc==="ingrown"?"Handle with care":null});
 
-  // HEEL
-  var heelNote;
+  // HEEL CLEANSE (pedicure only)
   if(pedi){
-    if(isDiab){ heelNote="Electric file only — no blade. Careful around fissures. No aggressive heat. Check circulation before starting."; }
-    else if(sf==="cracked_heels"){ heelNote="Extended heel cleanse — focus on fissure borders. Soften thoroughly before any mechanical removal. Blade or file as appropriate to fissure depth."; }
-    else if(sf==="calluses"){ heelNote="Medical-grade callus removal — blade or electric file as appropriate. Focus on ball of foot, heel borders, and corn sites. Do not over-remove — leave protective layer."; }
-    else{ heelNote="Standard heel cleanse — blade or electric file as appropriate. Focus on lateral heel borders and ball of foot."; }
+    var heelNote;
+    if(isDiab){ heelNote="Electric file only - no blade. Careful around fissures. No aggressive heat. Check circulation before starting."; }
+    else if(sf==="cracked_heels"){ heelNote="Extended heel cleanse - focus on fissure borders. Soften thoroughly before any mechanical removal. Blade or file as appropriate to fissure depth."; }
+    else if(sf==="calluses"){ heelNote="Medical-grade callus removal - blade or electric file as appropriate. Focus on ball of foot, heel borders, and corn sites. Do not over-remove - leave protective layer."; }
+    else{ heelNote="Standard heel cleanse - blade or electric file as appropriate. Focus on lateral heel borders and ball of foot."; }
+    var heelWhy = isDiab ? "Diabetes reduces circulation and sensation - blade use risks undetected injury. Electric file is always safer."
+      : sf==="cracked_heels" ? "Deep fissures need gradual softening before any mechanical removal to avoid splitting further."
+      : sf==="calluses"      ? "Callus build-up requires targeted removal at pressure points - heel borders and ball of foot are the priority areas."
+      : "Standard heel maintenance appropriate for current foot condition.";
+    steps.push({name:"Heel Cleanse", detail:heelNote, why:heelWhy, tag:isDiab?"Diabetic-safe":null});
   }
 
-  // THERMAL
-  var thermalName,thermalDetail;
+  // SOAK (pedicure only - fixed per tier)
+  if(pedi){
+    var soakName, soakDetail;
+    if(ceremPedi){ soakName="AHA and BHA Soaking Salt"; soakDetail="Strongly softening soaking salt with AHA and BHA acids for exfoliation and skin regeneration. Soak for 10-15 minutes."; }
+    else{ soakName="Bath Pearls Soak"; soakDetail="Smoothing, soothing and antiseptic bath pearls. Soak for 10-15 minutes."; }
+    steps.push({name:soakName, detail:soakDetail, why:"Soak is fixed per tier - softens skin and prepares nails and cuticles for treatment.", tag:null, ts:"s"});
+  }
+
+  // SCRUB (Edit Manicure and Ceremony Pedicure only)
   if(tier2){
-    if(noHeat){ thermalName=mani?"Hydrating Hand Mask":"Hydrating Foot Mask"; thermalDetail="Paraffin not suitable. Apply hydrating mask with cling wrap and mitts/booties for 8-10 minutes instead."; }
-    else if(isDiab){ thermalName=mani?"Warm Hand Mask":"Warm Foot Mask"; thermalDetail="Paraffin not recommended for diabetic clients. Use warm (not hot) mask with careful temperature monitoring."; }
-    else if(isPreg){ thermalName=mani?"Hydrating Hand Mask":"Hydrating Foot Mask"; thermalDetail="Paraffin avoided during pregnancy due to high heat. Hydrating mask applied at comfortable temperature."; }
-    else if(sf==="hydration"||isPeri||sf==="cracked_heels"){ thermalName="Paraffin Bath"; thermalDetail="Paraffin strongly recommended — maximum moisture penetration for dry, perimenopausal, or cracked skin. Double-dip for best results."; }
-    else{ thermalName=mani?"Hand Mask or Paraffin Bath":"Foot Mask or Paraffin Bath"; thermalDetail="Either suits this client — paraffin gives deeper moisture, mask is lighter. Offer the choice."; }
+    var scrubName, scrubDetail, scrubWhy;
+    if(editMani){ scrubName="Vitamin C Scrub"; scrubDetail="Vitamin C exfoliating scrub - brightens and evens skin tone while removing dead skin cells. Duration: 5 minutes."; scrubWhy="Vitamin C scrub is the single scrub option for The Edit Manicure - brightens and prepares the skin for serum and mask application."; }
+    else{ scrubName="Foot Scrub"; scrubDetail="Exfoliating foot scrub - removes dead skin cells and prepares feet for mask or paraffin treatment. Duration: 5 minutes."; scrubWhy="Scrub is included in The Ceremony Pedicure to prepare the skin for deeper treatment steps."; }
+    steps.push({name:scrubName, detail:scrubDetail, why:scrubWhy, tag:null, ts:"s"});
+  }
+
+  // SERUM (Edit Manicure only)
+  if(editMani){
+    var serumName, serumDetail, serumWhy, serumTag=null;
+    if(isIsot||isPreg||sf==="sensitivity"||sf==="hydration"||sf==="none"){
+      serumName="Hyaluronic Acid Serum";
+      serumDetail="Deeply hydrating hyaluronic acid serum - safe for all skin types including sensitive, pregnant, and isotretinoin-treated skin.";
+      serumWhy = isIsot ? "Isotretinoin compromises the skin barrier - hyaluronic acid hydrates without any risk of irritation." : isPreg ? "Hyaluronic acid is safe throughout pregnancy - retinol and active acids are contraindicated." : sf==="sensitivity" ? "Sensitive skin cannot tolerate active ingredients like retinol - hyaluronic acid is the safest choice." : "Universal hydration serum appropriate for the client's profile.";
+    } else if(sf==="pigmentation"){
+      serumName="Niacinamide Serum";
+      serumDetail="Niacinamide serum - interrupts melanin transfer and brightens uneven pigmentation. Apply before mask.";
+      serumWhy="Niacinamide directly addresses the client's pigmentation concern by interrupting melanin transfer at the cellular level.";
+    } else if(sf==="antiaging"&&isPeri){
+      serumName="Copper Peptides Serum";
+      serumDetail="Copper peptides serum - supports collagen synthesis and skin renewal. Gentler than retinol, suitable for perimenopausal skin.";
+      serumWhy="Perimenopausal skin benefits from peptide-based collagen support rather than retinol, which can be too stimulating for hormonally disrupted skin.";
+    } else if(sf==="antiaging"&&!isPeri){
+      serumName="Retinol Serum";
+      serumDetail="Retinol serum - stimulates cell turnover and collagen production. Apply before mask. SPF will be applied on top.";
+      serumWhy="Retinol is the gold standard anti-ageing active - stimulates fibroblast activity and collagen production for visible results.";
+      serumTag="SPF required after";
+    } else {
+      serumName="Hyaluronic Acid Serum";
+      serumDetail="Deeply hydrating hyaluronic acid serum - universal safe default for all profiles.";
+      serumWhy="No specific active concern identified - hyaluronic acid provides universal hydration benefit.";
+    }
+    steps.push({name:serumName, detail:serumDetail, why:serumWhy, tag:serumTag});
+    // SPF step after retinol
+    if(serumName==="Retinol Serum"){
+      steps.push({name:"SPF Application", detail:"Apply broad-spectrum SPF 30+ on the backs of the hands after the retinol serum. Retinol increases photosensitivity - SPF is mandatory.", why:"Retinol accelerates cell turnover and increases UV sensitivity. Without SPF protection the new skin cells are at higher risk of sun damage and pigmentation.", tag:"Mandatory with Retinol"});
+    }
+  }
+
+  // MASK (Edit Manicure and Ceremony Pedicure only)
+  if(tier2){
+    var maskName, maskDetail, maskWhy;
+    if(editMani){ maskName="Hydrating Hand Mask"; maskDetail="Hydrating mask applied to hands with cling wrap and mitts for 15 minutes."; maskWhy="Hydrating mask is the mask option for The Edit Manicure - seals in serum actives and delivers intensive moisture while the mask sets."; }
+    else{ maskName="Urea, Beeswax and Honey Foot Mask"; maskDetail="Soothing and refreshing mask with urea, beeswax and honey extract. Applied with cling wrap and booties for 15 minutes."; maskWhy="This mask combination softens, soothes and seals moisture into the foot after scrub - urea continues the keratolytic work, beeswax seals, honey soothes."; }
+    steps.push({name:maskName, detail:maskDetail, why:maskWhy, tag:null});
+  }
+
+  // PARAFFIN BATH (Edit Manicure and Ceremony Pedicure only)
+  if(tier2){
+    var paraffinDetail, paraffinTag=null;
+    if(noHeat){
+      paraffinDetail="Paraffin bath not suitable for this client (isotretinoin or no-heat preference). Skip this step.";
+      paraffinTag="Skip - contraindicated";
+    } else if(isDiab){
+      paraffinDetail="Paraffin bath not recommended for diabetic clients due to reduced heat sensitivity. Skip this step.";
+      paraffinTag="Skip - diabetic protocol";
+    } else if(isPreg){
+      paraffinDetail="Paraffin bath avoided during pregnancy due to high heat. Skip this step.";
+      paraffinTag="Skip - pregnancy";
+    } else {
+      paraffinDetail="Lavender Paraffin Bath - 15 minutes. Provides deep occlusive moisture and warmth. Double-dip for best results.";
+    }
+    var paraffinWhy = noHeat ? "Paraffin produces high localised heat which is contraindicated for isotretinoin-treated or heat-sensitive clients."
+      : isDiab ? "Diabetic clients have impaired heat sensation - paraffin immersion risks undetected thermal injury."
+      : isPreg  ? "High heat from paraffin is avoided during pregnancy as a precautionary measure."
+      : sf==="hydration"||isPeri||sf==="cracked_heels" ? "Paraffin creates an occlusive seal that drives cream actives deep into the skin - maximum moisture delivery for dry or perimenopausal skin."
+      : "Paraffin bath is a standard Tier 2 step - delivers warmth and deep moisture after the mask.";
+    steps.push({name:"Lavender Paraffin Bath", detail:paraffinDetail, why:paraffinWhy, tag:paraffinTag});
   }
 
   // MASSAGE
-  var massageDetail;
-  if(tier2){
-    if(isPreg){ massageDetail=mani?"Gentle hand and forearm massage only. Avoid deep pressure on wrist acupressure points. Light effleurage strokes throughout.":"Gentle foot massage — avoid Spleen 6 and Bladder 60 acupressure points. Light effleurage only."; }
-    else if(isPeri||a.hormonal==="hrt"){ massageDetail=mani?"Extended lymphatic drainage — focus on dorsal hand and wrist. Helps with fluid retention common in perimenopause.":"Reflexology-based massage with lymphatic drainage. Focus on arch and ankle. Helps with swelling and circulation."; }
-    else if(isArth){ massageDetail=mani?"Gentle joint mobilisation — avoid deep pressure on finger joints. Warm hands thoroughly first.":"Gentle effleurage around ankle and foot — avoid deep pressure on toe joints."; }
-    else{ massageDetail=mani?"Standard hand and forearm massage — adjust pressure to client preference.":"Standard foot and lower leg massage — adjust pressure to client preference."; }
+  var massageName, massageDetail, massageWhy;
+  if(mani){ massageName = tier2 ? "Palm and Forearm Massage" : "Palm Massage"; }
+  else{ massageName = tier2 ? "Foot and Calf Massage" : "Foot Massage"; }
+  var duration = tier2 ? "10 minutes" : "5 minutes";
+
+  if(isPreg){
+    massageDetail = mani
+      ? "Relaxing Massage — "+duration+". Gentle effleurage on palm only. Avoid deep pressure on wrist acupressure points."
+      : "Relaxing Massage — "+duration+". Gentle effleurage on foot only. Avoid Spleen 6 and Bladder 60 acupressure points.";
+    massageWhy="Certain acupressure points stimulate uterine contractions — avoiding them and using gentle effleurage keeps the treatment safe throughout pregnancy.";
+  } else if(isDiab){
+    massageDetail = mani
+      ? "Reflexology Massage — "+duration+". Stimulates hand circulation. Avoid deep pressure on areas with reduced sensation."
+      : "Reflexology Massage — "+duration+". Stimulates foot circulation. Avoid deep pressure on areas with reduced sensation.";
+    massageWhy="Reflexology stimulates circulation safely in diabetic clients where deep tissue work carries higher risk.";
+  } else if(isArth){
+    massageDetail = mani
+      ? "Relaxing Massage — "+duration+". Gentle effleurage only. Avoid deep pressure on finger and wrist joints."
+      : "Relaxing Massage — "+duration+". Gentle effleurage only. Avoid deep pressure on toe and ankle joints.";
+    massageWhy="Inflamed or arthritic joints are aggravated by deep pressure — gentle effleurage improves circulation without causing discomfort.";
+  } else if(isPeri){
+    if(tier2){
+      massageDetail = mani
+        ? "Lymphatic Drainage Massage — "+duration+". Focus on dorsal hand and wrist. Recommended for perimenopausal fluid retention."
+        : "Lymphatic Drainage Massage — "+duration+". Focus on arch, ankle and calf. Recommended for perimenopausal swelling and circulation.";
+      massageWhy="Perimenopausal hormonal shifts cause fluid retention in extremities — lymphatic drainage directly addresses this and is available in The Edit and Ceremony tiers.";
+    } else {
+      massageDetail = mani
+        ? "Reflexology Massage — "+duration+". Supports circulation and relaxation. Relaxing massage also available to client preference."
+        : "Reflexology Massage — "+duration+". Supports circulation and relaxation. Relaxing massage also available to client preference.";
+      massageWhy="Reflexology supports circulation and has a calming effect — the best option for perimenopausal clients in the Signature and Foundation tiers where lymphatic drainage is not available.";
+    }
+  } else {
+    if(tier2){
+      massageDetail = mani
+        ? "Relaxing, Reflexology, or Lymphatic Drainage Massage — "+duration+". Confirm client preference. Lymphatic Drainage recommended for any fluid retention."
+        : "Relaxing, Reflexology, or Lymphatic Drainage Massage — "+duration+". Confirm client preference. Lymphatic Drainage recommended for any fluid retention.";
+      massageWhy="No specific contraindications — all three techniques are available in this tier. Confirm client preference at the start of the treatment.";
+    } else {
+      massageDetail = mani
+        ? "Relaxing or Reflexology Massage — "+duration+". Confirm client preference."
+        : "Relaxing or Reflexology Massage — "+duration+". Confirm client preference.";
+      massageWhy="No specific contraindications — both techniques are available. Confirm client preference at the start of the treatment.";
+    }
   }
+  steps.push({name:massageName, detail:massageDetail, why:massageWhy, tag:isPreg?"Modified for pregnancy":null});
+
+  // CREAM
+  var creamName, creamDetail, creamWhy;
+  if(mani){
+    if(sf==="sensitivity"||fragSens||isIsot||isPreg){
+      creamName="Aloe Vera and Rosehip Oil Gel";
+      creamDetail="Aloe vera and rosehip oil gel for sensitive skin. Lightweight, calming and fragrance-free.";
+      creamWhy = isIsot ? "Isotretinoin leaves the skin barrier compromised - aloe and rosehip gel soothes without any irritating ingredients."
+        : isPreg ? "Rosehip oil gel is safe in pregnancy and provides gentle hydration without any contraindicated actives."
+        : "Sensitive or reactive skin needs a calming, non-irritating formula - aloe vera and rosehip oil gel delivers this without fragrance or aggressive actives.";
+    } else {
+      creamName="Aloe Vera and Calendula Cream";
+      creamDetail="Aloe vera and calendula cream for hydration. Nourishing, soothing and suitable for most skin types.";
+      creamWhy="Calendula is anti-inflammatory and deeply nourishing - ideal for general hydration and skin conditioning after treatment.";
+    }
+  } else {
+    if(ceremPedi&&(sf==="calluses"||sf==="cracked_heels"||sf==="hydration"||isPeri)){
+      creamName="Rich Ointment";
+      creamDetail="Rich ointment with propolis, moringa oil and coconut oil - intensive nourishment for very dry, calloused or perimenopausal skin. Advise client to use nightly at home.";
+      creamWhy = sf==="calluses"||sf==="cracked_heels" ? "High-lipid ointment with propolis continues the softening and healing work between appointments - essential for clients with significant hard skin or fissures."
+        : "Rich ointment provides maximum moisture density for dry or perimenopausal skin where standard creams are insufficient.";
+    } else {
+      creamName="Regenerative Foot Cream";
+      creamDetail="Regenerative foot cream - nourishing and restorative for normal to dry skin. Suitable for all pedicure tiers.";
+      creamWhy="Regenerative foot cream is the standard pedicure finish - restorative and nourishing for all foot skin types.";
+    }
+  }
+  if(nutAllerg){ creamDetail+=" Note: confirm no nut-derived oils in this product before applying."; }
+  steps.push({name:creamName, detail:creamDetail, why:creamWhy, tag:isPreg?"Pregnancy-safe":null});
 
   // AROMATHERAPY
-  var aromaDetail;
-  if(wantsAroma){
-    if(isPreg){ aromaDetail="Client wants aromatherapy but is pregnant. Only Roman chamomile and lavender (low dilution, after 1st trimester) considered safe. Confirm with client and exercise caution."; }
-    else if(sf==="sensitivity"||fragSens){ aromaDetail="Client interested in aromatherapy but has sensitive skin — use chamomile or unscented base only. Patch test before applying."; }
-    else if(isPeri){ aromaDetail="Recommend clary sage or geranium — both support hormonal balance. Dilute to 1% in carrier oil."; }
-    else{ aromaDetail="Recommend lavender for relaxation, eucalyptus for refreshing and circulation. Dilute to 1-2% in carrier oil. Confirm no fragrance sensitivity."; }
+  var aromaName, aromaDetail, aromaWhy, aromaTag=null;
+  if(fragSens){
+    aromaName="Aromatherapy";
+    aromaDetail="Not Recommended. Client has fragrance sensitivity - aromatherapy oils should not be added to the cream.";
+    aromaWhy="Fragrance sensitivity means essential oils risk triggering a reactive response - skipping aromatherapy protects the client's skin and comfort.";
+    aromaTag="Not recommended";
+  } else if(isPreg){
+    aromaName="Aromatherapy - Lavender";
+    aromaDetail="Lavender only (low dilution, after 1st trimester). Confirm with client before applying. A few drops in cream.";
+    aromaWhy="Most essential oils are contraindicated in pregnancy. Lavender at low dilution after the first trimester is considered safe - confirm with client.";
+    aromaTag="Use with caution";
+  } else if(isPeri){
+    aromaName="Aromatherapy - Clary Sage";
+    aromaDetail="Clary sage recommended - phytoestrogenic properties support hormonal balance. A few drops in cream. Dilute to 1%.";
+    aromaWhy="Clary sage has phytoestrogenic properties that may help balance hormonal fluctuations in perimenopausal clients.";
+  } else if(isDiab||sf==="hydration"){
+    aromaName="Aromatherapy - Lavender or Bergamot";
+    aromaDetail="Lavender or bergamot recommended - calming and beneficial for circulation. A few drops in cream. Dilute to 1-2%.";
+    aromaWhy="Lavender and bergamot support relaxation and have mild circulatory benefits - appropriate for diabetic or dry skin profiles.";
+  } else {
+    aromaName="Aromatherapy - Lavender, Sage, Eucalyptus or Bergamot";
+    aromaDetail="Selection of lavender, sage, eucalyptus or bergamot. A few drops in cream. Confirm client preference.";
+    aromaWhy="Aromatherapy enhances the sensory experience and supports relaxation outcomes. All four oils are available - confirm client preference.";
   }
+  steps.push({name:aromaName, detail:aromaDetail, why:aromaWhy, tag:aromaTag, ts:"s"});
+
+  // CUTICLE OIL
+  steps.push({name:"Cuticle Oil", detail:"Apply cuticle oil to all nails at end of treatment.", why:"Cuticle oil is a standard final step - nourishes and conditions the cuticle and proximal nail fold after all treatment steps.", tag:null});
 
   // FINISH
-  var finishDetail;
-  if(nc==="fungal"){ finishDetail="No polish or overlay — active fungal infection. Antifungal base only if condition is mild and client insists, otherwise leave bare and advise treatment."; }
-  else if(isHalal){ finishDetail="Halal breathable / water-permeable polish — wudu compatible. Confirm colour choice with client."; }
-  else if(nc==="thickened"||nc==="onycholysis"){ finishDetail="Simple polish only — no Gel Polish, Hard Gel or BIAB overlay. Keep nails short."; }
-  else if(nc==="brittle"||nc==="soft"||nc==="bitten"){ finishDetail="BIAB recommended to protect and strengthen. Hard Gel is also suitable for added structure. If client prefers Gel Polish or Simple Polish, note increased fragility and advise accordingly."; }
-  else{ finishDetail="Client choice — Gel Polish, BIAB, Hard Gel, or Simple Polish. All suitable for current nail condition."; }
-
-  // BUILD STEPS
-  // Each step has: name, detail, tag, ts (style), why (rationale frame)
-
-  var nailWhy = nc==="fungal" ? "Active infection detected — referral and infection control take priority over any cosmetic treatment."
-    : nc==="onycholysis" ? "Nail plate separation requires minimal intervention to avoid worsening the condition."
-    : nc==="ingrown"     ? "Incorrect technique on ingrown nails risks pain and infection — safe filing only."
-    : nc==="thickened"   ? "Thickened nails require extra care to avoid pressure damage to the nail bed."
-    : nc==="yellow"      ? "Discolouration may signal an underlying issue — documenting and advising takes priority."
-    : nc==="brittle"||nc==="soft" ? "Hormonal changes and aging reduce nail keratin — gentler technique and strengthening overlay protect the nail plate."
-    : nc==="bitten"      ? "Short or bitten nails benefit from careful cuticle work and a strengthening overlay to support regrowth."
-    : "Nails are in good condition — standard technique is appropriate.";
-
-  var heelWhy = isDiab ? "Diabetes reduces circulation and sensation — blade use risks undetected injury. Electric file is always safer."
-    : sf==="cracked_heels" ? "Deep fissures need gradual softening before any mechanical removal to avoid splitting further."
-    : sf==="calluses"      ? "Callus build-up requires targeted removal at pressure points — heel borders and ball of foot are the priority areas."
-    : "Standard heel maintenance appropriate for current foot condition.";
-
-  var scrubWhy = sf==="calluses"||sf==="cracked_heels" ? "Urea-based or pumice formula loosens hard skin before removal, making the heel cleanse more effective and less aggressive."
-    : isIsot||isPreg ? "Isotretinoin and pregnancy make skin highly reactive — enzyme formulas exfoliate without any abrasive risk."
-    : (sf==="antiaging"||sf==="pigmentation")&&!isPreg ? "AHA acids accelerate cell turnover and interrupt melanin production — directly addressing the client's anti-ageing or pigmentation concern."
-    : sf==="hydration"||isPeri ? "Perimenopausal and dehydrated skin loses moisture rapidly after exfoliation — a humectant scrub resurfaces and seals hydration in the same step."
-    : sf==="sensitivity"||fragSens ? "Reactive skin needs exfoliation without friction or active acids — enzyme formulas dissolve dead cells gently."
-    : "Standard maintenance exfoliation appropriate for current skin condition.";
-
-  var thermalWhy = noHeat ? "Paraffin bath produces high localised heat which is contraindicated — a mask achieves similar moisture penetration without thermal risk."
-    : isDiab ? "Diabetic clients have reduced heat sensitivity — a controlled warm mask is safer than immersion in hot paraffin."
-    : isPreg  ? "High heat is avoided during pregnancy — a comfortably warm mask delivers hydration safely."
-    : sf==="hydration"||isPeri||sf==="cracked_heels" ? "Paraffin creates an occlusive seal that drives cream actives deep into the skin — the most effective moisture delivery for dry or perimenopausal skin."
-    : "Both options are appropriate — paraffin gives deeper penetration, mask gives a lighter finish.";
-
-  var creamWhy = isIsot ? "Isotretinoin strips the skin barrier — ceramide formula rebuilds it without adding any irritant."
-    : isPreg  ? "Many active ingredients are contraindicated in pregnancy — this formula is safe across all trimesters."
-    : sf==="antiaging"&&!isPeri ? "Retinol stimulates fibroblast activity and collagen production — the most evidence-based anti-ageing active for hands."
-    : isPeri||sf==="hydration" ? "Estrogen decline reduces collagen and hyaluronic acid production — peptide formula directly compensates for this hormonal shift."
-    : sf==="pigmentation" ? "Niacinamide interrupts melanin transfer and vitamin C brightens existing spots — targeted at the client's primary concern."
-    : sf==="calluses"||sf==="cracked_heels" ? "High-concentration urea continues the softening work at home — essential for managing hard skin between appointments."
-    : sf==="sensitivity"||fragSens ? "Reactive skin needs barrier support without any potential irritants — fragrance-free oat formula soothes while hydrating."
-    : "Standard nourishing formula appropriate for current skin condition.";
-
-  var massageWhy = isPreg ? "Certain acupressure points stimulate uterine contractions — avoiding them and using gentle effleurage keeps the treatment safe throughout pregnancy."
-    : isPeri||a.hormonal==="hrt" ? "Perimenopausal hormonal shifts cause fluid retention in extremities — lymphatic drainage technique helps reduce this directly."
-    : isArth ? "Inflamed joints are aggravated by deep pressure — gentle mobilisation improves circulation without causing discomfort."
-    : "Massage improves circulation, aids product absorption, and delivers the relaxation element of the Tier 2 treatment.";
-
-  var aromaWhy = isPreg ? "Essential oils can cross the placental barrier — only the safest oils at low dilution are used, with client confirmation."
-    : sf==="sensitivity"||fragSens ? "Client has reactive skin — patch test and fragrance-free base are essential before any aromatic product is applied."
-    : isPeri ? "Clary sage and geranium have phytoestrogenic properties that may help balance hormonal fluctuations."
-    : "Aromatherapy enhances the sensory experience and supports the relaxation outcomes of the treatment.";
-
-  var finishWhy = nc==="fungal" ? "No product should be applied over an active infection — it traps moisture and worsens the condition."
-    : isHalal ? "Water-permeable polish allows ritual washing (wudu) without requiring removal — essential for observant Muslim clients."
-    : nc==="thickened"||nc==="onycholysis" ? "Overlays add thickness and tension to already compromised nails — simple polish is the only safe finish option."
-    : nc==="brittle"||nc==="soft"||nc==="bitten" ? "Weak nails benefit from a builder overlay that reinforces the nail plate — BIAB or Hard Gel reduce breakage between appointments."
-    : "Nails are in good condition and can support any finish the client prefers.";
-
-  steps.push({name:nailName, detail:nailNote, why:nailWhy, tag:nc==="fungal"?"Referral required":nc==="ingrown"?"Handle with care":null});
-  if(pedi) steps.push({name:"Heel Cleanse", detail:heelNote, why:heelWhy, tag:isDiab?"Diabetic-safe":null});
-  steps.push({name:scrubName, detail:scrubDetail, why:scrubWhy, tag:null, ts:"s"});
-  if(tier2) steps.push({name:thermalName, detail:thermalDetail, why:thermalWhy, tag:noHeat?"Paraffin replaced":isPreg?"Pregnancy-safe":null});
-  steps.push({name:creamName, detail:creamDetail, why:creamWhy, tag:isPreg?"Pregnancy-safe":null});
-  if(tier2) steps.push({name:mani?"Hand Massage":"Foot Massage", detail:massageDetail, why:massageWhy, tag:isPreg?"Modified for pregnancy":null});
-  if(wantsAroma) steps.push({name:"Aromatherapy", detail:aromaDetail||"", why:aromaWhy, tag:isPreg?"Use with caution":null, ts:"s"});
+  var finishDetail, finishWhy;
+  if(nc==="fungal"){ finishDetail="No polish or overlay - active fungal infection. Antifungal base only if condition is mild and client insists, otherwise leave bare and advise treatment."; finishWhy="No product should be applied over an active infection - it traps moisture and worsens the condition."; }
+  else if(isHalal){ finishDetail="Halal breathable / water-permeable polish - wudu compatible. Confirm colour choice with client."; finishWhy="Water-permeable polish allows ritual washing (wudu) without requiring removal - essential for observant Muslim clients."; }
+  else if(nc==="thickened"||nc==="onycholysis"){ finishDetail="Simple polish only - no Gel Polish, Hard Gel or BIAB overlay. Keep nails short."; finishWhy="Overlays add thickness and tension to already compromised nails - simple polish is the only safe finish option."; }
+  else if(nc==="brittle"||nc==="soft"||nc==="bitten"){ finishDetail="BIAB recommended to protect and strengthen. Hard Gel is also suitable for added structure. If client prefers Gel Polish or Simple Polish, note increased fragility and advise accordingly."; finishWhy="Weak nails benefit from a builder overlay that reinforces the nail plate - BIAB or Hard Gel reduce breakage between appointments."; }
+  else{ finishDetail="Client choice - Gel Polish, BIAB, Hard Gel, or Simple Polish. All suitable for current nail condition."; finishWhy="Nails are in good condition and can support any finish the client prefers."; }
   steps.push({name:"Finish", detail:finishDetail, why:finishWhy, tag:isHalal?"Halal polish":nc==="fungal"?"No polish":null});
 
+  // PROTOCOLS
   if(isDiab)        protocols.push("Diabetic-Safe Protocol");
   if(isIsot)        protocols.push("Isotretinoin-Safe");
   if(isPreg)        protocols.push("Pregnancy Protocol");
@@ -522,14 +581,24 @@ function buildRec(){
   if(fragSens)      protocols.push("Fragrance-Free");
   if(nc==="fungal") protocols.push("Infection Control");
 
-  if(isDiab)    notes.push("Diabetic protocol — no blade on feet, careful heat monitoring, no cutting near skin folds.");
-  if(isIsot)    notes.push("Client on isotretinoin — no paraffin, no aggressive exfoliation, no essential oils.");
-  if(isPreg)    notes.push("Pregnancy: no retinol, no AHA on broken skin, no deep pressure on acupressure points, no high heat, minimal essential oils.");
-  if(nc==="fungal") notes.push("Active fungal infection — no polish applied. Tools must be sanitised after use. Client referred to GP/podiatrist.");
-  if(isPeri&&sf==="pigmentation") notes.push("SPF hand cream recommended at end of appointment — pigmentation accelerates with estrogen decline.");
-  if((nc==="brittle"||nc==="soft")&&!isHalal) notes.push("Discuss BIAB overlay with client — explain long-term nail health benefit over standard gel.");
+  // THERAPIST NOTES
+  if(isDiab)    notes.push("Diabetic protocol - no blade on feet, careful heat monitoring, no cutting near skin folds.");
+  if(isIsot)    notes.push("Client on isotretinoin - no paraffin, no aggressive exfoliation, no essential oils.");
+  if(isPreg)    notes.push("Pregnancy: no retinol, no AHA, no deep acupressure, no high heat, minimal essential oils.");
+  if(nc==="fungal") notes.push("Active fungal infection - no polish applied. Tools must be sanitised after use. Client referred to GP/podiatrist.");
+  if(isPeri&&sf==="pigmentation") notes.push("SPF recommended at end of appointment - pigmentation accelerates with estrogen decline.");
+  if((nc==="brittle"||nc==="soft")&&!isHalal) notes.push("Discuss BIAB overlay with client - explain long-term nail health benefit over standard gel.");
+  if(editMani&&sf==="antiaging"&&!isPeri&&!isIsot&&!isPreg) notes.push("Retinol serum applied - SPF mandatory on backs of hands before client leaves.");
 
-  return {steps:steps,notes:notes,protocols:protocols};
+  return {steps:steps, notes:notes, protocols:protocols};
+}
+
+function sortPlans(arr){
+  return arr.slice().sort(function(a,b){
+    var ta=String(a.timestamp||a["Timestamp"]||"");
+    var tb=String(b.timestamp||b["Timestamp"]||"");
+    return tb.localeCompare(ta);
+  });
 }
 
 function saveToSheets(rec){
@@ -538,14 +607,14 @@ function saveToSheets(rec){
   var a=S.answers, t=TREATMENTS[S.treatment];
   var payload={
     timestamp:      new Date().toLocaleString("nl-NL",{timeZone:"Europe/Amsterdam"}),
-    client_name:    S.clientName||"—",
-    treatment:      t?t.tier+" — "+t.name:"—",
-    hormonal:       a.hormonal||"—",
-    skin_focus:     a.skin_focus||"—",
-    nail_condition: a.nail_condition||"—",
+    client_name:    S.clientName||"-",
+    treatment:      t?t.tier+" - "+t.name:"-",
+    hormonal:       a.hormonal||"-",
+    skin_focus:     a.skin_focus||"-",
+    nail_condition: a.nail_condition||"-",
     health_flags:   (a.health_flags||[]).join(", ")||"None",
     preferences:    (a.product_prefs||[]).join(", ")||"None",
-    recommended:    rec.steps.map(function(s){ return s.name; }).join(" · "),
+    recommended:    rec.steps.map(function(s){ return s.name; }).join(" - "),
     steps_json:     JSON.stringify(rec.steps),
     protocols:      rec.protocols.join(", ")||"None",
     therapist_notes:rec.notes.join(" | ")||"None",
@@ -557,32 +626,31 @@ function saveToSheets(rec){
     .catch(function(){ S.saveStatus="error"; render(); });
   var cached=JSON.parse(localStorage.getItem("nm_plans")||"[]");
   cached.unshift(payload);
-  if(cached.length>200) cached=cached.slice(0,200);
   localStorage.setItem("nm_plans",JSON.stringify(cached));
 }
 
 function fetchPlans(){
-  S.plansLoading=true; S.pendingDelete=null; render();
+  S.plansLoading=true; S.pendingDelete=null; S.plansPage=0; render();
   if(SHEETS_URL){
     fetch(SHEETS_URL)
       .then(function(r){ return r.json(); })
       .then(function(data){
-        S.plans=Array.isArray(data)?data:[];
-        // also merge any locally cached plans not yet in sheets
+        S.plans=sortPlans(Array.isArray(data)?data:[]);
         var local=JSON.parse(localStorage.getItem("nm_plans")||"[]");
-        var sheetTs=S.plans.map(function(p){ return p.timestamp||p["Timestamp"]||""; });
+        var sheetTs=S.plans.map(function(p){ return String(p.timestamp||p["Timestamp"]||""); });
         local.forEach(function(lp){
-          var ts=lp.timestamp||"";
+          var ts=String(lp.timestamp||"");
           if(ts&&sheetTs.indexOf(ts)<0) S.plans.unshift(lp);
         });
+        S.plans=sortPlans(S.plans);
         S.plansLoading=false; render();
       })
       .catch(function(){
-        S.plans=JSON.parse(localStorage.getItem("nm_plans")||"[]");
+        S.plans=sortPlans(JSON.parse(localStorage.getItem("nm_plans")||"[]"));
         S.plansLoading=false; render();
       });
   } else {
-    S.plans=JSON.parse(localStorage.getItem("nm_plans")||"[]");
+    S.plans=sortPlans(JSON.parse(localStorage.getItem("nm_plans")||"[]"));
     S.plansLoading=false; render();
   }
 }
@@ -607,7 +675,7 @@ function selectTreatment(key){ S.treatment=key; S.currentQ=0; S.history=[]; rend
 function handleSingle(value){
   S.answers[QUESTIONS[S.currentQ].id]=value;
   S.history.push(S.currentQ); S.currentQ++;
-  if(S.currentQ>=QUESTIONS.length) S.done=true;
+  if(S.currentQ>=QUESTIONS.length){ S.done=true; }
   render();
 }
 
@@ -624,7 +692,7 @@ function handleMultiContinue(){
   if(!S.multiSelected.length) return;
   S.answers[QUESTIONS[S.currentQ].id]=S.multiSelected.slice();
   S.history.push(S.currentQ); S.currentQ++; S.multiSelected=[];
-  if(S.currentQ>=QUESTIONS.length) S.done=true;
+  if(S.currentQ>=QUESTIONS.length){ S.done=true; }
   render();
 }
 
@@ -676,9 +744,9 @@ function render(){
 
 function renderSelect(){
   var card=el("div",{"class":"card"});
-  card.appendChild(el("div",{"class":"step-lbl"},"Step 1 — Select Treatment"));
+  card.appendChild(el("div",{"class":"step-lbl"},"Step 1 - Select Treatment"));
   card.appendChild(el("div",{"class":"question"},"Which treatment has the client booked?"));
-  card.appendChild(el("div",{"class":"q-note"},"Add-ons (French, nail art, extensions, removal) are handled separately at booking."));
+  card.appendChild(el("div",{"class":"q-note"},"Add-ons such as French, nail art, extensions and removal are handled separately at booking."));
   var nw=el("div",{"class":"cname-wrap"});
   nw.appendChild(el("div",{"class":"cname-lbl"},"Client Name (optional)"));
   var ni=el("input",{"class":"cname-input","type":"text","placeholder":"e.g. Maria","value":S.clientName});
@@ -701,7 +769,7 @@ function renderQuestion(){
   var q=QUESTIONS[S.currentQ];
   var opts=getOptions(q);
   var card=el("div",{"class":"card"});
-  card.appendChild(el("button",{"class":"back-btn","onClick":handleBack},"← Back"));
+  card.appendChild(el("button",{"class":"back-btn","onClick":handleBack},"Back"));
   if(S.currentQ===0){
     var nw=el("div",{"class":"cname-wrap"});
     nw.appendChild(el("div",{"class":"cname-lbl"},"Client Name (optional)"));
@@ -718,7 +786,7 @@ function renderQuestion(){
       (function(val){ optWrap.appendChild(el("button",{"class":"opt-btn","onClick":function(){ handleSingle(val); }},
         el("div",{"class":"opt-icon"},o.i),
         el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null),
-        el("span",{"class":"opt-arr"},"›"))); })(o.v);
+        el("span",{"class":"opt-arr"},">")));  })(o.v);
     });
     card.appendChild(optWrap);
   }
@@ -727,12 +795,12 @@ function renderQuestion(){
     opts.forEach(function(o){
       var chk=S.multiSelected.indexOf(o.v)>=0;
       (function(val){ optWrap.appendChild(el("div",{"class":"multi-opt"+(chk?" checked":""),"onClick":function(){ handleMultiToggle(val); }},
-        el("div",{"class":"chk"},chk?"✓":""),
+        el("div",{"class":"chk"},chk?"v":""),
         el("div",{"class":"opt-icon"},o.i),
         el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t)))); })(o.v);
     });
     card.appendChild(optWrap);
-    var btn=el("button",{"class":"cont-btn","onClick":handleMultiContinue},"Continue →");
+    var btn=el("button",{"class":"cont-btn","onClick":handleMultiContinue},"Continue");
     if(!S.multiSelected.length) btn.setAttribute("disabled","true");
     card.appendChild(btn);
   }
@@ -743,7 +811,7 @@ function renderResult(){
   var rec=buildRec(), t=TREATMENTS[S.treatment];
   var wrap=el("div",{"class":"res-card"});
   wrap.appendChild(el("div",{"class":"res-hdr"},
-    el("div",{"class":"res-tier"},t.tier+" · Personalised Treatment Plan"),
+    el("div",{"class":"res-tier"},t.tier+" - Personalised Treatment Plan"),
     el("div",{"class":"res-name"},t.name),
     el("div",{"class":"res-client"},S.clientName?"Client: "+S.clientName:"Treatment guide ready")));
   var body=el("div",{"class":"res-body"});
@@ -766,7 +834,7 @@ function renderResult(){
   if(rec.notes.length){
     var nb=el("div",{"class":"notes-box"});
     nb.appendChild(el("div",{"class":"notes-lbl"},"Therapist Notes"));
-    rec.notes.forEach(function(n){ nb.appendChild(el("div",{"class":"note-item"},el("span",{},"→"),n)); });
+    rec.notes.forEach(function(n){ nb.appendChild(el("div",{"class":"note-item"},el("span",{},"->"),n)); });
     body.appendChild(nb);
   }
   body.appendChild(renderAgreement(rec));
@@ -779,13 +847,13 @@ function renderAgreement(rec){
   sec.appendChild(el("div",{"class":"agree-q"},"Does the client agree with this proposed plan?"));
   if(S.agreed===null){
     var btns=el("div",{"class":"agree-btns"});
-    btns.appendChild(el("button",{"class":"agree-btn yes","onClick":function(){ S.agreed=true; saveToSheets(buildRec()); render(); }},"✓  Yes, proceed"));
-    btns.appendChild(el("button",{"class":"agree-btn no","onClick":function(){ S.agreed=false; render(); }},"✗  No, adjust"));
+    btns.appendChild(el("button",{"class":"agree-btn yes","onClick":function(){ S.agreed=true; saveToSheets(buildRec()); render(); }},"Yes, proceed"));
+    btns.appendChild(el("button",{"class":"agree-btn no","onClick":function(){ S.agreed=false; render(); }},"No, adjust"));
     sec.appendChild(btns);
   } else if(S.agreed===true){
-    var sm={"saving":{cls:"saving",icon:"⏳",text:"Saving plan to records…"},"saved":{cls:"saved",icon:"✓",text:"Plan saved to records"},"error":{cls:"error",icon:"⚠️",text:"Could not save — check Sheets connection"}};
-    var sv=sm[S.saveStatus]; if(sv) sec.appendChild(el("div",{"class":"save-status "+sv.cls},sv.icon+"  "+sv.text));
-    sec.appendChild(el("button",{"class":"restart-btn","onClick":handleRestart},"New Client ↺"));
+    var smA={"saving":{cls:"saving",icon:"...",text:"Saving plan to records..."},"saved":{cls:"saved",icon:"ok",text:"Plan saved to records"},"error":{cls:"error",icon:"!",text:"Could not save - check Sheets connection"}};
+    var svA=smA[S.saveStatus]; if(svA) sec.appendChild(el("div",{"class":"save-status "+svA.cls},svA.icon+"  "+svA.text));
+    sec.appendChild(el("button",{"class":"restart-btn","onClick":handleRestart},"New Client"));
   } else if(S.agreed===false){
     sec.appendChild(el("div",{"class":"alt-lbl"},"What is the chosen path? Please describe the adjusted treatment:"));
     var ta=document.createElement("textarea");
@@ -796,114 +864,97 @@ function renderAgreement(rec){
     var saveBtn=el("button",{"class":"save-plan-btn","onClick":function(){ if(!S.altPath.trim()) return; saveToSheets(buildRec()); render(); }},"Save Adjusted Plan");
     if(S.saveStatus==="saving"||S.saveStatus==="saved") saveBtn.setAttribute("disabled","true");
     sec.appendChild(saveBtn);
-    var sm2={"saving":{cls:"saving",icon:"⏳",text:"Saving adjusted plan…"},"saved":{cls:"saved",icon:"✓",text:"Adjusted plan saved"},"error":{cls:"error",icon:"⚠️",text:"Could not save — check Sheets connection"}};
-    var sv2=sm2[S.saveStatus]; if(sv2) sec.appendChild(el("div",{"class":"save-status "+sv2.cls},sv2.icon+"  "+sv2.text));
-    if(S.saveStatus==="saved") sec.appendChild(el("button",{"class":"restart-btn","style":"margin-top:10px","onClick":handleRestart},"New Client ↺"));
+    var smB={"saving":{cls:"saving",icon:"...",text:"Saving adjusted plan..."},"saved":{cls:"saved",icon:"ok",text:"Adjusted plan saved"},"error":{cls:"error",icon:"!",text:"Could not save - check Sheets connection"}};
+    var svB=smB[S.saveStatus]; if(svB) sec.appendChild(el("div",{"class":"save-status "+svB.cls},svB.icon+"  "+svB.text));
+    if(S.saveStatus==="saved") sec.appendChild(el("button",{"class":"restart-btn","style":"margin-top:10px","onClick":handleRestart},"New Client"));
   }
   return sec;
 }
 
-// ── PLANS TAB ─────────────────────────────────────
 function renderPlans(){
   var hidden=getHidden();
-
   var wrap=el("div",{"class":"plans-wrap"});
   var toolbar=el("div",{"class":"plans-toolbar"});
   toolbar.appendChild(el("div",{"class":"plans-title"},"Treatment Plans"));
-  toolbar.appendChild(el("button",{"class":"refresh-btn","onClick":fetchPlans},"↺ Refresh"));
+  toolbar.appendChild(el("button",{"class":"refresh-btn","onClick":fetchPlans},"Refresh"));
   wrap.appendChild(toolbar);
-
-  if(S.plansLoading){ wrap.appendChild(el("div",{"class":"plans-loading"},"Loading plans…")); return wrap; }
-
-  // Search bar
+  if(S.plansLoading){ wrap.appendChild(el("div",{"class":"plans-loading"},"Loading plans...")); return wrap; }
   var sw=el("div",{"class":"plans-search-wrap"});
-  sw.appendChild(el("span",{"class":"plans-search-icon"},"🔍"));
-  var si=el("input",{"class":"plans-search","type":"text","placeholder":"Search by client name or treatment…","value":S.plansSearch});
-  si.addEventListener("input",function(e){ 
-    S.plansSearch=e.target.value;
-    // Only re-render the list and count, not the whole page
-    updatePlansList(wrap, hidden);
-  });
-  sw.appendChild(si);
-  wrap.appendChild(sw);
-
-  // Initial list render
-  updatePlansList(wrap, hidden);
+  sw.appendChild(el("span",{"class":"plans-search-icon"},"?"));
+  var si=el("input",{"class":"plans-search","type":"text","placeholder":"Search by client name or treatment...","value":S.plansSearch});
+  si.addEventListener("input",function(e){ S.plansSearch=e.target.value; S.plansPage=0; updatePlansList(wrap,hidden); });
+  sw.appendChild(si); wrap.appendChild(sw);
+  updatePlansList(wrap,hidden);
   return wrap;
 }
 
-function updatePlansList(wrap, hidden){
-  // Remove old count + list if they exist
-  var oldCount = wrap.querySelector(".plans-count");
-  var oldList  = wrap.querySelector(".plans-list");
-  var oldEmpty = wrap.querySelector(".plans-empty");
-  if(oldCount) oldCount.parentNode.removeChild(oldCount);
-  if(oldList)  oldList.parentNode.removeChild(oldList);
-  if(oldEmpty) oldEmpty.parentNode.removeChild(oldEmpty);
-
-  var query = S.plansSearch.toLowerCase().trim();
-  var visible = S.plans.filter(function(p){
-    var ts = String(p.timestamp||p["Timestamp"]||"");
+function updatePlansList(wrap,hidden){
+  var PAGE_SIZE=10;
+  ["plans-count","plans-list","plans-empty","pagination"].forEach(function(cls){
+    var e=wrap.querySelector("."+cls); if(e) e.parentNode.removeChild(e);
+  });
+  var query=S.plansSearch.toLowerCase().trim();
+  var filtered=S.plans.filter(function(p){
+    var ts=String(p.timestamp||p["Timestamp"]||"");
     if(hidden.indexOf(ts)>=0) return false;
     if(!query) return true;
-    var name      = String(p.client_name||p["Client Name"]||"").toLowerCase();
-    var treatment = String(p.treatment||p["Treatment"]||"").toLowerCase();
-    return name.indexOf(query)>=0 || treatment.indexOf(query)>=0;
+    var name=String(p.client_name||p["Client Name"]||"").toLowerCase();
+    var tr=String(p.treatment||p["Treatment"]||"").toLowerCase();
+    return name.indexOf(query)>=0||tr.indexOf(query)>=0;
   });
-
-  var total = S.plans.filter(function(p){
-    return hidden.indexOf(String(p.timestamp||p["Timestamp"]||""))<0;
-  }).length;
-
-  var countEl = el("div",{"class":"plans-count"},
-    query ? visible.length+" of "+total+" plans match"
-          : total+" plan"+(total===1?"":"s")+" saved");
-  wrap.appendChild(countEl);
-
-  if(!visible.length){
-    var emptyMsg = query
-      ? "No plans match \""+S.plansSearch+"\" — try a different name or clear the search."
-      : "No plans saved yet. Complete a consultation and save a plan to see it appear here.";
-    wrap.appendChild(el("div",{"class":"plans-empty"},emptyMsg));
+  var total=S.plans.filter(function(p){ return hidden.indexOf(String(p.timestamp||p["Timestamp"]||""))<0; }).length;
+  var pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
+  var page=Math.min(S.plansPage,pages-1);
+  var pageItems=filtered.slice(page*PAGE_SIZE,(page+1)*PAGE_SIZE);
+  var countTxt=query?filtered.length+" of "+total+" plans match":total+" plan"+(total===1?"":"s")+" saved";
+  wrap.appendChild(el("div",{"class":"plans-count"},countTxt));
+  if(!filtered.length){
+    var msg=query?"No plans match \""+S.plansSearch+"\" - try a different name or clear the search.":"No plans saved yet. Complete a consultation and save a plan to see it appear here.";
+    wrap.appendChild(el("div",{"class":"plans-empty"},msg));
     return;
   }
-
-  var list = el("div",{"class":"plans-list"});
-  visible.forEach(function(p){
-    var name      = p.client_name||p["Client Name"]||"Unknown client";
-    var treatment = p.treatment||p["Treatment"]||"—";
-    var time      = String(p.timestamp||p["Timestamp"]||"—");
-    var agreed    = p.agreed||p["Agreed"]||"";
-    var ts        = String(p.timestamp||p["Timestamp"]||"");
-    var isPending = S.pendingDelete===ts;
-
-    var row = el("div",{"class":"plan-row"});
+  var list=el("div",{"class":"plans-list"});
+  pageItems.forEach(function(p){
+    var name=p.client_name||p["Client Name"]||"Unknown client";
+    var treatment=p.treatment||p["Treatment"]||"-";
+    var time=String(p.timestamp||p["Timestamp"]||"-");
+    var ts=String(p.timestamp||p["Timestamp"]||"");
+    var isPending=S.pendingDelete===ts;
+    var step1desc="";
+    var stepsJson=p.steps_json||p["Steps Detail"]||"";
+    if(stepsJson){ try{ var parsed=JSON.parse(stepsJson); if(parsed.length>0){ step1desc=parsed[0].name+(parsed[0].detail?" - "+parsed[0].detail.slice(0,60)+(parsed[0].detail.length>60?"...":""):""); } }catch(e){} }
+    if(!step1desc){ var rec=p.recommended||p["Recommended"]||""; step1desc=rec.split("-")[0].trim(); }
+    var dateOnly=time.split(",")[0]||time;
+    var row=el("div",{"class":"plan-row"});
     row.appendChild(el("div",{"class":"plan-dot"}));
-
     (function(plan){ row.appendChild(el("div",{"class":"plan-info","onClick":function(){ openModal(plan); }},
       el("div",{"class":"plan-name"},name),
-      el("div",{"class":"plan-meta"},treatment+" · "+time+(agreed?" · "+agreed:"")))); })(p);
-
-    (function(plan){ row.appendChild(el("button",{"class":"plan-open-btn","onClick":function(){ openModal(plan); }},"›")); })(p);
-
+      el("div",{"class":"plan-meta"},step1desc),
+      el("div",{"class":"plan-date"},dateOnly))); })(p);
+    (function(plan){ row.appendChild(el("button",{"class":"plan-open-btn","onClick":function(){ openModal(plan); }},">"));  })(p);
     if(!isPending){
-      (function(t){ row.appendChild(el("button",{"class":"plan-del-btn","onClick":function(e){
-        e.stopPropagation(); S.pendingDelete=t; render();
-      }},"Delete")); })(ts);
+      (function(t){ row.appendChild(el("button",{"class":"plan-del-btn","onClick":function(e){ e.stopPropagation(); S.pendingDelete=t; updatePlansList(wrap,hidden); }},"Delete")); })(ts);
     } else {
-      var conf = el("div",{"class":"del-confirm"});
+      var conf=el("div",{"class":"del-confirm"});
       conf.appendChild(el("span",{"class":"del-confirm-txt"},"Remove?"));
-      (function(t){ conf.appendChild(el("button",{"class":"del-yes-btn","onClick":function(e){
-        e.stopPropagation(); hideplan(t); S.pendingDelete=null; render();
-      }},"Yes")); })(ts);
-      conf.appendChild(el("button",{"class":"del-no-btn","onClick":function(e){
-        e.stopPropagation(); S.pendingDelete=null; render();
-      }},"Cancel"));
+      (function(t){ conf.appendChild(el("button",{"class":"del-yes-btn","onClick":function(e){ e.stopPropagation(); hideplan(t); S.pendingDelete=null; updatePlansList(wrap,hidden); }},"Yes")); })(ts);
+      conf.appendChild(el("button",{"class":"del-no-btn","onClick":function(e){ e.stopPropagation(); S.pendingDelete=null; updatePlansList(wrap,hidden); }},"Cancel"));
       row.appendChild(conf);
     }
     list.appendChild(row);
   });
   wrap.appendChild(list);
+  if(pages>1){
+    var pag=el("div",{"class":"pagination"});
+    var prevBtn=el("button",{"class":"page-btn","onClick":function(){ S.plansPage=page-1; updatePlansList(wrap,hidden); }},"Prev");
+    if(page===0) prevBtn.setAttribute("disabled","true");
+    pag.appendChild(prevBtn);
+    pag.appendChild(el("div",{"class":"page-info"},"Page "+(page+1)+" of "+pages));
+    var nextBtn=el("button",{"class":"page-btn","onClick":function(){ S.plansPage=page+1; updatePlansList(wrap,hidden); }},"Next");
+    if(page>=pages-1) nextBtn.setAttribute("disabled","true");
+    pag.appendChild(nextBtn);
+    wrap.appendChild(pag);
+  }
 }
 
 function openModal(plan){ renderModal(plan); }
@@ -912,36 +963,34 @@ function renderModal(p){
   var root=document.getElementById("modal-root");
   root.innerHTML="";
   var name=p.client_name||p["Client Name"]||"Client";
-  var treatment=p.treatment||p["Treatment"]||"—";
-  var time=p.timestamp||p["Timestamp"]||"—";
+  var treatment=p.treatment||p["Treatment"]||"-";
+  var time=String(p.timestamp||p["Timestamp"]||"-");
   var protocols=p.protocols||p["Protocols"]||"";
   var notes_=p.therapist_notes||p["Therapist Notes"]||"";
   var agreed=p.agreed||p["Agreed"]||"";
   var altPath=p.alt_path||p["Alt Path"]||"";
   var stepsJson=p.steps_json||p["Steps Detail"]||"";
   var tierStr="",tName=treatment;
-  var dashIdx=treatment.indexOf(" — ");
+  var dashIdx=treatment.indexOf(" - ");
   if(dashIdx>-1){ tierStr=treatment.slice(0,dashIdx); tName=treatment.slice(dashIdx+3); }
-
   var overlay=el("div",{"class":"modal-overlay","onClick":function(e){ if(e.target===overlay) closeModal(); }});
   var card=el("div",{"class":"modal-card"});
   var hdr=el("div",{"class":"modal-hdr"});
   hdr.appendChild(el("div",{"class":"modal-hdr-text"},
-    el("div",{"class":"modal-tier"},tierStr+" · "+time),
+    el("div",{"class":"modal-tier"},tierStr+" - "+time),
     el("div",{"class":"modal-tname"},tName),
     el("div",{"class":"modal-client"},"Client: "+name)));
-  hdr.appendChild(el("button",{"class":"modal-close","onClick":closeModal},"×"));
+  hdr.appendChild(el("button",{"class":"modal-close","onClick":closeModal},"x"));
   card.appendChild(hdr);
-
   var body=el("div",{"class":"modal-body"});
   if(agreed){
     var agCls=agreed.toLowerCase()==="yes"?"yes":"no";
-    body.appendChild(el("div",{"class":"modal-agree "+agCls},agreed.toLowerCase()==="yes"?"✓ Client agreed":"✗ Client adjusted plan"));
+    body.appendChild(el("div",{"class":"modal-agree "+agCls},agreed.toLowerCase()==="yes"?"Client agreed":"Client adjusted plan"));
   }
   if(altPath){
     var nb2=el("div",{"class":"notes-box","style":"margin-bottom:16px"});
     nb2.appendChild(el("div",{"class":"notes-lbl"},"Adjusted Treatment Path"));
-    nb2.appendChild(el("div",{"class":"note-item"},el("span",{},"→"),altPath));
+    nb2.appendChild(el("div",{"class":"note-item"},el("span",{},">"),altPath));
     body.appendChild(nb2);
   }
   var parsedSteps=[];
@@ -967,7 +1016,7 @@ function renderModal(p){
   if(notes_&&notes_!=="None"){
     var nb3=el("div",{"class":"notes-box"});
     nb3.appendChild(el("div",{"class":"notes-lbl"},"Therapist Notes"));
-    notes_.split("|").forEach(function(n){ if(n.trim()) nb3.appendChild(el("div",{"class":"note-item"},el("span",{},"→"),n.trim())); });
+    notes_.split("|").forEach(function(n){ if(n.trim()) nb3.appendChild(el("div",{"class":"note-item"},el("span",{},">"),n.trim())); });
     body.appendChild(nb3);
   }
   card.appendChild(body);
@@ -975,9 +1024,7 @@ function renderModal(p){
   root.appendChild(overlay);
 }
 
-function closeModal(){
-  document.getElementById("modal-root").innerHTML="";
-}
+function closeModal(){ document.getElementById("modal-root").innerHTML=""; }
 
 if(isAuth()) render();
 </script>
