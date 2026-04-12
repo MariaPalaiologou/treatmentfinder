@@ -396,13 +396,13 @@ function renderConsent(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=5;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Almost There, Muse"));
   card.appendChild(el("div",{"class":"question"},"May we keep your treatment preferences?"));
-  card.appendChild(el("div",{"class":"q-note"},"Your personalised plan helps us give you an even better experience on your next visit. We store treatment preferences only — never personal details."));
+  card.appendChild(el("div",{"class":"q-note"},"If you choose to save your plan, your name and date of birth will be stored privately in our salon tool only, to help us personalise your future visits. They are never shared with third parties. Your health information is used solely to tailor your treatment and is never stored on external systems."));
   var consentBox=el("div",{"class":"consent-box"+(S.consent?" checked":"")});
   var row=el("div",{"class":"consent-row"},
     el("div",{"class":"consent-chk"},S.consent?"✓":""),
     el("div",{"class":"consent-txt"},
-      el("strong",{},"Yes, please save my treatment preferences"),
-      document.createTextNode(" so your team can personalise my next visit. I understand my personal details are never stored.")));
+      el("strong",{},"Yes, please save my treatment plan for future visits."),
+      document.createTextNode(" I understand that my name and date of birth will be stored privately in the salon's secure tool, and that my health information is never stored on external systems.")));
   consentBox.appendChild(row);
   consentBox.addEventListener("click",function(){ S.consent=!S.consent; render(); });
   card.appendChild(consentBox);
@@ -430,11 +430,12 @@ function submitForm(){
     version:      FORM_VERSION
   };
 
-  // Store locally for staff pickup (includes name, no DOB)
+  // Store locally for staff pickup (includes name and DOB if provided — never sent to Sheets)
   var sessionData={
     id:           "cf_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),
     timestamp:    payload.timestamp,
     client_name:  S.name,
+    client_dob:   S.dob||"",
     treatment:    treatmentNames,
     treatment_keys: S.treatments,
     skin:         S.skin,
