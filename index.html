@@ -73,6 +73,9 @@
     .t-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .t-tile{border:1.5px solid var(--border);border-radius:14px;padding:18px 14px;cursor:pointer;transition:all .2s;text-align:center;background:white}
     .t-tile:hover{border-color:var(--burg);background:var(--burg-pale);transform:translateY(-2px)}
+    .t-tile.selected{border-color:var(--burg);background:var(--burg-light)}
+    .t-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:50%;margin:8px auto 0;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;transition:all .15s}
+    .t-tile.selected .t-check{background:var(--burg);border-color:var(--burg)}
     .t-tier{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:5px}
     .t-name{font-family:"Playfair Display",serif;font-size:14px;font-weight:400;color:var(--charcoal);line-height:1.3}
 
@@ -322,10 +325,13 @@ function cleanExpiredPlans(){
 
 // Check for pending client form submissions
 function checkPending(){
+  if(typeof S==="undefined") return;
   var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
   var area=document.getElementById("pending-area");
   if(!area||!isAuth()) return;
   area.innerHTML="";
+  // Only show on New Consultation tab and only when not showing a completed plan
+  if(S.tab!=="new"||S.done) return;
   var unprocessed=pending.filter(function(p){ return p.status==="pending"; });
   if(!unprocessed.length) return;
   unprocessed.forEach(function(p){
@@ -348,7 +354,7 @@ function processPending(p){
   localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
   // Set state and show plan
   S.clientName=p.client_name||"";
-  S.treatment=p.treatment_keys&&p.treatment_keys.length?p.treatment_keys[0]:null;
+  S.fromPending=p;
   S.answers={
     skin_focus: p.skin&&p.skin.length?p.skin[0]:"none",
     skin_focus_all: p.skin||[],
@@ -674,6 +680,7 @@ function saveToSheets(rec){
   var plans=JSON.parse(localStorage.getItem(PLANS_KEY)||"[]");
   var planEntry=Object.assign({},payload,{
     client_name: S.clientName,
+    client_dob:  S.fromPending&&S.fromPending.client_dob?S.fromPending.client_dob:"",
     id: "p_"+Date.now(),
     expires: S.consent?null:Date.now()+(24*60*60*1000),
     consent: S.consent
@@ -694,6 +701,7 @@ document.getElementById("tab-checkin-btn").addEventListener("click",function(){
   ["tab-checkin-btn","tab-new-btn","tab-plans-btn"].forEach(function(id){ document.getElementById(id).classList.remove("active"); });
   document.getElementById("tab-checkin-btn").classList.add("active");
   document.getElementById("prog-wrap").style.display="none";
+  document.getElementById("pending-area").innerHTML="";
   render();
 });
 document.getElementById("tab-new-btn").addEventListener("click",function(){
@@ -749,7 +757,7 @@ function handleBack(){
 }
 
 function handleRestart(){
-  S.clientName=""; S.treatment=null; S.answers={}; S.history=[];
+  S.clientName=""; S.treatment=null; S.selectedTreatments=[]; S.answers={}; S.history=[];
   S.currentQ=0; S.multiSelected=[]; S.done=false;
   S.agreed=null; S.altPath=""; S.saveStatus="idle"; S.fromPending=null; S.consent=true;
   checkPending();
@@ -788,7 +796,7 @@ function render(){
   var cur=S.done?total:S.treatment?S.currentQ+1:0;
   document.getElementById("progress").style.width=(cur/total*100)+"%";
   if(!S.treatment){ main.appendChild(renderSelect()); return; }
-  if(S.done){ renderResults(main); return; }
+  if(S.done){ document.getElementById("pending-area").innerHTML=""; renderResults(main); return; }
   main.appendChild(renderQuestion());
 }
 
@@ -824,19 +832,44 @@ function renderSelect(){
   var card=el("div",{"class":"card"});
   card.appendChild(el("div",{"class":"step-lbl"},"Step 1 — Select Treatment"));
   card.appendChild(el("div",{"class":"question"},"Which treatment has the client booked?"));
+  card.appendChild(el("div",{"class":"q-note"},"Select all that apply if the client has booked more than one treatment today."));
   var nw=el("div",{"class":"cname-wrap"});
   nw.appendChild(el("div",{"class":"cname-lbl"},"Client Name"));
   var ni=el("input",{"class":"cname-input","type":"text","placeholder":"Full name","value":S.clientName});
   ni.addEventListener("input",function(e){S.clientName=e.target.value;});
   nw.appendChild(ni); card.appendChild(nw);
+
+  if(!S.selectedTreatments) S.selectedTreatments=[];
+
   var grid=el("div",{"class":"t-grid"});
   Object.keys(TREATMENTS).forEach(function(key){
     var t=TREATMENTS[key];
-    (function(k){ grid.appendChild(el("div",{"class":"t-tile","onClick":function(){ selectTreatment(k); }},
-      el("div",{"class":"t-tier"},t.tier),
-      el("div",{"class":"t-name"},t.name))); })(key);
+    var sel=S.selectedTreatments.indexOf(key)>=0;
+    (function(k){
+      var tile=el("div",{"class":"t-tile"+(sel?" selected":"")},
+        el("div",{"class":"t-tier"},t.tier),
+        el("div",{"class":"t-name"},t.name),
+        el("div",{"class":"t-check"},sel?"✓":""));
+      tile.addEventListener("click",function(){
+        var idx=S.selectedTreatments.indexOf(k);
+        if(idx>=0) S.selectedTreatments.splice(idx,1); else S.selectedTreatments.push(k);
+        render();
+      });
+      grid.appendChild(tile);
+    })(key);
   });
   card.appendChild(grid);
+
+  // If multiple selected, show each as a separate flow starting with first
+  var btn=el("button",{"class":"cont-btn","style":"margin-top:18px","onClick":function(){
+    if(!S.selectedTreatments.length) return;
+    S.treatment=S.selectedTreatments[0];
+    S.remainingTreatments=S.selectedTreatments.slice(1);
+    S.currentQ=0; S.history=[]; S.answers={};
+    render();
+  }},"Continue →");
+  if(!S.selectedTreatments||!S.selectedTreatments.length) btn.setAttribute("disabled","true");
+  card.appendChild(btn);
   return card;
 }
 
@@ -894,7 +927,7 @@ function renderResults(main){
   resCard.appendChild(el("div",{"class":"res-hdr"},
     el("div",{"class":"res-tier"},t.tier+" · Personalised Treatment Plan"),
     el("div",{"class":"res-name"},t.name),
-    el("div",{"class":"res-client"},S.clientName?"Muse: "+S.clientName:"Treatment plan ready")));
+    el("div",{"class":"res-client"},(S.clientName?"Muse: "+S.clientName:"Treatment plan ready")+(S.fromPending&&S.fromPending.client_dob?" · DOB: "+S.fromPending.client_dob:""))));
 
   var body=el("div",{"class":"res-body"});
 
@@ -1062,7 +1095,7 @@ function renderModal(p){
   hdr.appendChild(el("div",{"class":"modal-hdr-text"},
     el("div",{"class":"modal-tier"},treatment+" · "+time.split(",")[0]),
     el("div",{"class":"modal-tname"},name),
-    el("div",{"class":"modal-client"},noConsent?"No consent — auto-deletes in 24h":"Plan stored with consent")));
+    el("div",{"class":"modal-client"},(p.client_dob?"DOB: "+p.client_dob+" · ":"")+(noConsent?"No consent — auto-deletes in 24h":"Plan stored with consent"))));
   hdr.appendChild(el("button",{"class":"modal-close","onClick":closeModal},"×"));
   card.appendChild(hdr);
   var body=el("div",{"class":"modal-body"});
@@ -1098,7 +1131,7 @@ function renderModal(p){
 }
 
 // Poll for new pending forms every 30 seconds
-setInterval(function(){ if(isAuth()) checkPending(); },30000);
+setInterval(function(){ if(typeof S!=="undefined"&&isAuth()) checkPending(); },30000);
 
 if(isAuth()) render();
 </script>
