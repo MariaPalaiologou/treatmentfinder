@@ -323,15 +323,66 @@ function cleanExpiredPlans(){
   if(cleaned.length!==plans.length) localStorage.setItem(PLANS_KEY,JSON.stringify(cleaned));
 }
 
-// Check for pending client form submissions
+// ── CLIENT FORM POLLING ──────────────────────────────────────────
+var SEEN_KEY = "nm_seen_sessions";
+function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY)||"[]"); }catch(e){ return []; } }
+function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
+
+function pollSheets(){
+  if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
+  fetch(SHEETS_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(!Array.isArray(data)) return;
+      var seen=getSeenSessions();
+      // Find unseen client_form rows from last 4 hours
+      var cutoff=Date.now()-(4*60*60*1000);
+      var newForms=data.filter(function(row){
+        var src=String(row["Source"]||row.source||"");
+        var sid=String(row["Session Id"]||row["Session ID"]||row.session_id||"");
+        if(src!=="client_form"||!sid||seen.indexOf(sid)>=0) return false;
+        return true;
+      });
+      if(!newForms.length) return;
+      // Store as pending in localStorage
+      var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
+      var existingIds=pending.map(function(p){ return p.id; });
+      newForms.forEach(function(row){
+        var sid=String(row["Session Id"]||row["Session ID"]||row.session_id||"");
+        if(existingIds.indexOf(sid)>=0) return;
+        var treatmentKeys=String(row["Treatment Keys"]||row.treatment_keys||"").split(",").filter(Boolean);
+        var skinArr=String(row["Skin"]||row.skin||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+        var nailArr=String(row["Nails"]||row.nails||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+        var healthArr=String(row["Health Flags"]||row.health_flags||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+        pending.unshift({
+          id:             sid,
+          timestamp:      String(row["Timestamp"]||row.timestamp||""),
+          client_name:    String(row["Client Name"]||row.client_name||""),
+          client_dob:     String(row["Client Dob"]||row["Client DOB"]||row.client_dob||""),
+          treatment:      String(row["Treatment"]||row.treatment||""),
+          treatment_keys: treatmentKeys,
+          skin:           skinArr,
+          nails:          nailArr,
+          health:         healthArr,
+          hormonal:       String(row["Hormonal"]||row.hormonal||"unknown"),
+          consent:        String(row["Consent"]||row.consent||"No")==="Yes",
+          status:         "pending"
+        });
+        existingIds.push(sid);
+      });
+      localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
+      checkPending();
+    })
+    .catch(function(){});
+}
+
 function checkPending(){
   if(typeof S==="undefined") return;
-  var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
   var area=document.getElementById("pending-area");
   if(!area||!isAuth()) return;
   area.innerHTML="";
-  // Only show on New Consultation tab and only when not showing a completed plan
   if(S.tab!=="new"||S.done) return;
+  var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
   var unprocessed=pending.filter(function(p){ return p.status==="pending"; });
   if(!unprocessed.length) return;
   unprocessed.forEach(function(p){
@@ -348,28 +399,32 @@ function checkPending(){
 }
 
 function processPending(p){
-  // Mark as processed
+  // Mark as seen and processed
+  markSeen(p.id);
   var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
   pending=pending.map(function(x){ return x.id===p.id?Object.assign({},x,{status:"processed"}):x; });
   localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
-  // Set state and show plan
+  // Parse skin/nails/health into answers
+  var skinAll=Array.isArray(p.skin)?p.skin:[];
+  var nailAll=Array.isArray(p.nails)?p.nails:[];
+  var healthAll=Array.isArray(p.health)?p.health:[];
   S.clientName=p.client_name||"";
   S.fromPending=p;
+  S.treatment=p.treatment_keys&&p.treatment_keys.length?p.treatment_keys[0]:null;
+  S.selectedTreatments=p.treatment_keys||[];
   S.answers={
-    skin_focus: p.skin&&p.skin.length?p.skin[0]:"none",
-    skin_focus_all: p.skin||[],
-    nail_condition: p.nails&&p.nails.length?p.nails[0]:"healthy",
-    nail_condition_all: p.nails||[],
-    health_flags: p.health||[],
-    hormonal: p.hormonal||"unknown"
+    skin_focus:         skinAll[0]||"none",
+    skin_focus_all:     skinAll,
+    nail_condition:     nailAll[0]||"healthy",
+    nail_condition_all: nailAll,
+    health_flags:       healthAll,
+    hormonal:           p.hormonal||"unknown"
   };
   S.consent=p.consent;
   S.done=true;
   S.tab="new";
-  S.fromPending=p;
+  ["tab-new-btn","tab-plans-btn","tab-checkin-btn"].forEach(function(id){ document.getElementById(id).classList.remove("active"); });
   document.getElementById("tab-new-btn").classList.add("active");
-  document.getElementById("tab-plans-btn").classList.remove("active");
-  document.getElementById("tab-checkin-btn").classList.remove("active");
   document.getElementById("prog-wrap").style.display="block";
   document.getElementById("pending-area").innerHTML="";
   render();
@@ -1131,9 +1186,67 @@ function renderModal(p){
 }
 
 // Poll for new pending forms every 30 seconds
-setInterval(function(){ if(typeof S!=="undefined"&&isAuth()) checkPending(); },30000);
+setInterval(function(){ if(typeof S!=="undefined"&&isAuth()){ pollSheets(); } },30000);
+// Also poll on load
+if(isAuth()){ cleanExpiredPlans(); checkPending(); pollSheets(); }
 
 if(isAuth()) render();
 </script>
+<!--
+UPDATED GOOGLE SHEETS SETUP
+============================
+
+STEP 1 — Update row 1 headers in your Consultations sheet to exactly:
+Timestamp | Client Name | Client DOB | Treatment | Treatment Keys | Skin | Nails | Health Flags | Hormonal | Recommended | Steps Detail | Glance | Protocols | Therapist Notes | Agreed | Alt Path | Consent | Source | Session ID
+
+STEP 2 — Replace ALL code in Apps Script with:
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Consultations");
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    data.timestamp,
+    data.client_name    || "",
+    data.client_dob     || "",
+    data.treatment      || "",
+    data.treatment_keys || "",
+    data.skin           || "",
+    data.nails          || "",
+    data.health_flags   || "",
+    data.hormonal       || "",
+    data.recommended    || "",
+    data.steps_json     || "",
+    data.glance_json    || "",
+    data.protocols      || "",
+    data.therapist_notes|| "",
+    data.agreed         || "",
+    data.alt_path       || "",
+    data.consent        || "",
+    data.source         || "",
+    data.session_id     || ""
+  ]);
+  return ContentService.createTextOutput("OK");
+}
+
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Consultations");
+  var data = sheet.getDataRange().getValues();
+  if(data.length < 2) return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
+  var headers = data[0];
+  var rows = data.slice(1).reverse();
+  var result = rows.map(function(row) {
+    var obj = {};
+    headers.forEach(function(h, i) { obj[String(h)] = row[i]; });
+    return obj;
+  });
+  return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+}
+
+STEP 3 — Deploy as new Web App (Execute as Me, Anyone) and update SHEETS_URL in both index.html and form.html.
+
+STEP 4 — Periodically for No Consent rows:
+Filter by Consent = No, then clear the Client Name and Client DOB cells only.
+Leave all other columns intact for anonymous analysis.
+-->
 </body>
 </html>
