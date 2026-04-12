@@ -15,39 +15,26 @@
       --charcoal:#373636;--mid:#5A5555;--gray:#9A9494;--border:#DDD5CE;
     }
     html,body{min-height:100%;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 40%,#EDE0D8 100%);background-attachment:fixed;font-family:"Poppins",sans-serif;color:var(--charcoal)}
-
     .wrap{max-width:560px;margin:0 auto;padding:40px 20px 100px}
-
-    /* HEADER */
     .header{text-align:center;margin-bottom:36px}
     .logo{width:160px;height:auto;margin:0 auto 16px;display:block}
     .header-div{width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--suede),transparent);margin:0 auto 16px}
     .header-sub{font-size:12px;color:var(--gray);font-weight:300;line-height:1.6}
-
-    /* PROGRESS */
     .prog-wrap{margin-bottom:28px}
     .prog-bar{height:2px;background:var(--warm-grey);border-radius:2px;overflow:hidden}
     .prog-fill{height:100%;background:linear-gradient(90deg,var(--burg),var(--suede));border-radius:2px;transition:width .5s ease}
     .prog-label{font-size:10px;color:var(--gray);font-weight:300;margin-top:6px;letter-spacing:1px}
-
-    /* CARD */
     .card{background:white;border-radius:20px;box-shadow:0 4px 40px rgba(71,11,20,.07);padding:36px 32px;animation:fadeUp .35s ease both}
     @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
     .back-btn{background:none;border:none;color:var(--gray);font-family:"Poppins",sans-serif;font-size:11px;cursor:pointer;margin-bottom:20px;padding:0;display:flex;align-items:center;gap:5px;transition:color .15s}
     .back-btn:hover{color:var(--burg)}
-
     .step-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:10px}
     .question{font-family:"Playfair Display",serif;font-size:22px;font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:8px}
     .q-note{font-size:12px;color:var(--gray);font-weight:300;margin-bottom:24px;line-height:1.6}
-
-    /* INPUTS */
     .field-wrap{margin-bottom:18px}
     .field-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:7px}
     .field-input{width:100%;padding:12px 15px;border:1.5px solid var(--border);border-radius:10px;font-family:"Poppins",sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color .2s;background:var(--burg-pale)}
     .field-input:focus{border-color:var(--burg);background:white}
-
-    /* TREATMENT TILES */
     .t-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
     .t-tile{border:1.5px solid var(--border);border-radius:14px;padding:18px 14px;cursor:pointer;transition:all .2s;text-align:center;background:white;user-select:none}
     .t-tile:hover{border-color:var(--burg);background:var(--burg-pale);transform:translateY(-2px)}
@@ -56,8 +43,6 @@
     .t-name{font-family:"Playfair Display",serif;font-size:14px;font-weight:400;color:var(--charcoal);line-height:1.3}
     .t-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:50%;margin:10px auto 0;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;transition:all .15s}
     .t-tile.selected .t-check{background:var(--burg);border-color:var(--burg)}
-
-    /* OPTIONS */
     .options{display:flex;flex-direction:column;gap:9px}
     .opt-btn{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;background:white;cursor:pointer;text-align:left;transition:all .18s;width:100%;font-family:"Poppins",sans-serif;user-select:none}
     .opt-btn:hover{border-color:var(--burg);background:var(--burg-pale)}
@@ -68,22 +53,16 @@
     .chk{width:19px;height:19px;border:1.5px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:white;transition:all .15s}
     .opt-btn.selected .chk{background:var(--burg);border-color:var(--burg)}
     .multi-hint{font-size:11px;color:var(--suede);font-weight:300;margin-bottom:13px;font-style:italic}
-
-    /* CONSENT */
-    .consent-box{border:1.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:20px;cursor:pointer;transition:all .18s;user-select:none}
+    .consent-box{border:1.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px;cursor:pointer;transition:all .18s;user-select:none}
     .consent-box.checked{border-color:var(--burg);background:var(--burg-light)}
     .consent-row{display:flex;align-items:flex-start;gap:12px}
     .consent-chk{width:20px;height:20px;border:1.5px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:white;transition:all .15s;margin-top:1px}
     .consent-box.checked .consent-chk{background:var(--burg);border-color:var(--burg)}
     .consent-txt{font-size:12px;color:var(--mid);line-height:1.6;font-weight:300}
     .consent-txt strong{font-weight:500;color:var(--charcoal)}
-
-    /* BUTTONS */
     .next-btn{width:100%;padding:14px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:"Poppins",sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .18s;margin-top:20px}
     .next-btn:hover{background:var(--burg-mid);transform:translateY(-1px)}
     .next-btn:disabled{background:#ccc;cursor:default;transform:none}
-
-    /* THANK YOU */
     .thankyou{text-align:center;padding:20px 0}
     .ty-icon{font-size:48px;margin-bottom:20px}
     .ty-title{font-family:"Playfair Display",serif;font-size:32px;font-weight:400;color:var(--burg);margin-bottom:12px;line-height:1.2}
@@ -91,14 +70,8 @@
     .ty-div{width:40px;height:1px;background:var(--suede);margin:20px auto}
     .ty-body{font-size:13px;color:var(--mid);line-height:1.8;font-weight:300;margin-bottom:12px}
     .ty-note{font-size:11px;color:var(--gray);font-weight:300;line-height:1.6;font-style:italic}
-    .ty-pin{font-family:"Playfair Display",serif;font-size:18px;color:var(--suede);margin:16px 0;font-style:italic}
     .ornament{text-align:center;color:var(--suede);font-size:14px;letter-spacing:8px;margin:28px 0;opacity:.35;font-family:"Playfair Display",serif}
-
-    @media(max-width:400px){
-      .card{padding:28px 20px}
-      .t-grid{grid-template-columns:1fr}
-      .question{font-size:20px}
-    }
+    @media(max-width:400px){.card{padding:28px 20px}.t-grid{grid-template-columns:1fr}.question{font-size:20px}}
   </style>
 </head>
 <body>
@@ -115,123 +88,87 @@
   <div id="main"></div>
   <div class="ornament">✦ ✦ ✦</div>
 </div>
-
 <script>
 var SHEETS_URL = "AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N";
-var FORM_VERSION = "1.0";
 
 var TREATMENTS = {
-  sig_mani: { tier:"Signature", name:"The Signature Manicure", path:"mani" },
-  edit_mani:{ tier:"Edit",      name:"The Edit Manicure",      path:"mani" },
-  sig_pedi: { tier:"Signature", name:"The Signature Pedicure", path:"pedi" },
-  cerem_pedi:{ tier:"Ceremony", name:"The Ceremony Pedicure",  path:"pedi" }
+  sig_mani:  {tier:"Signature", name:"The Signature Manicure", path:"mani"},
+  edit_mani: {tier:"Edit",      name:"The Edit Manicure",      path:"mani"},
+  sig_pedi:  {tier:"Signature", name:"The Signature Pedicure", path:"pedi"},
+  cerem_pedi:{tier:"Ceremony",  name:"The Ceremony Pedicure",  path:"pedi"}
 };
 
-// Questions shown to client - polite, warm language
-var SKIN_OPTIONS_MANI = [
-  {v:"antiaging",   t:"Signs of ageing",        s:"Fine lines, loss of firmness or elasticity on the hands"},
-  {v:"pigmentation",t:"Uneven skin tone",        s:"Age spots, sun damage or discolouration on the hands"},
-  {v:"sensitivity", t:"Sensitive or reactive skin",s:"Skin that reacts easily, redness or irritation"},
-  {v:"hydration",   t:"Dryness or dehydration",  s:"Skin that feels tight, dry or in need of moisture"},
-  {v:"none",        t:"No specific concern",      s:"General care and maintenance"},
+var SKIN_MANI=[
+  {v:"antiaging",   t:"Signs of ageing",           s:"Fine lines, loss of firmness on the hands"},
+  {v:"pigmentation",t:"Uneven skin tone",           s:"Age spots, sun damage or discolouration"},
+  {v:"sensitivity", t:"Sensitive or reactive skin", s:"Skin that reacts easily, redness or irritation"},
+  {v:"hydration",   t:"Dryness or dehydration",     s:"Skin that feels tight, dry or in need of moisture"},
+  {v:"none",        t:"No specific concern",        s:"General care and maintenance"},
 ];
-var SKIN_OPTIONS_PEDI = [
-  {v:"hydration",    t:"Dryness or dehydration",  s:"Skin that feels tight, dry or in need of moisture"},
-  {v:"calluses",     t:"Calluses or corns",        s:"Areas of hardened or thickened skin"},
-  {v:"cracked_heels",t:"Cracked heels or rough skin",s:"Heel fissures, rough patches or peeling skin"},
-  {v:"none",         t:"No specific concern",      s:"General care and maintenance"},
+var SKIN_PEDI=[
+  {v:"hydration",    t:"Dryness or dehydration",       s:"Skin that feels tight, dry or in need of moisture"},
+  {v:"calluses",     t:"Calluses or corns",             s:"Areas of hardened or thickened skin"},
+  {v:"cracked_heels",t:"Cracked heels or rough skin",  s:"Heel fissures, rough patches or peeling skin"},
+  {v:"none",         t:"No specific concern",           s:"General care and maintenance"},
 ];
-
-var NAIL_OPTIONS_MANI = [
-  {v:"healthy", t:"Generally healthy",         s:"Nails in good condition"},
-  {v:"brittle", t:"Brittle, peeling or ridged",s:"Nails that break easily, peel or have visible lines"},
-  {v:"soft",    t:"Soft and flexible",          s:"Nails that bend easily and do not hold length well"},
-  {v:"bitten",  t:"Short or bitten",            s:"Nails that have been bitten or are very short"},
-  {v:"onycholysis",t:"Nail lifting or separating",s:"Nail plate appears to be lifting from the nail bed"},
+var NAIL_MANI=[
+  {v:"healthy",    t:"Generally healthy",          s:"Nails in good condition"},
+  {v:"brittle",    t:"Brittle, peeling or ridged", s:"Nails that break easily, peel or have visible lines"},
+  {v:"soft",       t:"Soft and flexible",          s:"Nails that bend easily and do not hold length"},
+  {v:"bitten",     t:"Short or bitten",            s:"Nails that have been bitten or are very short"},
+  {v:"onycholysis",t:"Nail lifting or separating", s:"Nail plate appears to be lifting from the nail bed"},
 ];
-var NAIL_OPTIONS_PEDI = [
-  {v:"healthy",   t:"Generally healthy",          s:"Nails in good condition"},
-  {v:"brittle",   t:"Brittle or ridged",           s:"Nails that break easily or have visible lines"},
-  {v:"thickened", t:"Thick or difficult to cut",   s:"Nails that are noticeably thicker than usual"},
-  {v:"yellow",    t:"Yellow or discoloured",        s:"Nails that have changed colour"},
-  {v:"fungal",    t:"Signs of fungal infection",   s:"White or yellow patches, crumbling edges"},
-  {v:"ingrown",   t:"Ingrown toenail",             s:"Nail edge growing into the surrounding skin"},
+var NAIL_PEDI=[
+  {v:"healthy",  t:"Generally healthy",         s:"Nails in good condition"},
+  {v:"brittle",  t:"Brittle or ridged",          s:"Nails that break easily or have visible lines"},
+  {v:"thickened",t:"Thick or difficult to cut",  s:"Nails that are noticeably thicker than usual"},
+  {v:"yellow",   t:"Yellow or discoloured",      s:"Nails that have changed colour"},
+  {v:"fungal",   t:"Signs of fungal infection",  s:"White or yellow patches, crumbling edges"},
+  {v:"ingrown",  t:"Ingrown toenail",            s:"Nail edge growing into the surrounding skin"},
 ];
-
-var HEALTH_OPTIONS = [
-  {v:"diabetes",    t:"Diabetes or poor circulation", s:"Affects heat sensitivity and technique choices"},
-  {v:"isotretinoin",t:"Currently taking Roaccutane",  s:"Affects product and heat choices"},
-  {v:"arthritis",   t:"Arthritis or joint sensitivity",s:"We will adapt our technique for your comfort"},
-  {v:"pregnancy",   t:"Pregnancy",                    s:"We will choose the safest products for you"},
-  {v:"nut_allergy", t:"Nut oil sensitivity or allergy",s:"We will avoid all nut-derived ingredients"},
-  {v:"fragrance",   t:"Fragrance sensitivity",         s:"We will use fragrance-free products"},
-  {v:"no_heat",     t:"Preference for no heat treatments",s:"We will skip the paraffin bath"},
-  {v:"none",        t:"None of the above",             s:""},
+var HEALTH_OPTS=[
+  {v:"diabetes",    t:"Diabetes or poor circulation",      s:"Affects heat sensitivity and technique choices"},
+  {v:"isotretinoin",t:"Currently taking Roaccutane",       s:"Affects product and heat choices"},
+  {v:"arthritis",   t:"Arthritis or joint sensitivity",    s:"We will adapt our technique for your comfort"},
+  {v:"pregnancy",   t:"Pregnancy",                         s:"We will choose the safest products for you"},
+  {v:"nut_allergy", t:"Nut oil sensitivity or allergy",    s:"We will avoid all nut-derived ingredients"},
+  {v:"fragrance",   t:"Fragrance sensitivity",             s:"We will use fragrance-free products"},
+  {v:"no_heat",     t:"Preference for no heat treatments", s:"We will skip the paraffin bath"},
+  {v:"none",        t:"None of the above",                 s:""},
 ];
-
-var HORMONAL_OPTIONS = [
-  {v:"peri",    t:"Perimenopause or menopause",    s:"Including irregular cycles or post-menopause"},
-  {v:"pre",     t:"Pre-menopause",                 s:"Regular cycle, no significant hormonal changes"},
-  {v:"hrt",     t:"On HRT or hormonal medication", s:"Including the contraceptive pill or coil"},
-  {v:"unknown", t:"Prefer not to say",             s:"We will use your other answers to guide us"},
+var HORMONAL_OPTS=[
+  {v:"peri",   t:"Perimenopause or menopause",    s:"Including irregular cycles or post-menopause"},
+  {v:"pre",    t:"Pre-menopause",                 s:"Regular cycle, no significant hormonal changes"},
+  {v:"hrt",    t:"On HRT or hormonal medication", s:"Including the contraceptive pill or coil"},
+  {v:"unknown",t:"Prefer not to say",             s:"We will use your other answers to guide us"},
 ];
 
-// STATE
-var S = {
-  step: 0,
-  name: "",
-  dob: "",
-  treatments: [],
-  skin: [],
-  nails: [],
-  health: [],
-  hormonal: null,
-  consent: false,
-  submitted: false
-};
+var S={step:0,firstName:"",lastName:"",dob:"",treatments:[],skin:[],nails:[],health:[],hormonal:null,consent:false,submitted:false};
+var TOTAL=7;
 
-var TOTAL_STEPS = 7; // name, treatment, skin, nails, health, hormonal, consent
+function hasMani(){ return S.treatments.some(function(t){ return TREATMENTS[t]&&TREATMENTS[t].path==="mani"; }); }
+function hasPedi(){ return S.treatments.some(function(t){ return TREATMENTS[t]&&TREATMENTS[t].path==="pedi"; }); }
+function getSkin(){ var o=[]; if(hasMani()) SKIN_MANI.forEach(function(x){ if(!o.find(function(y){return y.v===x.v;})) o.push(x); }); if(hasPedi()) SKIN_PEDI.forEach(function(x){ if(!o.find(function(y){return y.v===x.v;})) o.push(x); }); return o; }
+function getNails(){ var o=[]; if(hasMani()) NAIL_MANI.forEach(function(x){ if(!o.find(function(y){return y.v===x.v;})) o.push(x); }); if(hasPedi()) NAIL_PEDI.forEach(function(x){ if(!o.find(function(y){return y.v===x.v;})) o.push(x); }); return o; }
 
-function hasMani(){ return S.treatments.some(function(t){ return TREATMENTS[t] && TREATMENTS[t].path==="mani"; }); }
-function hasPedi(){ return S.treatments.some(function(t){ return TREATMENTS[t] && TREATMENTS[t].path==="pedi"; }); }
-
-function getSkinOptions(){
-  var opts = [];
-  if(hasMani()) SKIN_OPTIONS_MANI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
-  if(hasPedi()) SKIN_OPTIONS_PEDI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
-  return opts;
-}
-function getNailOptions(){
-  var opts = [];
-  if(hasMani()) NAIL_OPTIONS_MANI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
-  if(hasPedi()) NAIL_OPTIONS_PEDI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
-  return opts;
+function toggleArr(arr,v){
+  if(v==="none") return arr.indexOf("none")>=0?[]:["none"];
+  var w=arr.filter(function(x){return x!=="none";});
+  return w.indexOf(v)>=0?w.filter(function(x){return x!==v;}):w.concat([v]);
 }
 
 function el(tag,attrs){
   var e=document.createElement(tag);
-  var children=Array.prototype.slice.call(arguments,2);
-  if(attrs){ Object.keys(attrs).forEach(function(k){
-    var v=attrs[k];
-    if(k==="class") e.className=v;
-    else if(k==="style") e.style.cssText=v;
-    else if(k.indexOf("on")===0) e.addEventListener(k.slice(2).toLowerCase(),v);
-    else e.setAttribute(k,v);
-  });}
-  children.forEach(function(c){ if(c==null) return; e.appendChild(typeof c==="string"?document.createTextNode(c):c); });
+  var ch=Array.prototype.slice.call(arguments,2);
+  if(attrs){ Object.keys(attrs).forEach(function(k){ var v=attrs[k]; if(k==="class") e.className=v; else if(k==="style") e.style.cssText=v; else if(k.indexOf("on")===0) e.addEventListener(k.slice(2).toLowerCase(),v); else e.setAttribute(k,v); }); }
+  ch.forEach(function(c){ if(c==null) return; e.appendChild(typeof c==="string"?document.createTextNode(c):c); });
   return e;
 }
 
-function toggleArr(arr,v){
-  if(v==="none") return arr.indexOf("none")>=0?[]:["none"];
-  var without=arr.filter(function(x){return x!=="none";});
-  return without.indexOf(v)>=0?without.filter(function(x){return x!==v;}):without.concat([v]);
-}
-
 function updateProgress(){
-  var pct = S.submitted ? 100 : Math.round((S.step/TOTAL_STEPS)*100);
+  var pct=S.submitted?100:Math.round((S.step/TOTAL)*100);
   document.getElementById("progress").style.width=pct+"%";
-  var labels=["","Step 1 of "+TOTAL_STEPS+" — Your name","Step 2 of "+TOTAL_STEPS+" — Your treatment","Step 3 of "+TOTAL_STEPS+" — Your skin","Step 4 of "+TOTAL_STEPS+" — Your nails","Step 5 of "+TOTAL_STEPS+" — Your health","Step 6 of "+TOTAL_STEPS+" — Your profile","Step 7 of "+TOTAL_STEPS+" — Almost done"];
+  var labels=["","Step 1 of "+TOTAL+" — Your details","Step 2 of "+TOTAL+" — Your treatment","Step 3 of "+TOTAL+" — Your skin","Step 4 of "+TOTAL+" — Your nails","Step 5 of "+TOTAL+" — Your health","Step 6 of "+TOTAL+" — Your profile","Step 7 of "+TOTAL+" — Almost done"];
   document.getElementById("prog-label").textContent=labels[S.step]||"";
 }
 
@@ -240,29 +177,35 @@ function render(){
   main.innerHTML="";
   updateProgress();
   if(S.submitted){ main.appendChild(renderThankYou()); document.getElementById("prog-wrap").style.display="none"; return; }
-  var screens=[renderName, renderTreatment, renderSkin, renderNails, renderHealth, renderHormonal, renderConsent];
+  var screens=[renderName,renderTreatment,renderSkin,renderNails,renderHealth,renderHormonal,renderConsent];
   main.appendChild(screens[S.step]());
 }
 
-// STEP 1 — NAME
+// STEP 1 — NAME & DOB
 function renderName(){
   var card=el("div",{"class":"card"});
   card.appendChild(el("div",{"class":"step-lbl"},"Welcome, Muse"));
   card.appendChild(el("div",{"class":"question"},"May we know your name?"));
-  card.appendChild(el("div",{"class":"q-note"},"This helps us personalise your experience today. Your details are handled with the utmost care."));
+  card.appendChild(el("div",{"class":"q-note"},"This helps us personalise your experience today. Please see our data notice at the bottom of this page."));
   var fw=el("div",{"class":"field-wrap"});
-  fw.appendChild(el("div",{"class":"field-lbl"},"Full Name"));
-  var ni=el("input",{"class":"field-input","type":"text","placeholder":"Your first and last name","value":S.name,"autocomplete":"name"});
-  ni.addEventListener("input",function(e){S.name=e.target.value;});
-  fw.appendChild(ni); card.appendChild(fw);
-  var fw2=el("div",{"class":"field-wrap"});
-  fw2.appendChild(el("div",{"class":"field-lbl"},"Date of Birth (optional)"));
+  fw.appendChild(el("div",{"class":"field-lbl"},"First Name"));
+  var fi=el("input",{"class":"field-input","type":"text","placeholder":"Your first name","value":S.firstName,"autocomplete":"given-name"});
+  fi.addEventListener("input",function(e){S.firstName=e.target.value;});
+  fw.appendChild(fi); card.appendChild(fw);
+  var lw=el("div",{"class":"field-wrap"});
+  lw.appendChild(el("div",{"class":"field-lbl"},"Last Name"));
+  var li=el("input",{"class":"field-input","type":"text","placeholder":"Your last name","value":S.lastName,"autocomplete":"family-name"});
+  li.addEventListener("input",function(e){S.lastName=e.target.value;});
+  lw.appendChild(li); card.appendChild(lw);
+  var dw=el("div",{"class":"field-wrap"});
+  dw.appendChild(el("div",{"class":"field-lbl"},"Date of Birth (optional)"));
   var di=el("input",{"class":"field-input","type":"date","value":S.dob});
   di.addEventListener("change",function(e){S.dob=e.target.value;});
-  fw2.appendChild(di); card.appendChild(fw2);
-  var btn=el("button",{"class":"next-btn","onClick":function(){ if(S.name.trim().length<2) return; S.step=1; render(); }},"Continue");
-  ni.addEventListener("keydown",function(e){if(e.key==="Enter") btn.click();});
+  dw.appendChild(di); card.appendChild(dw);
+  var btn=el("button",{"class":"next-btn","onClick":function(){ if(S.firstName.trim().length<1||S.lastName.trim().length<1) return; S.step=1; render(); }},"Continue");
   card.appendChild(btn);
+  // Data notice
+  card.appendChild(el("div",{"style":"margin-top:20px;font-size:10px;color:var(--gray);line-height:1.6;font-weight:300;font-style:italic"},"Your name and date of birth are stored in our secure salon system to personalise your future visits, subject to your consent at the end of this form. If you do not consent, your personal details will be removed within 24 hours. Treatment data is used anonymously for service improvement."));
   return card;
 }
 
@@ -271,21 +214,13 @@ function renderTreatment(){
   var card=el("div",{"class":"card"});
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=0;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Your Treatment Today"));
-  card.appendChild(el("div",{"class":"question"},"Which treatment have you booked, "+S.name.split(" ")[0]+"?"));
-  card.appendChild(el("div",{"class":"q-note"},"You may select more than one if you have booked both a manicure and a pedicure today."));
+  card.appendChild(el("div",{"class":"question"},"Which treatment have you booked today?"));
+  card.appendChild(el("div",{"class":"q-note"},"You may select more than one if you have booked both a manicure and a pedicure."));
   var grid=el("div",{"class":"t-grid"});
   Object.keys(TREATMENTS).forEach(function(key){
-    var t=TREATMENTS[key];
-    var sel=S.treatments.indexOf(key)>=0;
-    var tile=el("div",{"class":"t-tile"+(sel?" selected":"")},
-      el("div",{"class":"t-tier"},t.tier),
-      el("div",{"class":"t-name"},t.name),
-      el("div",{"class":"t-check"},sel?"✓":""));
-    tile.addEventListener("click",function(){
-      var idx=S.treatments.indexOf(key);
-      if(idx>=0) S.treatments.splice(idx,1); else S.treatments.push(key);
-      render();
-    });
+    var t=TREATMENTS[key]; var sel=S.treatments.indexOf(key)>=0;
+    var tile=el("div",{"class":"t-tile"+(sel?" selected":"")},el("div",{"class":"t-tier"},t.tier),el("div",{"class":"t-name"},t.name),el("div",{"class":"t-check"},sel?"✓":""));
+    tile.addEventListener("click",function(){ var idx=S.treatments.indexOf(key); if(idx>=0) S.treatments.splice(idx,1); else S.treatments.push(key); render(); });
     grid.appendChild(tile);
   });
   card.appendChild(grid);
@@ -301,14 +236,12 @@ function renderSkin(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=1;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Your Skin"));
   card.appendChild(el("div",{"class":"question"},"What are your skin concerns today?"));
-  card.appendChild(el("div",{"class":"q-note"},"Please select all that apply. This helps us choose the right products for your skin."));
+  card.appendChild(el("div",{"class":"q-note"},"Please select all that apply — this helps us choose the right products for you."));
   card.appendChild(el("div",{"class":"multi-hint"},"You may select more than one."));
   var opts=el("div",{"class":"options"});
-  getSkinOptions().forEach(function(o){
+  getSkin().forEach(function(o){
     var sel=S.skin.indexOf(o.v)>=0;
-    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},
-      el("div",{"class":"chk"},sel?"✓":""),
-      el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
+    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},el("div",{"class":"chk"},sel?"✓":""),el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
     btn.addEventListener("click",function(){ S.skin=toggleArr(S.skin,o.v); render(); });
     opts.appendChild(btn);
   });
@@ -325,14 +258,12 @@ function renderNails(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=2;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Your Nails"));
   card.appendChild(el("div",{"class":"question"},"How would you describe your nails?"));
-  card.appendChild(el("div",{"class":"q-note"},"Please select all that apply. This guides our technique and product choices."));
+  card.appendChild(el("div",{"class":"q-note"},"Please select all that apply."));
   card.appendChild(el("div",{"class":"multi-hint"},"You may select more than one."));
   var opts=el("div",{"class":"options"});
-  getNailOptions().forEach(function(o){
+  getNails().forEach(function(o){
     var sel=S.nails.indexOf(o.v)>=0;
-    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},
-      el("div",{"class":"chk"},sel?"✓":""),
-      el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
+    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},el("div",{"class":"chk"},sel?"✓":""),el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
     btn.addEventListener("click",function(){ S.nails=toggleArr(S.nails,o.v); render(); });
     opts.appendChild(btn);
   });
@@ -349,14 +280,12 @@ function renderHealth(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=3;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Your Wellbeing"));
   card.appendChild(el("div",{"class":"question"},"Are there any health considerations we should be aware of?"));
-  card.appendChild(el("div",{"class":"q-note"},"Everything you share with us stays confidential and is used solely to ensure your treatment is safe and comfortable."));
+  card.appendChild(el("div",{"class":"q-note"},"Everything you share stays confidential and is used solely to ensure your treatment is safe and comfortable."));
   card.appendChild(el("div",{"class":"multi-hint"},"Select all that apply."));
   var opts=el("div",{"class":"options"});
-  HEALTH_OPTIONS.forEach(function(o){
+  HEALTH_OPTS.forEach(function(o){
     var sel=S.health.indexOf(o.v)>=0;
-    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},
-      el("div",{"class":"chk"},sel?"✓":""),
-      el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
+    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},el("div",{"class":"chk"},sel?"✓":""),el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
     btn.addEventListener("click",function(){ S.health=toggleArr(S.health,o.v); render(); });
     opts.appendChild(btn);
   });
@@ -373,13 +302,11 @@ function renderHormonal(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=4;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"One Last Thing"));
   card.appendChild(el("div",{"class":"question"},"Which best describes your hormonal stage?"));
-  card.appendChild(el("div",{"class":"q-note"},"This is entirely optional and confidential. Hormonal changes can significantly affect skin and nail health — knowing this helps us choose the most effective products for you."));
+  card.appendChild(el("div",{"class":"q-note"},"Entirely optional and confidential. Hormonal changes can significantly affect skin and nail health — knowing this helps us choose the most effective products for you."));
   var opts=el("div",{"class":"options"});
-  HORMONAL_OPTIONS.forEach(function(o){
+  HORMONAL_OPTS.forEach(function(o){
     var sel=S.hormonal===o.v;
-    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},
-      el("div",{"class":"chk"},sel?"✓":""),
-      el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
+    var btn=el("div",{"class":"opt-btn"+(sel?" selected":"")},el("div",{"class":"chk"},sel?"✓":""),el("div",{"class":"opt-text"},el("div",{"class":"opt-title"},o.t),o.s?el("div",{"class":"opt-sub"},o.s):null));
     btn.addEventListener("click",function(){ S.hormonal=o.v; render(); });
     opts.appendChild(btn);
   });
@@ -395,19 +322,18 @@ function renderConsent(){
   var card=el("div",{"class":"card"});
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=5;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Almost There, Muse"));
-  card.appendChild(el("div",{"class":"question"},"May we keep your treatment preferences?"));
-  card.appendChild(el("div",{"class":"q-note"},"If you choose to save your plan, your name and date of birth will be stored privately in our salon tool only, to help us personalise your future visits. They are never shared with third parties. Your health information is used solely to tailor your treatment and is never stored on external systems."));
+  card.appendChild(el("div",{"class":"question"},"May we keep your treatment plan?"));
+  card.appendChild(el("div",{"class":"q-note"},"If you consent, your name, date of birth and personalised treatment plan will be stored securely in our private salon system to personalise your future visits. They are never shared with third parties. If you do not consent, your personal details will be removed from our records within 24 hours — your treatment data will be kept anonymously for service improvement only."));
   var consentBox=el("div",{"class":"consent-box"+(S.consent?" checked":"")});
   var row=el("div",{"class":"consent-row"},
     el("div",{"class":"consent-chk"},S.consent?"✓":""),
     el("div",{"class":"consent-txt"},
       el("strong",{},"Yes, please save my treatment plan for future visits."),
-      document.createTextNode(" I understand that my name and date of birth will be stored privately in the salon's secure tool, and that my health information is never stored on external systems.")));
+      document.createTextNode(" I understand that my name and date of birth will be stored securely in the salon system, and removed immediately upon request.")));
   consentBox.appendChild(row);
   consentBox.addEventListener("click",function(){ S.consent=!S.consent; render(); });
   card.appendChild(consentBox);
-  var submitBtn=el("button",{"class":"next-btn","onClick":submitForm},"Submit my answers");
-  card.appendChild(submitBtn);
+  card.appendChild(el("button",{"class":"next-btn","onClick":submitForm},"Submit my answers"));
   return card;
 }
 
@@ -415,74 +341,50 @@ function renderConsent(){
 function submitForm(){
   if(S.submitted) return;
   S.submitted=true;
-
-  // Build payload - NO PII sent to Sheets
+  var sid="cf_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
   var treatmentNames=S.treatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
+  var fullName=(S.firstName+" "+S.lastName).trim();
   var payload={
-    timestamp:    new Date().toLocaleString("nl-NL",{timeZone:"Europe/Amsterdam"}),
-    treatment:    treatmentNames,
-    skin:         S.skin.join(", ")||"None",
-    nails:        S.nails.join(", ")||"None",
-    health:       S.health.join(", ")||"None",
-    hormonal:     S.hormonal||"Not shared",
-    consent:      S.consent?"Yes":"No",
-    source:       "client_form",
-    version:      FORM_VERSION
+    timestamp:      new Date().toLocaleString("nl-NL",{timeZone:"Europe/Amsterdam"}),
+    client_name:    fullName,
+    client_dob:     S.dob||"",
+    treatment:      treatmentNames,
+    treatment_keys: S.treatments.join(","),
+    skin:           S.skin.join(", ")||"None",
+    nails:          S.nails.join(", ")||"None",
+    health_flags:   S.health.join(", ")||"None",
+    hormonal:       S.hormonal||"Not shared",
+    recommended:    "",
+    steps_json:     "",
+    glance_json:    "",
+    protocols:      "",
+    therapist_notes:"",
+    agreed:         "",
+    alt_path:       "",
+    consent:        S.consent?"Yes":"No",
+    source:         "client_form",
+    session_id:     sid
   };
-
-  // Store locally for staff pickup (includes name and DOB if provided — never sent to Sheets)
-  var sessionData={
-    id:           "cf_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),
-    timestamp:    payload.timestamp,
-    client_name:  S.name,
-    client_dob:   S.dob||"",
-    treatment:    treatmentNames,
-    treatment_keys: S.treatments,
-    skin:         S.skin,
-    nails:        S.nails,
-    health:       S.health,
-    hormonal:     S.hormonal||"unknown",
-    consent:      S.consent,
-    status:       "pending",
-    expires:      S.consent ? null : Date.now()+(24*60*60*1000)
-  };
-
-  // Save to localStorage for staff tool to pick up
-  var pending=JSON.parse(localStorage.getItem("nm_pending_forms")||"[]");
-  pending.unshift(sessionData);
-  localStorage.setItem("nm_pending_forms",JSON.stringify(pending));
-
-  // Send anonymous data to Google Sheets
-  if(SHEETS_URL && SHEETS_URL!=="YOUR_SHEETS_URL_HERE"){
+  if(SHEETS_URL&&SHEETS_URL!=="YOUR_SHEETS_URL_HERE"){
     fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
   }
-
   render();
 }
 
 // THANK YOU
 function renderThankYou(){
-  var first=S.name.split(" ")[0]||"Muse";
+  var first=S.firstName||"Muse";
   var div=el("div",{"class":"card thankyou"});
   div.appendChild(el("div",{"class":"ty-icon"},"✦"));
   div.appendChild(el("div",{"class":"ty-title"},"Thank you, ",el("em",{},first),"."));
   div.appendChild(el("div",{"class":"ty-div"}));
-  div.appendChild(el("div",{"class":"ty-body"},"Your answers have been received. Your personalised treatment plan is being prepared as we speak — your technician will walk you through every step before you begin."));
+  div.appendChild(el("div",{"class":"ty-body"},"Your answers have been received. Your personalised treatment plan is being prepared — your technician will walk you through every step before you begin."));
   div.appendChild(el("div",{"class":"ty-note"},"Sit back, relax, and let us take care of the rest."));
   if(!S.consent){
-    div.appendChild(el("div",{"class":"ty-note","style":"margin-top:12px"},"As requested, your preferences will not be stored after your visit today."));
+    div.appendChild(el("div",{"class":"ty-note","style":"margin-top:12px"},"As requested, your personal details will be removed from our records within 24 hours."));
   }
   return div;
 }
-
-// Lock form after submit
-window.addEventListener("pageshow",function(){
-  if(S.submitted){
-    document.getElementById("main").innerHTML="";
-    document.getElementById("main").appendChild(renderThankYou());
-    document.getElementById("prog-wrap").style.display="none";
-  }
-});
 
 render();
 </script>
