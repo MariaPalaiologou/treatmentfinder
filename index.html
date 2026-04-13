@@ -280,7 +280,7 @@
 
 <script>
 var STAFF_PASSWORD = "confidence";
-var SHEETS_URL = "https://script.google.com/macros/s/AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N/exec";
+var SHEETS_URL = "https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec";
 var CLIENT_FORM_URL = "https://treatmentfinder.nailandmuse.com/form.html";
 var SESSION_KEY = "nm_auth";
 var HIDDEN_KEY  = "nm_hidden_plans";
@@ -329,7 +329,7 @@ function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY
 function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
 
 function pollSheets(){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N/exec") return;
+  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec") return;
   fetch(SHEETS_URL)
     .then(function(r){ return r.json(); })
     .then(function(data){
@@ -735,7 +735,7 @@ function buildRec(){
 
 // ── GOOGLE SHEETS ──────────────────────────────────────────────────
 function saveToSheets(rec){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N/exec") return;
+  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec") return;
   var a=S.answers;
   var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
   var treatmentName=allTreatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
