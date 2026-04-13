@@ -329,7 +329,7 @@ function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY
 function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
 
 function pollSheets(){
-  if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
+  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec") return;
   console.log("pollSheets: fetching from Sheets...");
   var url=SHEETS_URL+"?callback=handleSheetData&t="+Date.now();
   // Use script tag injection to bypass CORS
@@ -389,7 +389,8 @@ function checkPending(){
   var area=document.getElementById("pending-area");
   if(!area||!isAuth()) return;
   area.innerHTML="";
-  if(S.tab!=="new"||S.done) return;
+  // Only show on Treatment Plans tab
+  if(S.tab!=="plans") return;
   var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
   var unprocessed=pending.filter(function(p){ return p.status==="pending"; });
   if(!unprocessed.length) return;
@@ -743,7 +744,7 @@ function buildRec(){
 
 // ── GOOGLE SHEETS ──────────────────────────────────────────────────
 function saveToSheets(rec){
-  if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
+  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec") return;
   var a=S.answers;
   var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
   var treatmentName=allTreatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
@@ -802,6 +803,7 @@ document.getElementById("tab-new-btn").addEventListener("click",function(){
   ["tab-checkin-btn","tab-new-btn","tab-plans-btn"].forEach(function(id){ document.getElementById(id).classList.remove("active"); });
   document.getElementById("tab-new-btn").classList.add("active");
   document.getElementById("prog-wrap").style.display="block";
+  document.getElementById("pending-area").innerHTML="";
   render();
 });
 document.getElementById("tab-plans-btn").addEventListener("click",function(){
@@ -810,6 +812,7 @@ document.getElementById("tab-plans-btn").addEventListener("click",function(){
   document.getElementById("tab-plans-btn").classList.add("active");
   document.getElementById("prog-wrap").style.display="none";
   loadPlans();
+  checkPending();
   render();
 });
 
