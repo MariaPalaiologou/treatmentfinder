@@ -35,7 +35,7 @@
     .field-wrap{margin-bottom:18px}
     .field-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:7px}
     .field-input{width:100%;padding:12px 15px;border:1.5px solid var(--border);border-radius:10px;font-family:"Poppins",sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color .2s;background:var(--burg-pale);box-sizing:border-box;max-width:100%}
-    input[type="date"].field-input{-webkit-appearance:none;appearance:none;min-width:0}
+    input[type="date"].field-input{-webkit-appearance:none;appearance:none;min-width:0;min-height:48px;line-height:1.5}
     .field-input:focus{border-color:var(--burg);background:white}
     .t-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
     .t-tile{border:1.5px solid var(--border);border-radius:14px;padding:18px 14px;cursor:pointer;transition:all .2s;text-align:center;background:white;user-select:none}
@@ -366,7 +366,7 @@ function submitForm(){
     source:         "client_form",
     session_id:     sid
   };
-  if(SHEETS_URL&&SHEETS_URL!=="https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec"){
+  if(SHEETS_URL&&SHEETS_URL.indexOf("script.google.com")>=0){
     fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
   }
   render();
