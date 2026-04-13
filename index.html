@@ -329,7 +329,7 @@ function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY
 function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
 
 function pollSheets(){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec") return;
+  if(!SHEETS_URL||SHEETS_URL.indexOf("script.google.com")<0) return;
   console.log("pollSheets: fetching from Sheets...");
   var url=SHEETS_URL+"?callback=handleSheetData&t="+Date.now();
   // Use script tag injection to bypass CORS
@@ -744,7 +744,7 @@ function buildRec(){
 
 // ── GOOGLE SHEETS ──────────────────────────────────────────────────
 function saveToSheets(rec){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec") return;
+  if(!SHEETS_URL||SHEETS_URL.indexOf("script.google.com")<0) return;
   var a=S.answers;
   var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
   var treatmentName=allTreatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
