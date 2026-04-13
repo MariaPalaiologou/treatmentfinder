@@ -364,7 +364,7 @@ function submitForm(){
     source:         "client_form",
     session_id:     sid
   };
-  if(SHEETS_URL&&SHEETS_URL!=="https://script.google.com/macros/s/AKfycbxVJgKfk-es57N5Y2_Tdoi6915OgximVnP5chEY_0Lgrv7nfFNfzoIO4ozQn3gIx0Ku3Q/exec"){
+  if(SHEETS_URL&&SHEETS_URL!=="YOUR_SHEETS_URL_HERE"){
     fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
   }
   render();
