@@ -329,7 +329,7 @@ function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY
 function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
 
 function pollSheets(){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbxVJgKfk-es57N5Y2_Tdoi6915OgximVnP5chEY_0Lgrv7nfFNfzoIO4ozQn3gIx0Ku3Q/exec") return;
+if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
   console.log("pollSheets: fetching from Sheets...");
   fetch(SHEETS_URL)
     .then(function(r){ return r.json(); })
@@ -736,7 +736,7 @@ function buildRec(){
 
 // ── GOOGLE SHEETS ──────────────────────────────────────────────────
 function saveToSheets(rec){
-  if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbxVJgKfk-es57N5Y2_Tdoi6915OgximVnP5chEY_0Lgrv7nfFNfzoIO4ozQn3gIx0Ku3Q/exec") return;
+  if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
   var a=S.answers;
   var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
   var treatmentName=allTreatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
