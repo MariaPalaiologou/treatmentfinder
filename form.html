@@ -198,7 +198,7 @@ function renderName(){
   li.addEventListener("input",function(e){S.lastName=e.target.value;});
   lw.appendChild(li); card.appendChild(lw);
   var dw=el("div",{"class":"field-wrap"});
-  dw.appendChild(el("div",{"class":"field-lbl"},"Date of Birth (optional)"));
+  dw.appendChild(el("div",{"class":"field-lbl"},"Date of Birth"));
   var di=el("input",{"class":"field-input","type":"date","value":S.dob});
   di.addEventListener("change",function(e){S.dob=e.target.value;});
   dw.appendChild(di); card.appendChild(dw);
@@ -323,13 +323,12 @@ function renderConsent(){
   card.appendChild(el("button",{"class":"back-btn","onClick":function(){S.step=5;render();}},"← Back"));
   card.appendChild(el("div",{"class":"step-lbl"},"Almost There, Muse"));
   card.appendChild(el("div",{"class":"question"},"May we keep your treatment plan?"));
-  card.appendChild(el("div",{"class":"q-note"},"If you consent, your name, date of birth and personalised treatment plan will be stored securely in our private salon system to personalise your future visits. They are never shared with third parties. If you do not consent, your personal details will be removed from our records within 24 hours — your treatment data will be kept anonymously for service improvement only."));
+  card.appendChild(el("div",{"class":"q-note"},"If you consent, your personalised treatment plan will be stored securely in our private salon system to tailor your future visits. Your details are never shared with third parties. If you do not consent, your personal details will be removed from our records within 24 hours."));
   var consentBox=el("div",{"class":"consent-box"+(S.consent?" checked":"")});
   var row=el("div",{"class":"consent-row"},
     el("div",{"class":"consent-chk"},S.consent?"✓":""),
     el("div",{"class":"consent-txt"},
-      el("strong",{},"Yes, please save my treatment plan for future visits."),
-      document.createTextNode(" I understand that my name and date of birth will be stored securely in the salon system, and removed immediately upon request.")));
+      el("strong",{},"Yes, please save my treatment plan for future visits.")));
   consentBox.appendChild(row);
   consentBox.addEventListener("click",function(){ S.consent=!S.consent; render(); });
   card.appendChild(consentBox);
