@@ -280,7 +280,7 @@
 
 <script>
 var STAFF_PASSWORD = "confidence";
-var SHEETS_URL = "https://script.google.com/macros/s/AKfycbxXSePUKyIBtyc3TebKHwmVCMOcbBpVQuRg_napSgwnh8Z4vOpQSHkv2bC8bKU9-bwQew/exec";
+var SHEETS_URL = "https://script.google.com/macros/s/AKfycbwwQe2WU8C3_vUmWfNjtbc0bDrUtBhsJ6GxA_vacrVOeYSUWg66JrKwJZF-1fzkMjCwBw/exec";
 var CLIENT_FORM_URL = "https://treatmentfinder.nailandmuse.com/form.html";
 var SESSION_KEY = "nm_auth";
 var HIDDEN_KEY  = "nm_hidden_plans";
@@ -329,53 +329,60 @@ function getSeenSessions(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY
 function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(sid); localStorage.setItem(SEEN_KEY,JSON.stringify(s)); } }
 
 function pollSheets(){
-if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
+  if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
   console.log("pollSheets: fetching from Sheets...");
-  fetch(SHEETS_URL)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      console.log("pollSheets: received", Array.isArray(data)?data.length:typeof data, "rows");
-      if(!Array.isArray(data)){ console.log("pollSheets: data is not an array:", data); return; }
-      var seen=getSeenSessions();
-      var newForms=data.filter(function(row){
-        var src=String(row["Source"]||row.source||"");
-        var sid=String(row["Session Id"]||row["Session ID"]||row.session_id||"");
-        console.log("row source:", src, "sid:", sid, "seen:", seen.indexOf(sid)>=0);
-        if(src!=="client_form"||!sid||seen.indexOf(sid)>=0) return false;
-        return true;
-      });
-      console.log("pollSheets: new unseen client forms:", newForms.length);
-      // Store as pending in localStorage
-      var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
-      var existingIds=pending.map(function(p){ return p.id; });
-      newForms.forEach(function(row){
-        var sid=String(row["Session Id"]||row["Session ID"]||row.session_id||"");
-        if(existingIds.indexOf(sid)>=0) return;
-        var treatmentKeys=String(row["Treatment Keys"]||row.treatment_keys||"").split(",").filter(Boolean);
-        var skinArr=String(row["Skin"]||row.skin||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
-        var nailArr=String(row["Nails"]||row.nails||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
-        var healthArr=String(row["Health Flags"]||row.health_flags||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
-        pending.unshift({
-          id:             sid,
-          timestamp:      String(row["Timestamp"]||row.timestamp||""),
-          client_name:    String(row["Client Name"]||row.client_name||""),
-          client_dob:     String(row["Client Dob"]||row["Client DOB"]||row.client_dob||""),
-          treatment:      String(row["Treatment"]||row.treatment||""),
-          treatment_keys: treatmentKeys,
-          skin:           skinArr,
-          nails:          nailArr,
-          health:         healthArr,
-          hormonal:       String(row["Hormonal"]||row.hormonal||"unknown"),
-          consent:        String(row["Consent"]||row.consent||"No")==="Yes",
-          status:         "pending"
-        });
-        existingIds.push(sid);
-      });
-      localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
-      checkPending();
-    })
-    .catch(function(err){ console.log("pollSheets error:", err); });
+  var url=SHEETS_URL+"?callback=handleSheetData&t="+Date.now();
+  // Use script tag injection to bypass CORS
+  var existing=document.getElementById("sheets-poll-script");
+  if(existing) existing.parentNode.removeChild(existing);
+  var script=document.createElement("script");
+  script.id="sheets-poll-script";
+  script.src=url;
+  script.onerror=function(){ console.log("pollSheets error: script load failed"); };
+  document.body.appendChild(script);
 }
+
+window.handleSheetData=function(data){
+  console.log("pollSheets: received", Array.isArray(data)?data.length:typeof data, "rows");
+  if(!Array.isArray(data)) return;
+  var seen=getSeenSessions();
+  var newForms=data.filter(function(row){
+    var src=String(row["Source"]||row.source||"");
+    var sid=String(row["Session ID"]||row["Session Id"]||row.session_id||"");
+    console.log("row source:", src, "sid:", sid, "seen:", seen.indexOf(sid)>=0);
+    if(src!=="client_form"||!sid||seen.indexOf(sid)>=0) return false;
+    return true;
+  });
+  console.log("pollSheets: new unseen client forms:", newForms.length);
+  if(!newForms.length) return;
+  var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
+  var existingIds=pending.map(function(p){ return p.id; });
+  newForms.forEach(function(row){
+    var sid=String(row["Session ID"]||row["Session Id"]||row.session_id||"");
+    if(existingIds.indexOf(sid)>=0) return;
+    var treatmentKeys=String(row["Treatment Keys"]||row.treatment_keys||"").split(",").filter(Boolean);
+    var skinArr=String(row["Skin"]||row.skin||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+    var nailArr=String(row["Nails"]||row.nails||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+    var healthArr=String(row["Health Flags"]||row.health_flags||"None").split(",").map(function(s){return s.trim();}).filter(function(s){return s&&s!=="None";});
+    pending.unshift({
+      id:             sid,
+      timestamp:      String(row["Timestamp"]||row.timestamp||""),
+      client_name:    String(row["Client Name"]||row.client_name||""),
+      client_dob:     String(row["Client Dob"]||row["Client DOB"]||row.client_dob||""),
+      treatment:      String(row["Treatment"]||row.treatment||""),
+      treatment_keys: treatmentKeys,
+      skin:           skinArr,
+      nails:          nailArr,
+      health:         healthArr,
+      hormonal:       String(row["Hormonal"]||row.hormonal||"unknown"),
+      consent:        String(row["Consent"]||row.consent||"No")==="Yes",
+      status:         "pending"
+    });
+    existingIds.push(sid);
+  });
+  localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
+  checkPending();
+};
 
 function checkPending(){
   if(typeof S==="undefined") return;
