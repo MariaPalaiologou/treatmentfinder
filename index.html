@@ -330,20 +330,21 @@ function markSeen(sid){ var s=getSeenSessions(); if(s.indexOf(sid)<0){ s.push(si
 
 function pollSheets(){
   if(!SHEETS_URL||SHEETS_URL==="https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec") return;
+  console.log("pollSheets: fetching from Sheets...");
   fetch(SHEETS_URL)
     .then(function(r){ return r.json(); })
     .then(function(data){
-      if(!Array.isArray(data)) return;
+      console.log("pollSheets: received", Array.isArray(data)?data.length:typeof data, "rows");
+      if(!Array.isArray(data)){ console.log("pollSheets: data is not an array:", data); return; }
       var seen=getSeenSessions();
-      // Find unseen client_form rows from last 4 hours
-      var cutoff=Date.now()-(4*60*60*1000);
       var newForms=data.filter(function(row){
         var src=String(row["Source"]||row.source||"");
         var sid=String(row["Session Id"]||row["Session ID"]||row.session_id||"");
+        console.log("row source:", src, "sid:", sid, "seen:", seen.indexOf(sid)>=0);
         if(src!=="client_form"||!sid||seen.indexOf(sid)>=0) return false;
         return true;
       });
-      if(!newForms.length) return;
+      console.log("pollSheets: new unseen client forms:", newForms.length);
       // Store as pending in localStorage
       var pending=JSON.parse(localStorage.getItem(PENDING_KEY)||"[]");
       var existingIds=pending.map(function(p){ return p.id; });
@@ -373,7 +374,7 @@ function pollSheets(){
       localStorage.setItem(PENDING_KEY,JSON.stringify(pending));
       checkPending();
     })
-    .catch(function(){});
+    .catch(function(err){ console.log("pollSheets error:", err); });
 }
 
 function checkPending(){
