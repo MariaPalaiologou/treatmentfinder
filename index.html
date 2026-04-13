@@ -507,8 +507,21 @@ function isEditMani(){ return S.treatment==="edit_mani"; }
 function isCeremPedi(){ return S.treatment==="cerem_pedi"; }
 function isTier2(){ return S.treatment==="edit_mani"||S.treatment==="cerem_pedi"; }
 
-function getSkinQ(){ return isManiPath()?SKIN_Q_MANI:SKIN_Q_PEDI; }
-function getNailQ(){ return isManiPath()?NAIL_Q_MANI:NAIL_Q_PEDI; }
+function hasAnyMani(){ var ts=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment]; return ts.some(function(t){ return t==="sig_mani"||t==="edit_mani"; }); }
+function hasAnyPedi(){ var ts=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment]; return ts.some(function(t){ return t==="sig_pedi"||t==="cerem_pedi"; }); }
+
+function getSkinQ(){
+  var opts=[];
+  if(hasAnyMani()) SKIN_Q_MANI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
+  if(hasAnyPedi()) SKIN_Q_PEDI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
+  return opts;
+}
+function getNailQ(){
+  var opts=[];
+  if(hasAnyMani()) NAIL_Q_MANI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
+  if(hasAnyPedi()) NAIL_Q_PEDI.forEach(function(o){ if(!opts.find(function(x){return x.v===o.v;})) opts.push(o); });
+  return opts;
+}
 function getQOptions(q){
   if(q.id==="skin_focus") return getSkinQ();
   if(q.id==="nail_condition") return getNailQ();
@@ -601,23 +614,38 @@ function buildRec(){
     }
   }
 
-  // MASK (Edit & Ceremony only)
+  // MASK OR PARAFFIN — either/or client choice (Edit & Ceremony only)
   if(tier2){
-    var maskName,maskDetail,maskGlance,maskWhy;
-    if(editMani){ maskName="Hydrating Hand Mask"; maskDetail="Hydrating mask applied with cling wrap and mitts. 15 minutes."; maskGlance="Hydrating Mask — 15 min"; maskWhy="Seals in serum actives and delivers intensive moisture while setting."; }
-    else{ maskName="Urea, Beeswax & Honey Foot Mask"; maskDetail="Soothing mask with urea, beeswax and honey extract. Applied with cling wrap and booties. 15 minutes."; maskGlance="Urea & Honey Mask — 15 min"; maskWhy="Urea softens, beeswax seals, honey soothes — triple action after scrub."; }
-    addStep({name:maskName,detail:maskDetail,why:maskWhy,glance:maskGlance,tag:null});
-  }
+    var thermalName, thermalDetail, thermalGlance, thermalWhy, thermalTag=null;
 
-  // PARAFFIN (Edit & Ceremony only)
-  if(tier2){
-    var paraffinDetail,paraffinTag=null,paraffinGlance;
-    if(noHeat){ paraffinDetail="Paraffin bath not suitable — isotretinoin or no-heat preference. Skip this step."; paraffinTag="Skip — contraindicated"; paraffinGlance="Skip — contraindicated"; }
-    else if(isDiab){ paraffinDetail="Paraffin bath not recommended — impaired heat sensation. Skip this step."; paraffinTag="Skip — diabetic protocol"; paraffinGlance="Skip — diabetic"; }
-    else if(isPreg){ paraffinDetail="Paraffin bath avoided during pregnancy — high heat. Skip this step."; paraffinTag="Skip — pregnancy"; paraffinGlance="Skip — pregnancy"; }
-    else{ paraffinDetail="Lavender Paraffin Bath — 15 minutes. Deep occlusive moisture and warmth. Double-dip for best results."; paraffinGlance="Lavender Paraffin — 15 min"; }
-    var paraffinWhy=noHeat?"High localised heat is contraindicated.":isDiab?"Diabetic clients have impaired heat sensation — immersion risks undetected thermal injury.":isPreg?"High heat from paraffin is avoided as a precautionary measure in pregnancy.":sf==="hydration"||isPeri||sf==="cracked_heels"?"Paraffin creates an occlusive seal that drives cream actives deep — maximum moisture for dry or perimenopausal skin.":"Standard Tier 2 step — delivers warmth and deep moisture after the mask.";
-    addStep({name:"Lavender Paraffin Bath",detail:paraffinDetail,why:paraffinWhy,glance:paraffinGlance,tag:paraffinTag});
+    if(noHeat){
+      // Paraffin contraindicated — mask only
+      if(editMani){ thermalName="Hydrating Hand Mask"; thermalDetail="Hydrating mask with cling wrap and mitts — 15 minutes. Paraffin bath not suitable (isotretinoin or no-heat preference)."; thermalGlance="Hydrating Mask — 15 min"; }
+      else{ thermalName="Urea, Beeswax & Honey Foot Mask"; thermalDetail="Soothing mask with urea, beeswax and honey — 15 minutes. Paraffin bath not suitable (isotretinoin or no-heat preference)."; thermalGlance="Foot Mask — 15 min"; }
+      thermalWhy="Paraffin produces high localised heat which is contraindicated — mask delivers moisture safely.";
+      thermalTag="Paraffin replaced by mask";
+    } else if(isDiab){
+      if(editMani){ thermalName="Hydrating Hand Mask"; thermalDetail="Hydrating mask with cling wrap and mitts — 15 minutes. Paraffin bath not recommended for diabetic clients."; thermalGlance="Hydrating Mask — 15 min"; }
+      else{ thermalName="Urea, Beeswax & Honey Foot Mask"; thermalDetail="Soothing mask with urea, beeswax and honey — 15 minutes. Paraffin bath not recommended for diabetic clients."; thermalGlance="Foot Mask — 15 min"; }
+      thermalWhy="Diabetic clients have impaired heat sensation — paraffin immersion risks undetected thermal injury. Mask is the safe alternative.";
+      thermalTag="Paraffin replaced — diabetic";
+    } else if(isPreg){
+      if(editMani){ thermalName="Hydrating Hand Mask"; thermalDetail="Hydrating mask with cling wrap and mitts — 15 minutes. Paraffin bath avoided during pregnancy."; thermalGlance="Hydrating Mask — 15 min"; }
+      else{ thermalName="Urea, Beeswax & Honey Foot Mask"; thermalDetail="Soothing mask with urea, beeswax and honey — 15 minutes. Paraffin bath avoided during pregnancy."; thermalGlance="Foot Mask — 15 min"; }
+      thermalWhy="High heat from paraffin is avoided during pregnancy. Mask delivers intensive moisture safely.";
+      thermalTag="Paraffin replaced — pregnancy";
+    } else if(sf==="hydration"||isPeri||sf==="cracked_heels"){
+      // Recommend paraffin but offer mask as alternative
+      if(editMani){ thermalName="Lavender Paraffin Bath (recommended) or Hydrating Hand Mask"; thermalDetail="Paraffin Bath recommended — 15 minutes of deep occlusive moisture. Double-dip for best results. If client prefers: Hydrating Hand Mask with cling wrap and mitts — 15 minutes."; thermalGlance="Paraffin recommended — or Mask"; }
+      else{ thermalName="Lavender Paraffin Bath (recommended) or Urea & Honey Foot Mask"; thermalDetail="Paraffin Bath recommended — 15 minutes of deep occlusive moisture. Double-dip for best results. If client prefers: Urea, Beeswax & Honey Foot Mask with booties — 15 minutes."; thermalGlance="Paraffin recommended — or Mask"; }
+      thermalWhy="Paraffin creates an occlusive seal that drives cream actives deep — maximum moisture for dry or perimenopausal skin. Mask is a lighter but effective alternative.";
+    } else {
+      // Neutral — offer both, client chooses
+      if(editMani){ thermalName="Lavender Paraffin Bath or Hydrating Hand Mask — client choice"; thermalDetail="Confirm client preference: Lavender Paraffin Bath (15 min, deep warmth and moisture) OR Hydrating Hand Mask with cling wrap and mitts (15 min, lighter moisture treatment)."; thermalGlance="Paraffin or Mask — confirm"; }
+      else{ thermalName="Lavender Paraffin Bath or Urea & Honey Foot Mask — client choice"; thermalDetail="Confirm client preference: Lavender Paraffin Bath (15 min, deep warmth and moisture) OR Urea, Beeswax & Honey Foot Mask with booties (15 min, lighter moisture treatment)."; thermalGlance="Paraffin or Mask — confirm"; }
+      thermalWhy="Both are suitable for this client's profile. Paraffin gives deeper penetration and warmth; mask is lighter. Confirm with client before starting.";
+    }
+    addStep({name:thermalName, detail:thermalDetail, why:thermalWhy, glance:thermalGlance, tag:thermalTag});
   }
 
   // MASSAGE
@@ -708,12 +736,14 @@ function buildRec(){
 // ── GOOGLE SHEETS ──────────────────────────────────────────────────
 function saveToSheets(rec){
   if(!SHEETS_URL||SHEETS_URL==="YOUR_SHEETS_URL_HERE") return;
-  var a=S.answers, t=TREATMENTS[S.treatment];
+  var a=S.answers;
+  var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
+  var treatmentName=allTreatments.map(function(k){ return TREATMENTS[k]?TREATMENTS[k].name:""; }).join(" + ");
   var skins=Array.isArray(a.skin_focus_all)?a.skin_focus_all:(a.skin_focus?[a.skin_focus]:[]);
   var nails=Array.isArray(a.nail_condition_all)?a.nail_condition_all:(a.nail_condition?[a.nail_condition]:[]);
   var payload={
     timestamp:      new Date().toLocaleString("nl-NL",{timeZone:"Europe/Amsterdam"}),
-    treatment:      t?t.name:"-",
+    treatment:      treatmentName,
     skin:           skins.join(", ")||"None",
     nails:          nails.join(", ")||"None",
     health_flags:   (a.health_flags||[]).join(", ")||"None",
@@ -971,64 +1001,94 @@ function renderQuestion(){
   return card;
 }
 
-// RESULTS — multiple cards if needed
+// RESULTS — one card per selected treatment
 function renderResults(main){
-  var rec=buildRec();
-  var t=TREATMENTS[S.treatment];
   var wrap=el("div",{});
+  var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
+  var allRecs=[];
 
-  // RESULT CARD
-  var resCard=el("div",{"class":"res-card"});
-  resCard.appendChild(el("div",{"class":"res-hdr"},
-    el("div",{"class":"res-tier"},t.tier+" · Personalised Treatment Plan"),
-    el("div",{"class":"res-name"},t.name),
-    el("div",{"class":"res-client"},(S.clientName?"Muse: "+S.clientName:"Treatment plan ready")+(S.fromPending&&S.fromPending.client_dob?" · DOB: "+S.fromPending.client_dob:""))));
+  allTreatments.forEach(function(tKey,idx){
+    // Set S.treatment so buildRec uses the right path
+    S.treatment=tKey;
+    var rec=buildRec();
+    allRecs.push({tKey:tKey,rec:rec});
 
-  var body=el("div",{"class":"res-body"});
+    var t=TREATMENTS[tKey];
+    var resCard=el("div",{"class":"res-card","style":idx>0?"margin-top:20px":""});
+    resCard.appendChild(el("div",{"class":"res-hdr"},
+      el("div",{"class":"res-tier"},t.tier+" · Personalised Treatment Plan"),
+      el("div",{"class":"res-name"},t.name),
+      el("div",{"class":"res-client"},(S.clientName?"Muse: "+S.clientName:"Treatment plan ready")+(S.fromPending&&S.fromPending.client_dob?" · DOB: "+S.fromPending.client_dob:""))));
 
-  // AT A GLANCE
-  var glanceBox=el("div",{"class":"glance-box"});
-  glanceBox.appendChild(el("div",{"class":"sec-lbl"},"At a Glance"));
-  var glanceItems=el("div",{"class":"glance-items"});
-  rec.glance.forEach(function(g){
-    glanceItems.appendChild(el("div",{"class":"glance-item"},
-      g.label,el("span",{},g.value!==g.label?"— "+g.value:"")));
+    var body=el("div",{"class":"res-body"});
+
+    // AT A GLANCE
+    var glanceBox=el("div",{"class":"glance-box"});
+    glanceBox.appendChild(el("div",{"class":"sec-lbl"},"At a Glance"));
+    var glanceItems=el("div",{"class":"glance-items"});
+    rec.glance.forEach(function(g){
+      glanceItems.appendChild(el("div",{"class":"glance-item"},
+        g.label,el("span",{},g.value!==g.label?"— "+g.value:"")));
+    });
+    glanceBox.appendChild(glanceItems);
+    body.appendChild(glanceBox);
+
+    // DETAILED STEPS
+    body.appendChild(el("div",{"class":"sec-lbl"},"Detailed Steps"));
+    var stepsEl=el("div",{"class":"steps"});
+    rec.steps.forEach(function(s,i){
+      var item=el("div",{"class":"step-item"},el("div",{"class":"step-num"},String(i+1)));
+      var content=el("div",{"class":"step-body"},el("div",{"class":"step-name"},s.name),el("div",{"class":"step-detail"},s.detail));
+      if(s.tag) content.appendChild(el("div",{"class":"step-tag"+(s.ts==="s"?" s":"")},s.tag));
+      if(s.why) content.appendChild(el("div",{"class":"step-why"},"Why: "+s.why));
+      item.appendChild(content); stepsEl.appendChild(item);
+    });
+    body.appendChild(stepsEl);
+
+    if(rec.protocols.length){
+      body.appendChild(el("div",{"class":"sec-lbl"},"Applied Protocols"));
+      var pb=el("div",{"class":"protocols"});
+      rec.protocols.forEach(function(p){ pb.appendChild(el("div",{"class":"badge"},p)); });
+      body.appendChild(pb);
+    }
+    if(rec.notes.length){
+      var nb=el("div",{"class":"notes-box"});
+      nb.appendChild(el("div",{"class":"notes-lbl"},"Therapist Notes"));
+      rec.notes.forEach(function(n){ nb.appendChild(el("div",{"class":"note-item"},el("span",{},"→"),n)); });
+      body.appendChild(nb);
+    }
+
+    // Agreement only on last card
+    if(idx===allTreatments.length-1){
+      body.appendChild(renderAgreement(allRecs));
+    }
+
+    resCard.appendChild(body);
+    wrap.appendChild(resCard);
   });
-  glanceBox.appendChild(glanceItems);
-  body.appendChild(glanceBox);
 
-  // DETAILED STEPS
-  body.appendChild(el("div",{"class":"sec-lbl"},"Detailed Steps"));
-  var stepsEl=el("div",{"class":"steps"});
-  rec.steps.forEach(function(s,i){
-    var item=el("div",{"class":"step-item"},el("div",{"class":"step-num"},String(i+1)));
-    var content=el("div",{"class":"step-body"},el("div",{"class":"step-name"},s.name),el("div",{"class":"step-detail"},s.detail));
-    if(s.tag) content.appendChild(el("div",{"class":"step-tag"+(s.ts==="s"?" s":"")},s.tag));
-    if(s.why) content.appendChild(el("div",{"class":"step-why"},"Why: "+s.why));
-    item.appendChild(content); stepsEl.appendChild(item);
-  });
-  body.appendChild(stepsEl);
-
-  if(rec.protocols.length){
-    body.appendChild(el("div",{"class":"sec-lbl"},"Applied Protocols"));
-    var pb=el("div",{"class":"protocols"});
-    rec.protocols.forEach(function(p){ pb.appendChild(el("div",{"class":"badge"},p)); });
-    body.appendChild(pb);
-  }
-  if(rec.notes.length){
-    var nb=el("div",{"class":"notes-box"});
-    nb.appendChild(el("div",{"class":"notes-lbl"},"Therapist Notes"));
-    rec.notes.forEach(function(n){ nb.appendChild(el("div",{"class":"note-item"},el("span",{},"→"),n)); });
-    body.appendChild(nb);
-  }
-
-  body.appendChild(renderAgreement(rec));
-  resCard.appendChild(body);
-  wrap.appendChild(resCard);
+  // Restore S.treatment to first selected
+  S.treatment=allTreatments[0];
   main.appendChild(wrap);
 }
 
-function renderAgreement(rec){
+function buildAllRecs(){
+  var allTreatments=S.selectedTreatments&&S.selectedTreatments.length?S.selectedTreatments:[S.treatment];
+  var combined={steps:[],glance:[],notes:[],protocols:[]};
+  allTreatments.forEach(function(tKey){
+    S.treatment=tKey;
+    var rec=buildRec();
+    combined.steps=combined.steps.concat(rec.steps);
+    combined.glance=combined.glance.concat(rec.glance);
+    rec.notes.forEach(function(n){ if(combined.notes.indexOf(n)<0) combined.notes.push(n); });
+    rec.protocols.forEach(function(p){ if(combined.protocols.indexOf(p)<0) combined.protocols.push(p); });
+  });
+  S.treatment=allTreatments[0];
+  return combined;
+}
+
+function renderAgreement(allRecs){
+  var rec=buildAllRecs();
   var sec=el("div",{"class":"agree-sec"});
   sec.appendChild(el("div",{"class":"agree-q"},"Does the client agree with this plan?"));
   if(!S.consent){
@@ -1036,7 +1096,7 @@ function renderAgreement(rec){
   }
   if(S.agreed===null){
     var btns=el("div",{"class":"agree-btns"});
-    btns.appendChild(el("button",{"class":"agree-btn yes","onClick":function(){ S.agreed=true; S.saveStatus="saving"; saveToSheets(buildRec()); render(); }},"✓  Yes, proceed"));
+    btns.appendChild(el("button",{"class":"agree-btn yes","onClick":function(){ S.agreed=true; S.saveStatus="saving"; saveToSheets(buildAllRecs()); render(); }},"✓  Yes, proceed"));
     btns.appendChild(el("button",{"class":"agree-btn no","onClick":function(){ S.agreed=false; render(); }},"✗  No, adjust"));
     sec.appendChild(btns);
   } else if(S.agreed===true){
@@ -1049,7 +1109,7 @@ function renderAgreement(rec){
     ta.className="alt-input"; ta.placeholder="Notes on adjusted path…"; ta.setAttribute("rows","3"); ta.value=S.altPath;
     ta.addEventListener("input",function(e){S.altPath=e.target.value;});
     sec.appendChild(ta);
-    var saveBtn=el("button",{"class":"save-plan-btn","onClick":function(){ if(!S.altPath.trim()) return; S.saveStatus="saving"; saveToSheets(buildRec()); render(); }},"Save Adjusted Plan");
+    var saveBtn=el("button",{"class":"save-plan-btn","onClick":function(){ if(!S.altPath.trim()) return; S.saveStatus="saving"; saveToSheets(buildAllRecs()); render(); }},"Save Adjusted Plan");
     if(S.saveStatus==="saving"||S.saveStatus==="saved") saveBtn.setAttribute("disabled","true");
     sec.appendChild(saveBtn);
     var sm2={"saving":{cls:"saving",icon:"⏳",text:"Saving…"},"saved":{cls:"saved",icon:"✓",text:"Saved"},"error":{cls:"error",icon:"⚠",text:"Could not save"}};
