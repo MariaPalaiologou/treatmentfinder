@@ -89,7 +89,7 @@
   <div class="ornament">✦ ✦ ✦</div>
 </div>
 <script>
-var SHEETS_URL = "https://script.google.com/macros/s/AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N/exec";
+var SHEETS_URL = "https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec";
 
 var TREATMENTS = {
   sig_mani:  {tier:"Signature", name:"The Signature Manicure", path:"mani"},
@@ -364,7 +364,7 @@ function submitForm(){
     source:         "client_form",
     session_id:     sid
   };
-  if(SHEETS_URL&&SHEETS_URL!=="https://script.google.com/macros/s/AKfycbxXwrk3pTW2tMtNYvdDVGs8ieNMAxvKe_72k0v2dpd7Q0yOCbmpSoeVtsCe3OjMWA2N/exec"){
+  if(SHEETS_URL&&SHEETS_URL!=="https://script.google.com/macros/s/AKfycbzmVlKz2iTixRiMqPUXQriTxODfcVOU-PokH231I0G42DX_VaAS1m0I36SpN6pxVHRbdg/exec"){
     fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
   }
   render();
