@@ -192,20 +192,45 @@ function renderName(){
   var fw=el("div",{"class":"field-wrap"});
   fw.appendChild(el("div",{"class":"field-lbl"},"First Name"));
   var fi=el("input",{"class":"field-input","type":"text","placeholder":"Your first name","value":S.firstName,"autocomplete":"given-name"});
-  fi.addEventListener("input",function(e){S.firstName=e.target.value;});
+  fi.addEventListener("input",function(e){
+    S.firstName=e.target.value;
+    updateBtn();
+  });
   fw.appendChild(fi); card.appendChild(fw);
   var lw=el("div",{"class":"field-wrap"});
   lw.appendChild(el("div",{"class":"field-lbl"},"Last Name"));
   var li=el("input",{"class":"field-input","type":"text","placeholder":"Your last name","value":S.lastName,"autocomplete":"family-name"});
-  li.addEventListener("input",function(e){S.lastName=e.target.value;});
+  li.addEventListener("input",function(e){
+    S.lastName=e.target.value;
+    updateBtn();
+  });
   lw.appendChild(li); card.appendChild(lw);
   var dw=el("div",{"class":"field-wrap"});
   dw.appendChild(el("div",{"class":"field-lbl"},"Date of Birth"));
   var di=el("input",{"class":"field-input","type":"date","value":S.dob});
   di.addEventListener("change",function(e){S.dob=e.target.value;});
   dw.appendChild(di); card.appendChild(dw);
-  var btn=el("button",{"class":"next-btn","onClick":function(){ if(S.firstName.trim().length<1||S.lastName.trim().length<1) return; S.step=1; render(); }},"Continue");
+  var btn=el("button",{"class":"next-btn","onClick":function(){
+    if(S.firstName.trim().length<1||S.lastName.trim().length<1){
+      var err=document.getElementById("name-error");
+      if(err) err.style.display="block";
+      return;
+    }
+    S.step=1; render();
+  }},"Continue");
+  if(S.firstName.trim().length<1||S.lastName.trim().length<1) btn.setAttribute("disabled","true");
+  var updateBtn=function(){
+    if(S.firstName.trim().length>0&&S.lastName.trim().length>0){
+      btn.removeAttribute("disabled");
+      var err=document.getElementById("name-error");
+      if(err) err.style.display="none";
+    } else {
+      btn.setAttribute("disabled","true");
+    }
+  };
+  var errMsg=el("div",{"id":"name-error","style":"display:none;margin-top:10px;font-size:12px;color:#C0392B;font-weight:400;text-align:center"},"Please enter both your first and last name to continue.");
   card.appendChild(btn);
+  card.appendChild(errMsg);
   // Data notice
   card.appendChild(el("div",{"style":"margin-top:20px;font-size:10px;color:var(--gray);line-height:1.6;font-weight:300;font-style:italic"},"Your name and date of birth are stored in our secure salon system to personalise your future visits, subject to your consent at the end of this form. If you do not consent, your personal details will be removed within 24 hours. Treatment data is used anonymously for service improvement."));
   return card;
