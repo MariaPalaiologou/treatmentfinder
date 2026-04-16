@@ -755,7 +755,7 @@ function saveToSheets(rec){
     treatment:      treatmentName,
     skin:           skins.join(", ")||"None",
     nails:          nails.join(", ")||"None",
-    health_flags:   (a.health_flags||[]).join(", ")||"None",
+    health_flags:   (Array.isArray(a.health_flags)?a.health_flags:(a.health_flags?[a.health_flags]:[])).join(", ")||"None",
     hormonal:       a.hormonal||"-",
     recommended:    rec.steps.map(function(s){return s.name;}).join(" · "),
     steps_json:     JSON.stringify(rec.steps),
@@ -797,6 +797,8 @@ function formatDob(dob){
   var year=d.getUTCFullYear();
   return day+"/"+month+"/"+year;
 }
+
+function sortPlans(arr){
   return arr.slice().sort(function(a,b){
     return String(b.timestamp||"").localeCompare(String(a.timestamp||""));
   });
