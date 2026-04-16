@@ -10,13 +10,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    *{max-width:100%}
     :root{
       --burg:#470B14;--burg-mid:#6B1420;--burg-light:#F2E8EA;--burg-pale:#FAF5F6;
       --suede:#AD7957;--suede-light:#F5EDE4;--warm-grey:#E3DDD5;
       --charcoal:#373636;--mid:#5A5555;--gray:#9A9494;--border:#DDD5CE;
       --green:#2D7A4F;--green-bg:#F0FFF4;
     }
-    html,body{min-height:100%;background:#F7F4F1;font-family:"Poppins",sans-serif;color:var(--charcoal)}
+    html,body{min-height:100%;background:#F7F4F1;font-family:"Poppins",sans-serif;color:var(--charcoal);overflow-x:hidden}
 
     /* LOCK */
     #lock-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 50%,#EDE0D8 100%)}
@@ -36,7 +37,7 @@
 
     /* APP */
     #app{display:none}
-    .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:44px 20px 100px;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 40%,#EDE0D8 100%);background-attachment:fixed}
+    .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:44px 16px 100px;background:linear-gradient(160deg,#FAF5F6 0%,#F2E8EA 40%,#EDE0D8 100%);background-attachment:fixed;width:100%;box-sizing:border-box}
 
     /* HEADER */
     .header{text-align:center;margin-bottom:28px}
@@ -45,7 +46,7 @@
     .header-sub{font-size:11px;font-weight:300;color:var(--gray)}
 
     /* TABS */
-    .tab-bar{display:flex;gap:0;margin-bottom:28px;background:white;border-radius:12px;padding:4px;box-shadow:0 2px 16px rgba(71,11,20,.06);width:100%;max-width:620px}
+    .tab-bar{display:flex;gap:0;margin-bottom:28px;background:white;border-radius:12px;padding:4px;box-shadow:0 2px 16px rgba(71,11,20,.06);width:100%;max-width:620px;box-sizing:border-box}
     .tab-btn{flex:1;padding:10px 6px;border:none;background:transparent;font-family:"Poppins",sans-serif;font-size:10px;font-weight:400;color:var(--gray);letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:9px;transition:all .2s}
     .tab-btn.active{background:var(--burg);color:white;font-weight:500}
 
@@ -55,7 +56,7 @@
     .prog-fill{height:100%;background:linear-gradient(90deg,var(--burg),var(--suede));border-radius:2px;transition:width .5s ease}
 
     /* CARD */
-    .card{background:white;border-radius:20px;box-shadow:0 4px 40px rgba(71,11,20,.07),0 1px 8px rgba(0,0,0,.03);padding:40px 44px;width:100%;max-width:620px;animation:fadeUp .35s ease both}
+    .card{background:white;border-radius:20px;box-shadow:0 4px 40px rgba(71,11,20,.07),0 1px 8px rgba(0,0,0,.03);padding:28px 20px;width:100%;max-width:620px;animation:fadeUp .35s ease both;box-sizing:border-box}
     @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .back-btn{background:none;border:none;color:var(--gray);font-family:"Poppins",sans-serif;font-size:11px;cursor:pointer;margin-bottom:20px;padding:0;display:flex;align-items:center;gap:5px;transition:color .15s}
     .back-btn:hover{color:var(--burg)}
@@ -113,7 +114,7 @@
     .res-tier{font-size:9px;letter-spacing:4px;text-transform:uppercase;opacity:.7;margin-bottom:8px;font-weight:400}
     .res-name{font-family:"Playfair Display",serif;font-size:28px;font-weight:400;line-height:1.2;margin-bottom:4px}
     .res-client{font-size:13px;opacity:.8;font-weight:300}
-    .res-body{padding:32px 40px}
+    .res-body{padding:24px 20px}
     .sec-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--suede);font-weight:500;margin-bottom:12px}
 
     /* AT A GLANCE */
@@ -233,8 +234,8 @@
     .modal-agree.no{background:#FFF0F0;color:#C0392B}
 
     @media(max-width:560px){
-      .card,.res-body,.modal-body{padding:28px 20px}
-      .res-hdr,.modal-hdr{padding:24px 20px}
+      .card,.res-body,.modal-body{padding:20px 16px}
+      .res-hdr,.modal-hdr{padding:20px 16px}
       .res-name,.modal-tname{font-size:22px}
       .t-grid{grid-template-columns:1fr}
       .lock-card{padding:36px 24px}
@@ -1280,61 +1281,6 @@ if(isAuth()){ cleanExpiredPlans(); checkPending(); pollSheets(); }
 
 if(isAuth()) render();
 </script>
-<!--
-UPDATED GOOGLE SHEETS SETUP
-============================
 
-STEP 1 — Update row 1 headers in your Consultations sheet to exactly:
-Timestamp | Client Name | Client DOB | Treatment | Treatment Keys | Skin | Nails | Health Flags | Hormonal | Recommended | Steps Detail | Glance | Protocols | Therapist Notes | Agreed | Alt Path | Consent | Source | Session ID
-
-STEP 2 — Replace ALL code in Apps Script with:
-
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Consultations");
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
-    data.timestamp,
-    data.client_name    || "",
-    data.client_dob     || "",
-    data.treatment      || "",
-    data.treatment_keys || "",
-    data.skin           || "",
-    data.nails          || "",
-    data.health_flags   || "",
-    data.hormonal       || "",
-    data.recommended    || "",
-    data.steps_json     || "",
-    data.glance_json    || "",
-    data.protocols      || "",
-    data.therapist_notes|| "",
-    data.agreed         || "",
-    data.alt_path       || "",
-    data.consent        || "",
-    data.source         || "",
-    data.session_id     || ""
-  ]);
-  return ContentService.createTextOutput("OK");
-}
-
-function doGet(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Consultations");
-  var data = sheet.getDataRange().getValues();
-  if(data.length < 2) return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
-  var headers = data[0];
-  var rows = data.slice(1).reverse();
-  var result = rows.map(function(row) {
-    var obj = {};
-    headers.forEach(function(h, i) { obj[String(h)] = row[i]; });
-    return obj;
-  });
-  return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
-}
-
-STEP 3 — Deploy as new Web App (Execute as Me, Anyone) and update SHEETS_URL in both index.html and form.html.
-
-STEP 4 — Periodically for No Consent rows:
-Filter by Consent = No, then clear the Client Name and Client DOB cells only.
-Leave all other columns intact for anonymous analysis.
--->
 </body>
 </html>
