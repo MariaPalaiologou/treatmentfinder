@@ -783,7 +783,20 @@ function saveToSheets(rec){
   localStorage.setItem(PLANS_KEY,JSON.stringify(sortPlans(plans)));
 }
 
-function sortPlans(arr){
+function formatDob(dob){
+  if(!dob) return "";
+  // Handle ISO format like 2026-04-30T23:00:00.000Z or just 2026-04-30
+  var d=new Date(dob);
+  if(isNaN(d.getTime())){
+    // Try parsing as dd-mm-yyyy or return as-is
+    return dob;
+  }
+  // Format as DD/MM/YYYY
+  var day=String(d.getUTCDate()).padStart(2,"0");
+  var month=String(d.getUTCMonth()+1).padStart(2,"0");
+  var year=d.getUTCFullYear();
+  return day+"/"+month+"/"+year;
+}
   return arr.slice().sort(function(a,b){
     return String(b.timestamp||"").localeCompare(String(a.timestamp||""));
   });
@@ -1029,7 +1042,7 @@ function renderResults(main){
     resCard.appendChild(el("div",{"class":"res-hdr"},
       el("div",{"class":"res-tier"},t.tier+" · Personalised Treatment Plan"),
       el("div",{"class":"res-name"},t.name),
-      el("div",{"class":"res-client"},(S.clientName?"Muse: "+S.clientName:"Treatment plan ready")+(S.fromPending&&S.fromPending.client_dob?" · DOB: "+S.fromPending.client_dob:""))));
+      el("div",{"class":"res-client"},(S.clientName?"Muse: "+S.clientName:"Treatment plan ready")+(S.fromPending&&S.fromPending.client_dob?" · DOB: "+formatDob(S.fromPending.client_dob):""))));
 
     var body=el("div",{"class":"res-body"});
 
@@ -1156,7 +1169,9 @@ function updatePlansList(wrap,hidden){
     var ts=String(p.timestamp||"");
     if(hidden.indexOf(ts)>=0) return false;
     if(!query) return true;
-    return String(p.client_name||"").toLowerCase().indexOf(query)>=0||String(p.treatment||"").toLowerCase().indexOf(query)>=0;
+    var name=String(p.client_name||p["Client Name"]||"").toLowerCase();
+    var treatment=String(p.treatment||p["Treatment"]||"").toLowerCase();
+    return name.indexOf(query)>=0||treatment.indexOf(query)>=0;
   });
   var total=S.plans.filter(function(p){ return hidden.indexOf(String(p.timestamp||""))<0; }).length;
   var pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
@@ -1166,8 +1181,8 @@ function updatePlansList(wrap,hidden){
   if(!filtered.length){ wrap.appendChild(el("div",{"class":"plans-empty"},query?"No plans match \""+S.plansSearch+"\".":"No plans saved yet.")); return; }
   var list=el("div",{"class":"plans-list"});
   pageItems.forEach(function(p){
-    var name=p.client_name||"Unknown";
-    var treatment=p.treatment||"—";
+    var name=p.client_name||p["Client Name"]||"Unknown";
+    var treatment=p.treatment||p["Treatment"]||"—";
     var ts=String(p.timestamp||"");
     var dateOnly=ts.split(",")[0]||ts;
     var noConsent=!p.consent;
@@ -1221,7 +1236,7 @@ function renderModal(p){
   hdr.appendChild(el("div",{"class":"modal-hdr-text"},
     el("div",{"class":"modal-tier"},treatment+" · "+time.split(",")[0]),
     el("div",{"class":"modal-tname"},name),
-    el("div",{"class":"modal-client"},(p.client_dob?"DOB: "+p.client_dob+" · ":"")+(noConsent?"No consent — auto-deletes in 24h":"Plan stored with consent"))));
+    el("div",{"class":"modal-client"},(p.client_dob?"DOB: "+formatDob(p.client_dob)+" · ":"")+(noConsent?"No consent — auto-deletes in 24h":"Plan stored with consent"))));
   hdr.appendChild(el("button",{"class":"modal-close","onClick":closeModal},"×"));
   card.appendChild(hdr);
   var body=el("div",{"class":"modal-body"});
